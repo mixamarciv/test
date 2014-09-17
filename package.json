@@ -10,6 +10,7 @@
       "minimist": "*"
      ,"bower": "*"
      ,"iconv-lite": "*"
+     ,"moment": "*"
      ,"koa": "*"
      ,"co": "*"
      ,"thunkify": "*"

@@ -4,14 +4,20 @@ console.log('load inc ...');
 var g = {}
 module.exports = g;
 
+g.os   = require('os');
 g.fs   = require('fs');
 g.util = require('util');
 g.path = require('path');
 g.u    = require('underscore');
 g.u.str = require('underscore.string');
+g.moment = require('moment');
+
 //g.async = require('async');
 g.process_logger = require('process-logger');
 g.rimraf = require('rimraf');
+
+g.iconv = require('iconv-lite');
+g.iconv.extendNodeEncodings();
 
 //g.ncp  = require('ncp').ncp;
 

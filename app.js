@@ -45,6 +45,6 @@ function server_is_ready(err) {
     return;
   }
   if ( ++ss > 1 ) {
-    clog('\n\nserver is running  \n\n');
+    clog('\n\nserver is running  '+g.mixa.str.date_format('Y.M.D h:m:s k')+'\n\n');
   }
 }
