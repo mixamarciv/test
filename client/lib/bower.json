@@ -1,0 +1,17 @@
+{
+  "name": "my_bower_lib",
+  "version": "0.0.1",
+  "authors": [
+    "mixa <mixamarciv@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,   "// не публиковать пакет, оставить приватным":1,
+  "ignore": [
+    "**/.*"
+  ],
+  "dependencies": {
+    "jquery": "*",
+    "bootstrap": "*",
+    "underscore": "*"
+  }
+}

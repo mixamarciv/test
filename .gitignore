@@ -6,6 +6,9 @@ temp*/
 keys/**
 **/log.txt
 client/lib/**
+!client/lib/.bowerrc
+!client/lib/bower.json
+
 
 # Windows image file caches
 Thumbs.db
