@@ -1,0 +1,40 @@
+{
+  "name": "app_template3",
+  "version": "0.0.1",
+  "description": "my app template for http server with ssl and koa",
+  "main": "./app.js",
+  "scripts": {
+    "start": "node --harmony app.js"
+  },
+  "dependencies": {
+      "minimist": "*"
+     ,"iconv-lite": "*"
+     ,"koa": "*"
+     ,"co": "*"
+     ,"koa-force-ssl": "*"
+     ,"koa-session": "*"
+     ,"koa-bodyparser": "*"
+     ,"koa-helmet": "*"
+     ,"koa-router": "*"
+     ,"koa-passport": "*"
+     ,"koa-logger": "*"
+
+     ,"bluebird": "*"
+     ,"koa-sendfile": "*"
+     ,"koa-static": "*"
+
+
+
+     ,"thunkify": "*"
+     ,"node-firebird": "*"
+     ,"underscore": "*"
+     ,"underscore.string": "*"
+     ,"async": "*"
+     ,"mixa_std_js_functions": "https://github.com/mixamarciv/mixa_std_js_functions/tarball/master"
+     ,"process_logger": "https://github.com/mixamarciv/process_logger/tarball/master"
+     ,"kill-prev-app-process": "https://github.com/mixamarciv/kill-prev-app-process/tarball/master"
+     ,"rimraf": "*"
+  }
+}
+
+
