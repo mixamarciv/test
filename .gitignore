@@ -5,6 +5,7 @@ db/*.fdb
 temp*/
 keys/**
 **/log.txt
+client/lib/*/
 
 # Windows image file caches
 Thumbs.db

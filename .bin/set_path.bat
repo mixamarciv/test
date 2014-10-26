@@ -24,7 +24,7 @@ CD "%this_file_path%\.."
 @SET PATH=%PATH%;%NODE_PATH%
 @SET PATH=%PATH%;%NODE_PATH%\node_modules\npm\node_modules
 @SET PATH=%PATH%;%NODE_PATH%\node_modules\.bin
-@SET PATH=%PATH%;.\node_modules\.bin
+@SET PATH=%PATH%;.\node_modules\.bin;%this_file_path%\..\node_modules\.bin
 
 @SET NODE_PATH=.
 
