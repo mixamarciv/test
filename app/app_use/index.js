@@ -37,6 +37,7 @@ module.exports = function load_app_use(app){
     //разбор параметров
     app.use(require('koa-bodyparser')());
     
+    require('./ejs.js')(app);
 }
 
 

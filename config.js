@@ -10,9 +10,9 @@ var datef = g.mixa.str.date_format;
 
 
 
-c.app_path = path_norm(__dirname);
-
-
+c.app_path = path_norm(__dirname);                             //путь к приложению
+c.templates_path = path_join(c.app_path,'client/templates/');  //пути к шаблонам ejs
+c.scripts_path = path_join(c.app_path,'scripts');              //пути к пользовательским скриптам
 
 //названия логов:
 c.log_path  = path_join(__dirname,'log/'+datef('Y.M'));

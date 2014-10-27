@@ -15,14 +15,21 @@ g.rimraf = require('rimraf');
 
 //g.ncp  = require('ncp').ncp;
 
-//g.thunkify = require('thunkify');
 //g.path.mkdirp = require('mkdirp');
 
 g.co = require('co');
+g.thunkify = require('thunkify');
+
 
 g.mixa = require('mixa_std_js_functions');
 
-g.functions = require('./fnc/functions.js');
+g.path.join2 = g.mixa.path.join;
+g.path.norm2 = g.mixa.path.norm;
+g.path.normalize2 = g.mixa.path.norm;
+
+
+
+g.functions = require('./app/fnc/functions.js');
 //g.check_net_disk = require('./fnc/check_net_disk.js');
 
 g.config = require('./config.js');

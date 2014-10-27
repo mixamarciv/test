@@ -1,4 +1,4 @@
-var g = require('../inc.js');
+var g = require('../../inc.js');
 var cerr = console.error;
 module.exports = fnc = {};
 
