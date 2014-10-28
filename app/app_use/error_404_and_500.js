@@ -8,21 +8,23 @@ module.exports = function *pageNotFound(next) {
     try {
         yield next;
     } catch(e) {
+        e = f.merr(e);
+        var error_info = e.messages.join('\n\n');
         this.status = 500;
         switch (this.accepts('html', 'json')) {
           case 'html':
               this.type = 'html';
-              this.body = '<h1>500</h1><p>internal server error</p><pre>\n'+g.util.inspect(e)+'</pre>';
+              this.body = '<h1>500</h1><p>internal server error</p><pre>\n'+error_info+'</pre>';
               break;
           case 'json':
               this.body = {
                 message: 'internal server error',
-                debug_info: g.util.inspect(e)
+                error_info: error_info
               };
               break;
           default:
               this.type = 'text';
-              this.body = 'internal server error\n\n\n'+g.util.inspect(e);
+              this.body = 'internal server error\n\n\n' + error_info;
         }
         return;
     }

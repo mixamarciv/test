@@ -10,59 +10,17 @@ var app = require('koa')();
 //задаем настройки приложения
 require('./app/app_use/index.js')(app);
 
-//задаем пользовательские параметры роутинга:
-/*******
-var router = new require('koa-router')();
-var user_scripts = g.path.join(g.config.scripts_path,'index.js');
-require(user_scripts)(router);
-app.use(router.middleware());
-********/
 
 //загрузка роутов из всех поддиректорий g.config.scripts_path
 g.co(function *(){
-    
-    var list = [];
-    function *update_list_route_files(ppath,level) {
-        if (!level) level = 0;
-        var dir = yield tf(g.fs.readdir)(ppath);
-        for(var i=0;i<dir.length;i++){
-            var file = dir[i];
-            var file_path = g.path.join2(ppath,file);
-            var stat = yield tf(g.fs.stat)(file_path);
-            if (stat.isDirectory()) {
-                yield update_list_route_files(file_path,level+1);
-            }else if ( file == 'index.js') {
-                list.push(file_path);
-            }
-        }
-        if (level==0) {
-            //сортируем получившийся список
-            list.sort(function(a,b){
-                if (a.length>b.length) return 1;
-                if (a > b) return 1;
-                if (b < a) return -1;
-                return 0;
-            });
-        }
-    }
-    
-    try {
-        //загружаем список всех index.js файлов из g.config.scripts_path
-        yield update_list_route_files(g.config.scripts_path);
-        //console.log(list);
-    } catch(e) {
-        console.log(g.util.inspect(e))
-    }
-    
-    try {
-        //загружаем список всех index.js файлов из g.config.scripts_path
-        yield update_list_route_files(g.config.scripts_path);
-        //console.log(list);
-    } catch(e) {
-        console.log(g.util.inspect(e))
-    }
+    var a = require('./app/app_load/index.js');
+    //загрузка списка index.js файлов из подкаталогов g.config.scripts_path
+    var list = yield tf(a.load_index_files_list)(g.config.scripts_path);
+    //загрузка роутингов и других данных из списка index.js файлов
+    yield tf(a.load_route_from_index_files)(app,list);
     
 })();
+
 
 /************
 var sendfile = require('koa-sendfile');

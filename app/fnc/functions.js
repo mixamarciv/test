@@ -13,8 +13,10 @@ function die() {
 
 fnc.merr =
 function add_message_to_error(err,msg) {
-    if (!err.message) err.message = [msg];
-    else err.message = [msg].concat(err.message);
+    var info = g.util.inspect(err.stack).replace(/(\\\\)/g,'\\').replace(/\\n\s*at/g,'\n    at');
+    var imsg = msg+'\n'+info;
+    if (!err.messages) err.messages = [imsg];
+    else err.messages = [imsg].concat(err.messages);
     return err;
 }
 
@@ -48,4 +50,15 @@ function readJsonSync(jsonFile,showErrors){
   }
   
   return data;
+}
+
+//получаем route_path из полного пути к route_file относительно пути к g.config.scripts_path
+fnc.get_route_path =
+function get_route_path(route_file) {
+  var p = g.path.dirname(g.path.relative(g.config.scripts_path,route_file));
+  p = p.replace(/\\/g,'/');
+  p = p.replace(/\.\.\//g,'/');
+  p = '/'+p;
+  p = p.replace(/\/\//g,'/');
+  return p;
 }

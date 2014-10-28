@@ -20,7 +20,7 @@
      ,"koa-router": "*"
      ,"koa-passport": "*"
      ,"koa-logger": "*"
-     ,"koa-ejs": "*"
+     ,"ect": "*"
 
      ,"bluebird": "*"
      ,"koa-sendfile": "*"

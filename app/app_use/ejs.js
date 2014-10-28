@@ -27,7 +27,7 @@ module.exports = function load_render(app){
 
     render(app, {
         root: g.config.templates_path,
-        /*layout: 'template',*/
+        layout: 'layout',
         viewExt: 'html',
         cache: false,
         debug: true,
