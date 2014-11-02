@@ -6,10 +6,15 @@ var tf = g.thunkify;
 var route_path = f.get_route_path(__filename);
 
 module.exports.load_route = function(router,fn){
-    //router.redirect('/','/main');
+
     router.get(route_path, function*(next) {
-        var users = [{name: 'Dead Horse'}, {name: 'Jack'}, {name: 'Tom'}];
-        this.render('content.html', {users: users});
+        if(!this.body){
+            this.body = route_path;
+        }else{
+            this.body += '\n'+route_path;
+        }
+        
+        clog('render '+route_path);
         yield next;
     });
     fn();

@@ -6,6 +6,13 @@ var clog = console.log;
 
 module.exports = function load_app_use(app){
     
+    //задаем локальные переменные и время старта загрузки контента
+    app.use(function *(next) {
+        this.locvars = {};
+        this.locvars.start_load = new Date;
+        yield next;
+    });
+    
     //logger
     app.use(require('koa-logger')());
     
@@ -49,9 +56,17 @@ app.use(serve('.'));
 // $ GET /hello.txt
 app.use(serve('test/fixtures'));
 ***********************/
-
-//-----------------------------------------------------------
 /***********************
+require('koa-onerror')(app);
+app.use(require('koa-logger')());
+app.use(require('koa-response-time')());
+
+app.use(require('koa-favicon')(__dirname + '/public/favicon.ico'));
+
+
+
+
+
 var passport = require('koa-passport')
 app.use(passport.initialize())
 app.use(passport.session())

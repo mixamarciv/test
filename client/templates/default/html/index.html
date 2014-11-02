@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%- @page_title %></title>
+
+    <link rel='stylesheet' href='/files/templates/<%- @template_main %>/a.css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+  </head>
+<body style="background: #000;" >
+
+
+  <nav class="navbar navbar-default navbar-static-top" role="navigation" > <!-- navbar-fixed-top -->
+    <div class="container">
+      <% include @template_main_path + '/html/menu/main_menu.html', { title : 'main menu', info: '10$' } %>
+    </div>
+  </nav>
+  
+    
+  <% if @error : %>
+    <div class="alert alert-dismissable alert-danger">
+      <!-- button type="button" class="close" data-dismiss="alert">×</button -->
+      <strong>ERROR: <%- @error %></strong>
+      <div class="row">
+        <div class="col-md-12"><%- @html_dump_error %></div>
+      </div>
+    </div>
+  <% end %>
+  
+
+  <div class="row"><div class="col-md-12">
+    <% content 'header' %>
+  </div></div>
+  
+  
+    <div class="row-fluid">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        
+        
+        <div class="row"><div class="col-md-12">
+        <% content %>
+        </div></div>
+        
+        
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+    
+  
+  <stdscripts>
+    <script language='javascript' src='/files/templates/<%- @template_main %>/a.js'></script>
+  </stdscripts>
+  
+  <div class="row"><div class="col-md-12">
+    <% content 'footer' %>
+  </div></div>
+
+  <div class="row"><div class="col-md-12">
+    <small> <%- @get_execute_time() %> </small>
+  </div></div>
+
+</body>
+</html>

@@ -14,7 +14,9 @@ function die() {
 fnc.merr =
 function add_message_to_error(err,msg) {
     var info = g.util.inspect(err.stack).replace(/(\\\\)/g,'\\').replace(/\\n\s*at/g,'\n    at');
-    var imsg = msg+'\n'+info;
+    if (!msg) msg = '';
+    else msg += '\n';
+    var imsg = msg + info;
     if (!err.messages) err.messages = [imsg];
     else err.messages = [imsg].concat(err.messages);
     return err;

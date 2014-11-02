@@ -11,7 +11,6 @@ var datef = g.mixa.str.date_format;
 
 
 c.app_path = path_norm(__dirname);                             //путь к приложению
-c.templates_path = path_join(c.app_path,'client/templates/');  //пути к шаблонам ejs
 c.scripts_path = path_join(c.app_path,'scripts');              //пути к пользовательским скриптам
 
 //названия логов:
@@ -36,4 +35,14 @@ c.ip = g.mixa.ip.get_ipv4_adress_list(/192\.168\.\d\./)[0];
 //аргументы запуска приложения
 c.args = require('minimist')(process.argv.slice(2));
 
+
+c.templates = {};          //набор параметров и данных по шаблонам
+c.templates.main_path = path_join(c.app_path,'client/templates/');  //пути к шаблонам eсt
+c.templates.watch = true;  // ect — Automatic reloading of changed templates, defaulting to false
+c.templates.cache = true;  // ect — Compiled functions are cached, defaulting to true
+
+//==================================================================================
+//далее данные которые будут загружены автоматически при старте приложения:
+c.templates.path  = {}; //список доступных шаблонов в виде: {'default':'/path/to/default','name':'/path/to/name'}
+c.templates.names = []; //список имен доступных шаблонов
 
