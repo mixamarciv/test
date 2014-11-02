@@ -2,7 +2,7 @@ node_modules*/
 db/**.fdb
 db/*.fdb
 .bin/*.log
-temp*/
+temp/
 keys/**
 **/log.txt
 client/lib/**
