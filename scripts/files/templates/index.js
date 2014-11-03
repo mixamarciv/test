@@ -5,41 +5,47 @@ var tf = g.thunkify;
 
 var sendfile = require('koa-sendfile');
 
-
 var route_path = f.get_route_path(__filename);
+
 
 module.exports.load_route = function(router,fn){
 
     router.get(route_path+'/:p_template_name/:file_name', function*(next) {
-        if(!this.body){
-            this.body = route_path;
-        }else{
-            this.body += '\n'+route_path;
-        }
+        
         var file = this.url;
         file = file.replace(/\?.*$/g,'');
-        var is_exists = yield tf(g.fs.exists)(file);
+        var full_path_to_file = g.path.join(g.config.app_path,file);
+        var is_exists = yield f.gen_fs_exists(full_path_to_file);
         if (!is_exists){
 
-            var tplt = g.config.templates.path[this.params.p_template_name];
-            if (!tplt) { //если такой шаблон не существует
+            var template_path = g.config.templates.path[this.params.p_template_name];
+            if (!template_path) { //если такой шаблон не существует
                 return this.throw(404,'not found template: '+this.params.p_template_name);
             }
             
             var file_ext = g.path.extname(file);
+            var ext = file_ext.substring(1);
             var base_name_file = g.path.basename(file,file_ext);
-            
-            var template_to_this_file = 
-            if () {
-                
+            var template_for_this_file = g.path.join(template_path,ext,base_name_file+'.js');
+            is_exists = yield f.gen_fs_exists(template_for_this_file);
+            if (!is_exists) {
+                return this.throw(404,'not found template file: '+template_for_this_file);
             }
             
+            var render_file = require(template_for_this_file);
+            try{
+                yield render_file(full_path_to_file);
+            }catch(e){
+                e = f.merr(e,'render file error in '+ template_for_this_file );
+                return this.throw(e);
+            }
         }
         
-
+        var stats = yield* sendfile.call(this, full_path_to_file);
+        if (this.status==404){
+            return this.throw(404,'file not found  ['+file+']');
+        }
         
-        var stats = yield* sendfile.call(this, file);
-        if (!this.status) this.throw(404);
     });
     fn();
 }

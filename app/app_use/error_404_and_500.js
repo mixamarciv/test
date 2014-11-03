@@ -9,28 +9,36 @@ module.exports = function *pageNotFound(next) {
         yield next;
     } catch(e) {
         e = f.merr(e);
-        var error_info = e.messages.join('\n\n');
-        this.status = 500;
+        var error_info = '';
+        if (e.messages && g.u.isArray(e.messages)) {
+            error_info = e.messages.join('\n\n');
+        }
+        this.status = e.status;
+        if (!this.status) this.status = 500;
+        
+        var message = 'internal server error';
+        if (this.status == 404)  message = 'file not found';
+        
         switch (this.accepts('html', 'json')) {
           case 'html':
               this.type = 'html';
-              this.body = '<h1>500</h1><p>internal server error</p><pre>\n'+error_info+'</pre>';
+              this.body = '<h1>'+this.status+'</h1><p>' + message + '</p><pre>\n'+error_info+'</pre>';
               break;
           case 'json':
               this.body = {
-                message: 'internal server error',
+                status: this.status,
+                message: message,
                 error_info: error_info
               };
               break;
           default:
               this.type = 'text';
-              this.body = 'internal server error\n\n\n' + error_info;
+              this.body = message + '\n\n\n' + error_info;
         }
         return;
     }
     
     if (404 != this.status) return;
-    this.status = 404;
     switch (this.accepts('html', 'json')) {
         case 'html':
             this.type = 'html';

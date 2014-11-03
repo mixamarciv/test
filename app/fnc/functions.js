@@ -64,3 +64,10 @@ function get_route_path(route_file) {
   p = p.replace(/\/\//g,'/');
   return p;
 }
+
+//генератор для fs.exists
+fnc.gen_fs_exists = g.thunkify(function(file,fn){
+    g.fs.exists(file,function(ex){
+        fn(null,ex);
+    });
+});

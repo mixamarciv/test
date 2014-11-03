@@ -27,8 +27,13 @@
      ,"koa-static": "*"
 
 
+     ,"gulp": "*"
+     ,"gulp-less": "*"
+     ,"gulp-concat": "*"
+     ,"gulp-uglify": "*"
+     ,"gulp-minify-css": "*"
 
-     ,"thunkify": "*"
+
      ,"node-firebird": "*"
      ,"underscore": "*"
      ,"underscore.string": "*"
