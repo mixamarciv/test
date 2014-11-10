@@ -1,34 +1,21 @@
 var g = require('../../../../inc.js');
 var f = g.functions;
+var c = g.config;
 var clog = console.log;
 var tf = g.thunkify;
+var path = g.path;
 
 
 module.exports = tf(render);
 
 function render(file,fn){
-    clog('render: '+file);
+    clog('render css: '+file);
     
-    var p = g.path;
-    
-    var gulp = require('gulp');
-    var less = require('gulp-less');
-    var concat = require('gulp-concat');
-    var minifycss = require('gulp-minify-css');
-    
-    gulp.task('less_render', function(){
-        return gulp.src(g.path.join(__dirname,'styles.less'))
-            .pipe(less())
-            .pipe(concat(p.basename(file)))
-            .pipe(minifycss())
-            .pipe(gulp.dest(p.dirname(file)));
-    });
-    
-    gulp.start('less_render',function(err){
-      //gutil.log('done building chrome app.');
-      //done();
-      fn(err);
-    });
-    
-    
+    var options = {render_file:file};
+    options.files = [path.join2(__dirname,'slate.bootstrap.min.css')
+                    ];
+    options.use_less = 0;
+    options.use_minify = 0;
+    f.render_css(options,fn);
+
 }

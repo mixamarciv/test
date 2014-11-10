@@ -13,6 +13,8 @@ var datef = g.mixa.str.date_format;
 c.app_path = path_norm(__dirname);                             //путь к приложению
 c.scripts_path = path_join(c.app_path,'scripts');              //пути к пользовательским скриптам
 
+c.client_lib_path = path_join(__dirname,'client/lib');         //путь к клиентским библиотекам (js,css)
+
 //названия логов:
 c.log_path  = path_join(__dirname,'log/'+datef('Y.M'));
 

@@ -20,7 +20,7 @@ module.exports.load_route = function(router,fn){
 
             var template_path = g.config.templates.path[this.params.p_template_name];
             if (!template_path) { //если такой шаблон не существует
-                return this.throw(404,'not found template: '+this.params.p_template_name);
+                return this.throw(404,'not found template: '+this.params.p_template_name+' (debug info:'+g.util.inspect(g.config.templates.path)+')');
             }
             
             var file_ext = g.path.extname(file);
@@ -43,7 +43,7 @@ module.exports.load_route = function(router,fn){
         
         var stats = yield* sendfile.call(this, full_path_to_file);
         if (this.status==404){
-            return this.throw(404,'file not found  ['+file+']');
+            return this.throw(404,'file not found  {'+file+':'+full_path_to_file+'}');
         }
         
     });

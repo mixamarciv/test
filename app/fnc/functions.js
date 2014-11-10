@@ -1,6 +1,9 @@
 var g = require('../../inc.js');
 var cerr = console.error;
-module.exports = fnc = {};
+var clog = console.log;
+
+var fnc = {};
+module.exports = fnc;
 
 fnc.die =
 function die() {
@@ -13,6 +16,9 @@ function die() {
 
 fnc.merr =
 function add_message_to_error(err,msg) {
+    if (!err) {
+      err = new Error('undefined error3000');
+    }
     var info = g.util.inspect(err.stack).replace(/(\\\\)/g,'\\').replace(/\\n\s*at/g,'\n    at');
     if (!msg) msg = '';
     else msg += '\n';
@@ -71,3 +77,43 @@ fnc.gen_fs_exists = g.thunkify(function(file,fn){
         fn(null,ex);
     });
 });
+
+//генератор для setTimeout
+fnc.gen_setTimeout = g.thunkify(function(timeout,fn){
+    setTimeout(function(){
+        //clog(' timeout '+(new Date()).getTime());
+        fn(null,1);
+    },timeout);
+});
+
+
+//функция ожидающая создания файла file
+//options.timeout - таймаут между проверками файла
+//options.cnt     - количество проверок до прерывания проверок
+fnc.wait_for_file = function(file,options,fn){
+    if (!fn){
+      fn = options;
+      options = {timeout:100,cnt:10};
+    }
+    if (!options.timeout || options.timeout<=0) options.timeout = 100;
+    if (!options.cnt     || options.cnt<=0    ) options.cnt = 10;
+    g.co(function *(){
+        var t = options.cnt;
+        var exists = 0;
+        while (t-->0) {
+            exists = yield fnc.gen_fs_exists(file);
+            if (exists) break;
+            //clog('wait '+(new Date()).getTime());
+            var b = yield fnc.gen_setTimeout(options.timeout);
+        }
+        return exists;
+    })(function(err,ret_exists){
+      //clog('ret('+ret+') exists == '+exists);
+      if (err) return fn(err);
+      if (!ret_exists) return fn(fnc.merr(err,'file not exists'));
+      fn(null);
+    });
+};
+
+fnc.render_css = require('./render_css.js');
+fnc.render_js  = require('./render_js.js');

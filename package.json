@@ -28,6 +28,7 @@
 
 
      ,"gulp": "*"
+     ,"gulp-plumber": "*"
      ,"gulp-less": "*"
      ,"gulp-concat": "*"
      ,"gulp-uglify": "*"
