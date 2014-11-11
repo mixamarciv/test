@@ -13,8 +13,11 @@ module.exports = function *pageNotFound(next) {
         if (e.messages && g.u.isArray(e.messages)) {
             error_info = e.messages.join('\n\n');
         }
-        this.status = e.status;
-        if (!this.status) this.status = 500;
+        if (g.u.isNumber(e.status)) {
+            this.status = e.status;
+        }else{
+            this.status = 500;
+        }
         
         var message = 'internal server error';
         if (this.status == 404)  message = 'file not found';
@@ -35,10 +38,11 @@ module.exports = function *pageNotFound(next) {
               this.type = 'text';
               this.body = message + '\n\n\n' + error_info;
         }
-        return;
+        //return this.throw(500);
     }
     
-    if (404 != this.status) return;
+    if (this.status != 404) return;
+    this.status = 404;
     switch (this.accepts('html', 'json')) {
         case 'html':
             this.type = 'html';
@@ -53,5 +57,6 @@ module.exports = function *pageNotFound(next) {
             this.type = 'text';
             this.body = 'Page Not Found';
     }
+    
 }
 

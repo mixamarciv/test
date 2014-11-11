@@ -19,7 +19,7 @@ g.rimraf = require('rimraf');
 
 g.co = require('co');
 g.thunkify = require('thunkify');
-g.sendfile = require('koa-sendfile');
+g.koa_send = require('koa-send');
 
 
 g.mixa = require('mixa_std_js_functions');

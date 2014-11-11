@@ -43,9 +43,14 @@ module.exports = function load_app_use(app){
     
     //разбор параметров
     app.use(require('koa-bodyparser')());
-    
+       
     require('./ect.js')(app);
+    
+    app.use(require('koa-conditional-get')());
+    app.use(require('koa-etag')());
+    
 }
+
 
 
 //-----------------------------------------------------------

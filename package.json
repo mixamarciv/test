@@ -20,9 +20,14 @@
      ,"koa-router": "*"
      ,"koa-passport": "*"
      ,"koa-logger": "*"
+
+     ,"koa-conditional-get": "*"
+     ,"koa-etag": "*"
+
      ,"ect": "*"
 
      ,"bluebird": "*"
+     ,"koa-send": "*"
      ,"koa-sendfile": "*"
      ,"koa-static": "*"
 

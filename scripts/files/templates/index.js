@@ -41,11 +41,9 @@ module.exports.load_route = function(router,fn){
             }
         }
         
-        var stats = yield* sendfile.call(this, full_path_to_file);
-        if (this.status==404){
-            return this.throw(404,'file not found  {'+file+':'+full_path_to_file+'}');
-        }
-        
+        yield g.koa_send(this, full_path_to_file, { maxage: 1000*60*60*24*364 });
+
+        yield next;
     });
     fn();
 }
