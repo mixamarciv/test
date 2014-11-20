@@ -51,18 +51,18 @@ function render_ect(file,options) {
     }
     if (!options.template_main || !options.template_main_path){
         // елси путь к основному шаблону не задан
-        if (options.template_main){
-            options.template_main_path = all_templates[options.template_main];
-            if (!this.session.template_main){
-                this.session.template_main = options.template_main;
+        
+        var user_template_main = this.cookies.get('template_main');
+        if (!user_template_main){
+            if (options.template_main){
+                user_template_main = options.template_main;
+            }else{
+                user_template_main = all_templates_names[0];
             }
-        }else{
-            if (!this.session.template_main){
-                this.session.template_main = all_templates_names[0];
-            }
-            options.template_main = this.session.template_main;
-            options.template_main_path = all_templates[options.template_main];
+            this.cookies.set('template_main',user_template_main);
         }
+        options.template_main = user_template_main;
+        options.template_main_path = all_templates[options.template_main];
     }
     
     this.body = renderer.render( g.path.join2(options.template_file_path, file), options);

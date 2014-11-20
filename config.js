@@ -19,8 +19,8 @@ c.client_lib_path = path_join(__dirname,'client/lib');         //путь к к�
 //названия логов:
 c.log_path  = path_join(__dirname,'log/'+datef('Y.M'));
 
-
-c.db0002fdb_options = {
+c.db = {};
+c.db['0002.fdb'] = {
     database: 'D:/_db_web/db002/0002.fdb',
     host: '192.168.1.7',
     port: 3050,            // default
@@ -39,6 +39,11 @@ c.ip = g.mixa.ip.get_ipv4_adress_list(/192\.168\.\d\./)[0];
 c.args = require('minimist')(process.argv.slice(2));
 
 
+c.options_kill_prev_app_process = {
+    path: __dirname+'/temp/pid',   // где храним pid текущего-предыдущего процесса
+    wait: 10                       // сколько ждем после завершения предыдущего процесса 
+};
+
 c.templates = {};          //набор параметров и данных по шаблонам
 c.templates.main_path = path_join(c.app_path,'client/templates/');  //пути к шаблонам eсt
 c.templates.watch = true;  // ect — Automatic reloading of changed templates, defaulting to false
@@ -48,4 +53,5 @@ c.templates.cache = true;  // ect — Compiled functions are cached, defaulting 
 //далее данные которые будут загружены автоматически при старте приложения:
 c.templates.path  = {}; //список доступных шаблонов в виде: {'default':'/path/to/default','name':'/path/to/name'}
 c.templates.names = []; //список имен доступных шаблонов
+
 

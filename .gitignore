@@ -5,9 +5,13 @@ db/*.fdb
 temp/
 keys/**
 **/log.txt
+
 client/lib/**
 !client/lib/.bowerrc
 !client/lib/bower.json
+
+files/templates/**/*.js
+files/templates/**/*.css
 
 
 # Windows image file caches

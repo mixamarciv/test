@@ -5,7 +5,19 @@ var f = g.functions;
 var clog = console.log;
 var tf = g.thunkify;
 
-module.exports = fnc = {};
+var fnc = {};
+
+//загрузка роутов из всех поддиректорий g.config.scripts_path
+module.exports = g.co(function *(app){
+    
+    //загрузка списка index.js файлов из подкаталогов g.config.scripts_path
+    var list = yield tf(fnc.load_index_files_list)(g.config.scripts_path);
+    
+    //загрузка роутингов и других данных из списка index.js файлов
+    yield tf(fnc.load_route_from_index_files)(app,list);
+    
+});
+
 
 //загрузка списка index.js файлов из всех поддиректорий path
 fnc.load_index_files_list = function (path,fn){

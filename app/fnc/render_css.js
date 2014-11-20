@@ -43,7 +43,7 @@ function render_css(options,fn){
         else is_call_fn = 1;
         
         if (err) return fn(err);
-        g.functions.wait_for_file(file,{timeout:100,cnt:300},fn);
+        g.functions.wait_for_file(file,{timeout:100,cnt:10},fn);
     });
     
 }
