@@ -57,4 +57,4 @@ c.auto.templates = {};       //данные шаблонов
 c.auto.templates.path  = {}; //список доступных шаблонов в виде: {'default':'/path/to/default','name':'/path/to/name'}
 c.auto.templates.names = []; //список имен доступных шаблонов
 
-
+c.auto.menu = {};            //пункты меню, - загружаются автоматически из scripts_path файлов 
