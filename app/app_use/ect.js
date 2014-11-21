@@ -20,8 +20,8 @@ module.exports = function load_render(app){
     });
     
     //получаем список шаблонов
-    g.config.templates.path  = get_templates_obj();
-    g.config.templates.names = g.u.keys(g.config.templates.path);
+    g.config.auto.templates.path  = get_templates_obj();
+    g.config.auto.templates.names = g.u.keys(g.config.auto.templates.path);
     
     //меняем функцию this.render
     app.use(function *(next) {
@@ -37,8 +37,8 @@ function render_ect(file,options) {
     // или в каталоге request.path(относительный путь к скрипту)
     if (!options) options = {};
     
-    var all_templates = g.config.templates.path;
-    var all_templates_names = g.config.templates.names;
+    var all_templates = g.config.auto.templates.path;
+    var all_templates_names = g.config.auto.templates.names;
     
     options.g = g;
     options.locvars = this.locvars;

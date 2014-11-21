@@ -43,6 +43,9 @@ module.exports = function load_app_use(app){
     
     //разбор параметров
     app.use(require('koa-bodyparser')());
+    
+    //меняем this.cookies.set и get
+    app.use(require('./check_cookies.js'));
        
     require('./ect.js')(app);
     

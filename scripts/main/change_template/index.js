@@ -7,7 +7,7 @@ var route_path = f.get_route_path(__filename);
 
 module.exports.load_route = function(router,fn){
     //router.redirect('/','/main');
-    var all_t = g.config.templates.names;
+    var all_t = g.config.auto.templates.names;
     router.get(route_path, function*(next) {
         var cur_t = this.cookies.get('template_main');
         var new_t = all_t[0];

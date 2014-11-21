@@ -51,7 +51,10 @@ c.templates.cache = true;  // ect — Compiled functions are cached, defaulting 
 
 //==================================================================================
 //далее данные которые будут загружены автоматически при старте приложения:
-c.templates.path  = {}; //список доступных шаблонов в виде: {'default':'/path/to/default','name':'/path/to/name'}
-c.templates.names = []; //список имен доступных шаблонов
+c.auto = {};
+
+c.auto.templates = {};       //данные шаблонов
+c.auto.templates.path  = {}; //список доступных шаблонов в виде: {'default':'/path/to/default','name':'/path/to/name'}
+c.auto.templates.names = []; //список имен доступных шаблонов
 
 
