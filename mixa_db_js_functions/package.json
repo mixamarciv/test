@@ -15,7 +15,10 @@
     "db",
     "js functions"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
   "main": "./index",
   "engines": {
     "node": ">= 0.6.1"
@@ -30,3 +33,4 @@
   "_from": "https://github.com/mixamarciv/mixa_db_js_functions/tarball/master",
   "_resolved": "https://github.com/mixamarciv/mixa_db_js_functions/tarball/master"
 }
+
