@@ -5,7 +5,7 @@ var f = g.functions;
 var clog = console.log;
 var tf = g.thunkify;
 
-
+//убиваем предыдущий процесс
 require('kill-prev-process-app')(g.config.options_kill_prev_app_process,function(){
     
     var app = require('koa')();

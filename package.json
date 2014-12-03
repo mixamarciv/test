@@ -47,6 +47,7 @@
      ,"mixa_std_js_functions": "https://github.com/mixamarciv/mixa_std_js_functions/tarball/master"
      ,"process_logger": "https://github.com/mixamarciv/process_logger/tarball/master"
      ,"kill-prev-app-process": "https://github.com/mixamarciv/kill-prev-app-process/tarball/master"
+     ,"mixa_db_js_functions":  "https://github.com/mixamarciv/mixa_db_js_functions/tarball/master"
      ,"rimraf": "*"
   }
 }
