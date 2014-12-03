@@ -84,7 +84,7 @@ fnc.load_route_from_index_files = function (app,list,fn){
                     yield tf(load_route_fnc)(router);
                     cnt_load_route++;
                 } catch(e) {
-                    e = f.merr(e,'ERROR: bad load_route in file: '+route_file);
+                    e = f.merr(e,'ERROR: fail load_route() in file: '+route_file);
                     //console.log(g.util.inspect(e));
                     errors.push(e);
                     cnt_err++;
@@ -100,7 +100,7 @@ fnc.load_route_from_index_files = function (app,list,fn){
                     menu_list.push(menu_item);
                     cnt_load_menu++;
                 } catch(e) {
-                    e = f.merr(e,'ERROR: bad load_menu in file: '+route_file);
+                    e = f.merr(e,'ERROR: fail load_menu() in file: '+route_file);
                     //console.log(g.util.inspect(e));
                     errors.push(e);
                     cnt_err++;
