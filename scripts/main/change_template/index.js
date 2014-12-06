@@ -5,6 +5,14 @@ var tf = g.thunkify;
 
 var route_path = f.get_route_path(__filename);
 
+module.exports.load_menu = function(fn){
+    var menu_item = {};
+    menu_item.link = route_path;
+    menu_item.name = 'изменить шаблон';
+    
+    fn();
+}
+
 module.exports.load_route = function(router,fn){
     //router.redirect('/','/main');
     var all_t = g.config.auto.templates.names;

@@ -4,7 +4,7 @@ var g = require('../../inc.js');
 var f = g.functions;
 var clog = console.log;
 var tf = g.thunkify;
-
+var path = g.path;
 var fnc = {};
 
 //загрузка роутов из всех поддиректорий g.config.scripts_path
@@ -15,6 +15,9 @@ module.exports = g.co(function *(app){
     
     //загрузка роутингов и других данных из списка index.js файлов
     yield tf(fnc.load_route_from_index_files)(app,list);
+    
+    //загрузка пунктов меню из списка index.js файлов
+    yield tf(fnc.load_menu_from_index_files)(list);
     
 });
 
@@ -67,12 +70,9 @@ fnc.load_route_from_index_files = function (app,list,fn){
         var Router = require('koa-router');
         var router = new Router();
         var cnt_load_route = 0;
-        var cnt_load_menu = 0;
         var cnt_err = 0;
         var errors = [];
-        
-        var menu_list = [];  //сюда загружаем набор пунктов меню из каждого index файла с функцией load_menu();
-        
+
         for(var i=0;i<list.length;i++){
             var route_file = list[i];
             var fncs_route_file = require(route_file);
@@ -91,20 +91,46 @@ fnc.load_route_from_index_files = function (app,list,fn){
                 }
             }
             
-            var load_menu_fnc = fncs_route_file.load_menu;
+        }
+        app.use(router.middleware());
+        
+        if (cnt_err) throw(errors);
+    })(fn);
+}
+
+function load_menu_from_index_files(list,fn) {
+    g.co(function *(){
+        var cnt_load_menu = 0;
+        var cnt_err = 0;
+        var errors = [];
+        
+        var menu_list = [];  //сюда загружаем набор пунктов меню из каждого index файла с функцией load_menu();
+        var parent = {menu_item:null,route_file:null};
+        
+        for(var i=0;i<list.length;i++){
+            var route_file = list[i];
+            var fncs_file = require(route_file);
+            
+            var load_menu_fnc = fncs_file.load_menu;
             if (g.u.isFunction(load_menu_fnc)){
                 console.info('    load_menu:  '+f.get_route_path(route_file));
+                var is_error = 0;
                 try{
                     var menu_item = yield tf(load_menu_fnc)();
-                    if(menu_item.n_order===undefined) menu_item.n_order = Number.MAX_VALUE;
-                    menu_list.push(menu_item);
+                    if(menu_item.n_order===undefined) menu_item.n_order = Number.MAX_VALUE/2 + cnt_load_menu;
                     cnt_load_menu++;
                 } catch(e) {
+                    is_error = 1;
                     e = f.merr(e,'ERROR: fail load_menu() in file: '+route_file);
                     //console.log(g.util.inspect(e));
                     errors.push(e);
                     cnt_err++;
                 }
+                if (is_error){
+                    continue;
+                }
+                
+                menu_list.push(menu_item);
             }
         }
         app.use(router.middleware());
