@@ -1,3 +1,4 @@
+'use strict';
 var g = require('../../../inc.js');
 var f = g.functions;
 var clog = console.log;
@@ -10,7 +11,7 @@ module.exports.load_menu = function(fn){
     menu_item.link = route_path;
     menu_item.name = 'изменить шаблон';
     
-    fn();
+    fn(null,menu_item);
 }
 
 module.exports.load_route = function(router,fn){

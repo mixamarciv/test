@@ -1,3 +1,4 @@
+'use strict';
 console.log('start app  (%s%s; node %s; pid:%s)',process.platform, process.arch, process.version, process.pid);
 
 var g = require('./inc.js');

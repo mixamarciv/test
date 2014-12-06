@@ -1,3 +1,4 @@
+'use strict';
 console.log('load config ...');
 
 //объявляем параметры приложения

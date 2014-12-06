@@ -1,3 +1,4 @@
+'use strict';
 console.log('  load app/app_load/index.js..');
 
 var g = require('../../inc.js');
@@ -98,7 +99,7 @@ fnc.load_route_from_index_files = function (app,list,fn){
     })(fn);
 }
 
-function load_menu_from_index_files(list,fn) {
+fnc.load_menu_from_index_files = function (list,fn) {
     g.co(function *(){
         var cnt_load_menu = 0;
         var cnt_err = 0;
@@ -117,7 +118,10 @@ function load_menu_from_index_files(list,fn) {
                 var is_error = 0;
                 try{
                     var menu_item = yield tf(load_menu_fnc)();
-                    if(menu_item.n_order===undefined) menu_item.n_order = Number.MAX_VALUE/2 + cnt_load_menu;
+                    menu_item._route_file = route_file;
+                    
+                    push_menu_item(menu_list,menu_item);
+                    
                     cnt_load_menu++;
                 } catch(e) {
                     is_error = 1;
@@ -126,24 +130,66 @@ function load_menu_from_index_files(list,fn) {
                     errors.push(e);
                     cnt_err++;
                 }
-                if (is_error){
-                    continue;
-                }
-                
-                menu_list.push(menu_item);
             }
         }
-        app.use(router.middleware());
-        set_main_menu(menu_list);
+        
+        menu_list.sort(sort_menu);
+        g.config.auto.menu = menu_list;
+        
         if (cnt_err) throw(errors);
     })(fn);
 }
 
-function set_main_menu(menu_list) {
-    menu_list.sort(function(a,b){
-        if (a.n_order < b.n_order) return -1;
-        if (a.n_order > b.n_order) return  1;
-        return 0;
-    });
-    g.config.auto.menu = menu_list;
+function push_menu_item(menu_list,a) {
+    if( !menu_list.length ){
+        menu_list.push(a);
+        return 1;
+    }
+    var b = 0;
+    for(var i=0;i<menu_list.length;i++) {
+        var m = menu_list[i];
+        var p = is_parent_path(m,a);
+        if ( p == 0 ) continue;
+        if ( p > 1 ) {
+            if ( !m.submenu ) m.submenu = [];
+            b = push_menu_item(m.submenu,a);
+            if ( b > 0 ) break;
+        }
+    }
+    if ( b == 0 ) {
+        menu_list.push(a);
+        return 1;
+    }
+    return 0;
 }
+
+function is_parent_path(parent,c) {
+    var level = 1;
+    while(1){
+        var t = path.dirname(c);
+        if (t == c) return 0;
+        if (t == parent) return level;
+        c = t;
+        level++;
+    }
+}
+
+var sort_i = 0;
+function sort_menu(a,b) {
+    sort_submenu(a);
+    sort_submenu(b);
+    
+    if (a.n_order===undefined) a.n_order = Number.MAX_VALUE/2 + sort_i++;
+    if (b.n_order===undefined) b.n_order = Number.MAX_VALUE/2 + sort_i++;
+    if (a.n_order < b.n_order) return -1;
+    if (a.n_order > b.n_order) return  1;
+    return 0;
+}
+
+function sort_submenu(a) {
+    if (a.submenu && g.u.isArray(a.submenu) && !a.submenu__sorted) {
+        a.submenu__sorted = 1;
+        a.submenu.sort(sort_menu);
+    }
+}
+
