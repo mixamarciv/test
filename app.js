@@ -26,9 +26,25 @@ require('kill-prev-process-app')(g.config.options_kill_prev_app_process,function
         }
         
         // start the server
-        require('http') .createServer(app.callback()).listen(80);
-        require('https').createServer(ssl_options, app.callback()).listen(443);
+        clog('run http server');
+        require('http') .createServer(app.callback()).listen(80,server_is_ready);
+        
+        clog('run https server');
+        require('https').createServer(ssl_options, app.callback()).listen(443,server_is_ready);
         
     });
     
 });
+
+
+var ss = 0;
+function server_is_ready(err) {
+  if (err) {
+    console.error('\n\n\n  SERVER START ERROR:  \n\n');
+    console.error(err);
+    return;
+  }
+  if ( ++ss > 1 ) {
+    clog('\n\nserver is running  \n\n');
+  }
+}

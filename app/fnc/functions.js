@@ -5,6 +5,8 @@ var clog = console.log;
 var fnc = {};
 module.exports = fnc;
 
+fnc.fs = require('./fs.js');
+
 fnc.die =
 function die() {
   for(i=0;i<arguments.length;i++){
@@ -71,12 +73,6 @@ function get_route_path(route_file) {
   return p;
 }
 
-//генератор для fs.exists
-fnc.gen_fs_exists = g.thunkify(function(file,fn){
-    g.fs.exists(file,function(ex){
-        fn(null,ex);
-    });
-});
 
 //генератор для setTimeout
 fnc.gen_setTimeout = g.thunkify(function(timeout,fn){
@@ -101,7 +97,7 @@ fnc.wait_for_file = function(file,options,fn){
         var t = options.cnt;
         var exists = 0;
         while (t-->0) {
-            exists = yield fnc.gen_fs_exists(file);
+            exists = yield fnc.fs.gen_exists(file);
             if (exists) break;
             //clog('wait '+(new Date()).getTime());
             var b = yield fnc.gen_setTimeout(options.timeout);

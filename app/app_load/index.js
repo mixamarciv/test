@@ -16,9 +16,11 @@ module.exports = g.co(function *(app){
     
     //загрузка роутингов и других данных из списка index.js файлов
     yield tf(fnc.load_route_from_index_files)(app,list);
-    
+        
     //загрузка пунктов меню из списка index.js файлов
     yield tf(fnc.load_menu_from_index_files)(list);
+    
+    yield tf(require('./render_html_menu_file.js'))(g.config.temp_path+'/template/html/menu/main_menu.html',g.config.auto.menu);
     
 });
 

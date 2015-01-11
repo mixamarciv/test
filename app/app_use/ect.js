@@ -65,7 +65,10 @@ function render_ect(file,options) {
         options.template_main_path = all_templates[options.template_main];
     }
     
-    this.body = renderer.render( g.path.join2(options.template_file_path, file), options);
+    var path_render_file = g.path.join2(options.template_file_path, file);
+    
+    options.all_vars = options;
+    this.body = renderer.render( path_render_file, options);
 }
 
 //возвращает время загрузки
