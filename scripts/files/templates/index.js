@@ -15,7 +15,7 @@ module.exports.load_route = function(router,fn){
         var file = this.url;
         file = file.replace(/\?.*$/g,'');
         var full_path_to_file = g.path.join(g.config.app_path,file);
-        var is_exists = yield f.gen_fs_exists(full_path_to_file);
+        var is_exists = yield f.fs.gen_exists(full_path_to_file);
         if (!is_exists){
 
             var template_path = g.config.templates.path[this.params.p_template_name];
@@ -27,7 +27,7 @@ module.exports.load_route = function(router,fn){
             var ext = file_ext.substring(1);
             var base_name_file = g.path.basename(file,file_ext);
             var template_for_this_file = g.path.join(template_path,ext,base_name_file+'.js');
-            is_exists = yield f.gen_fs_exists(template_for_this_file);
+            is_exists = yield f.fs.gen_exists(template_for_this_file);
             if (!is_exists) {
                 return this.throw(404,'not found template file: '+template_for_this_file);
             }

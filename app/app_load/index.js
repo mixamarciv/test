@@ -101,6 +101,9 @@ fnc.load_route_from_index_files = function (app,list,fn){
     })(fn);
 }
 
+//загрузка пунктов меню из index.js файлов
+//  меню задаются в этих файлах функуцией module.exports.load_menu()
+//    menu_item == {link: 'ссылка', name: 'название пункта меню', submenu: []}
 fnc.load_menu_from_index_files = function (list,fn) {
     g.co(function *(){
         var cnt_load_menu = 0;

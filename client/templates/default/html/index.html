@@ -12,7 +12,7 @@
 
   <nav class="navbar navbar-default navbar-static-top" role="navigation" > <!-- navbar-fixed-top -->
     <!-- <div class="container"> -->
-      <% include @template_main_path + '/html/menu/main_menu.html', {@all_vars} %>
+      <% include @template_main_path + '/html/menu/main_menu.html' %>
     <!-- </div> -->
   </nav>
   
@@ -58,7 +58,7 @@
 
   <div class="col-md-10"></div>
   <div class="col-md-2">
-      <small><small><%- get_execute_time() %></small></small>
+      <small><small><%- @get_execute_time() %></small></small>
   </div>
   <!-- -->
   
