@@ -18,9 +18,9 @@ module.exports.load_route = function(router,fn){
         var is_exists = yield f.fs.gen_exists(full_path_to_file);
         if (!is_exists){
 
-            var template_path = g.config.templates.path[this.params.p_template_name];
+            var template_path = g.config.auto.templates.path[this.params.p_template_name];
             if (!template_path) { //если такой шаблон не существует
-                return this.throw(404,'not found template: '+this.params.p_template_name+' (debug info:'+g.util.inspect(g.config.templates.path)+')');
+                return this.throw(404,'not found template: '+this.params.p_template_name+' (debug info:'+g.util.inspect(g.config.auto.templates.path)+')');
             }
             
             var file_ext = g.path.extname(file);

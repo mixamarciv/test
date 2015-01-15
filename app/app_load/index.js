@@ -9,6 +9,7 @@ var path = g.path;
 var fnc = {};
 
 //загрузка роутов из всех поддиректорий g.config.scripts_path
+//а так же загрузка пунктов меню и создание временного html файла меню
 module.exports = g.co(function *(app){
     
     //загрузка списка index.js файлов из подкаталогов g.config.scripts_path
@@ -137,8 +138,9 @@ fnc.load_menu_from_index_files = function (list,fn) {
                 }
             }
         }
-        
+        //console.log(g.util.inspect(menu_list));
         menu_list.sort(sort_menu);
+        console.log(g.util.inspect(menu_list,{depth:10}));
         g.config.auto.menu = menu_list;
         
         if (cnt_err) throw(errors);
@@ -153,9 +155,9 @@ function push_menu_item(menu_list,a) {
     var b = 0;
     for(var i=0;i<menu_list.length;i++) {
         var m = menu_list[i];
-        var p = is_parent_path(m,a);
+        var p = is_parent_path(path.dirname(m._route_file),a._route_file);
         if ( p == 0 ) continue;
-        if ( p > 1 ) {
+        if ( p > 0 ) {
             if ( !m.submenu ) m.submenu = [];
             b = push_menu_item(m.submenu,a);
             if ( b > 0 ) break;
@@ -169,6 +171,7 @@ function push_menu_item(menu_list,a) {
 }
 
 function is_parent_path(parent,c) {
+    if (parent==c) return 0;
     var level = 1;
     while(1){
         var t = path.dirname(c);
@@ -177,6 +180,7 @@ function is_parent_path(parent,c) {
         c = t;
         level++;
     }
+    return 0;
 }
 
 var sort_i = 0;

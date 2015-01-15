@@ -12,7 +12,7 @@
 
   <nav class="navbar navbar-default navbar-static-top" role="navigation" > <!-- navbar-fixed-top -->
     <!-- <div class="container"> -->
-      <% include @template_main_path + '/html/menu/main_menu.html', { title : 'main menu', info: '10$' } %>
+      <% include @template_main_path + '/html/menu/main_menu.html' %>
     <!-- </div> -->
   </nav>
   
@@ -20,7 +20,7 @@
   <% if @error : %>
     <div class="alert alert-dismissable alert-danger">
       <!-- button type="button" class="close" data-dismiss="alert">×</button -->
-      <strong>ERROR: <%- @error %></strong>
+      <strong>ERROR: <%- error %></strong>
       <div class="row">
         <div class="col-md-12"><%- @html_dump_error %></div>
       </div>
