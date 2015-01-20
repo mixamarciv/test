@@ -26,6 +26,9 @@ CD "%this_file_path%\.."
 @SET PATH=%PATH%;%NODE_PATH%\node_modules\.bin
 @SET PATH=%PATH%;.\node_modules\.bin;%this_file_path%\..\node_modules\.bin
 
+::обязательно задаем путь к архиватору 7z
+@SET PATH=%PATH%;c:\Program Files\7-Zip;
+
 @SET NODE_PATH=.
 
 ::@ECHO %PATH%

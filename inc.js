@@ -10,7 +10,7 @@ g.path = require('path');
 g.u    = require('underscore');
 g.u.str = require('underscore.string');
 //g.async = require('async');
-g.process_logger = require('process_logger');
+g.process_logger = require('process-logger');
 g.rimraf = require('rimraf');
 
 //g.ncp  = require('ncp').ncp;

@@ -1,0 +1,10 @@
+<% extend @template_main_path + '/html/index.html' %>
+<div>
+	<h2><%- @new_template %></h2> -> <h2><%- @cur_t2 %></h2>
+
+	<pre><%- @g.mixa.dump.var_dump_node('data1',@data1) %></pre>
+	<pre><%- @g.util.inspect(@data1) %></pre>
+	
+	<p>server time is: <%= (new Date()) %></p>
+	
+</div>

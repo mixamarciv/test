@@ -5,6 +5,18 @@ var clog = console.log;
 var fnc = {};
 module.exports = fnc;
 
+fnc.run_gen = function(fn){
+  return g.thunkify(g.co(fn));
+}
+
+fnc.wait    = function(time,fn) {
+  setTimeout(fn,time);
+}
+
+fnc.random_int = function(from,to){
+  return Math.round(Math.random()*(to-from))+from;
+}
+
 fnc.fs = require('./fs.js');
 
 fnc.die =
