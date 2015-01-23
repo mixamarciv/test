@@ -9,6 +9,7 @@ var tf = g.thunkify;
 
 var route_path = f.get_route_path(__filename);
 
+
 module.exports.load_menu = function(fn){
     var menu_item = {};
     menu_item.link = route_path;
@@ -29,6 +30,8 @@ module.exports.load_route = function(router,fn){
     fn();
 }
 
+
+
 function *this_function() {
     var data = {test:1};
     
@@ -41,7 +44,7 @@ function *this_function() {
         while(i--){
             var file = data.files[i];
             var ok = 0;
-            if (/sql/i.test(file) && /08/i.test(file) && !/run_log/i.test(file) && !/__temp/i.test(file)) {
+            if ( /* /sql/i.test(file) && /08/i.test(file) && */ !/run_log/i.test(file) && !/__temp/i.test(file)) {
                 ok = 1;
             }
             if (!ok) continue;
