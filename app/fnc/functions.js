@@ -13,9 +13,7 @@ fnc.wait    = function(time,fn) {
   setTimeout(fn,time);
 }
 
-fnc.random_int = function(from,to){
-  return Math.round(Math.random()*(to-from))+from;
-}
+fnc.random_int = g.mixa.int.get_random_int;
 
 fnc.fs = require('./fs.js');
 

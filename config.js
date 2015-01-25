@@ -60,3 +60,6 @@ c.auto.templates.path  = {}; //список доступных шаблонов 
 c.auto.templates.names = []; //список имен доступных шаблонов
 
 c.auto.menu = {};            //пункты меню, - загружаются автоматически из scripts_path файлов 
+//==================================================================================
+c.debug = {};
+c.debug.load_user_data_from_cookies = 1;  //выводить ошибки модуля load_user_data_from_cookies.js
