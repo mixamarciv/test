@@ -140,7 +140,7 @@ fnc.load_menu_from_index_files = function (list,fn) {
         }
         //console.log(g.util.inspect(menu_list));
         menu_list.sort(sort_menu);
-        console.log(g.util.inspect(menu_list,{depth:10}));
+        //console.log(g.util.inspect(menu_list,{depth:10}));
         g.config.auto.menu = menu_list;
         
         if (cnt_err) throw(errors);

@@ -24,10 +24,10 @@ module.exports = function *(next) {
     yield next;    
 }
 
-function check_session(ths) {
-    if (!ths.session.start_time) ths.session.start_time = ths.locvars.start_load;
-    var n = ths.session.views || 0;
-    ths.session.views = ++n;
+function check_session(ctx) {
+    if (!ctx.session.start_time) ctx.session.start_time = ctx.locvars.start_load;
+    var n = ctx.session.views || 0;
+    ctx.session.views = ++n;
 }
 
 

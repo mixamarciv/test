@@ -22,7 +22,7 @@ module.exports = function load_app_use(app){
     app.use(helmet.defaults({ xframe: false }));
     app.use(helmet.iexss({ setOnOldIE: true }));
     app.use(helmet.ienoopen());
-    app.use(helmet.hidePoweredBy());
+    //app.use(helmet.hidePoweredBy());
     
     //check error500 and 404
     app.use(require('./error_404_and_500.js'));
@@ -34,32 +34,21 @@ module.exports = function load_app_use(app){
     app.keys = f.readJsonSync(g.path.join(g.config.app_path,'/keys/session.keys'),1);
     var session_options = f.readJsonSync(g.path.join(g.config.app_path,'/keys/session.options'),0);
     if (!session_options || !session_options.key) session_options = {key:'koa:sess'};
-    app.use(require('koa-session')(session_options));
-    /*****
-    app.use(function *(next) {
-        if (!this.session.start_time) this.session.start_time = this.locvars.start_load;
-        var n = this.session.views || 0;
-        this.session.views = ++n;
-        
-        yield next;
-    });
-    *****/
+    //app.use(require('koa-session')(session_options));
+    require('koa-session')(session_options,app);
+
     
     //разбор параметров
     app.use(require('koa-bodyparser')());
     
     app.use(require('./load_req_functions.js'));
-    
-    //меняем this.cookies.set и get
-    //app.use(require('./check_cookies.js'));
-       
+
     require('./ect.js')(app);
     
     app.use(require('koa-conditional-get')());
     app.use(require('koa-etag')());
     
-    //app.use(require('./load_user_data.js'));
-    
+    //app.use(require('./load_user_data.js'));    
 }
 
 

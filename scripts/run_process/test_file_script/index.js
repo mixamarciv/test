@@ -21,7 +21,7 @@ module.exports.load_menu = function(fn){
 module.exports.load_route = function(router,fn){
     //router.redirect('/','/main');
     var all_t = g.config.auto.templates.names;
-    router.get(route_path, function*(next) {
+    router.get(route_path, function*(next){
         var data1 = yield g.co(this_function);
         
         this.render('index.html', {data1:data1});

@@ -42,6 +42,7 @@ function render_ect(file,options) {
     
     options.g = g;
     options.locvars = this.locvars;
+    options.session = this.session;
     options.get_execute_time = get_execute_time;
     
     

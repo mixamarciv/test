@@ -9,6 +9,8 @@ g.os   = require('os');
 g.fs   = require('fs');
 g.util = require('util');
 g.path = require('path');
+g.crypto = require('crypto');
+
 g.u    = require('underscore');
 g.u.str = require('underscore.string');
 g.moment = require('moment');
