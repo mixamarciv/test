@@ -17,7 +17,12 @@ require('kill-prev-process-app')(g.config.options_kill_prev_app_process,function
     //загрузка роутов из всех поддиректорий g.config.scripts_path
     var load_all_routes = require('./app/app_load/index.js');
     load_all_routes(app,function(err){
-        if (err) throw(err);
+        if (err){
+            clog('ERROR(load_all_routes):');
+            f.merr(err,'ERROR(load_all_routes)');
+            clog(g.util.inspect(err));
+            throw(err);
+        }
         
         // SSL options
         var ssl_options = {

@@ -8,6 +8,13 @@ module.exports = fnc;
 fnc.run_gen = function(fn){
   return g.thunkify(g.co(fn));
 }
+fnc.run_co = function(fn_gen,fn_callback){
+  g.co(fn_gen).then(function(val){
+      fn_callback(null,val);
+  },function(err){
+      fn_callback(err);
+  });
+}
 
 fnc.wait    = function(time,fn) {
   setTimeout(fn,time);

@@ -68,12 +68,13 @@ function load_new_anonim_user(ctx) {
     var data = {
         id: 1,
         login: 'anonymous'+n,
-        name: 'не авторизован('+n+')',
+        name: 'anonymous('+n+')',
         start_session: new Date(ctx.session.start_time).getTime()
     }
     return data;
 }
 
+var bad_test = 0;
 function save(ctx,user) {
     var bad_test = check_user_data(user,0);
     if (bad_test) throw(new Error('bad user data: '+bad_test));
@@ -81,15 +82,28 @@ function save(ctx,user) {
     var s = JSON.stringify(user);
     ctx.cookies.set('user',s,{signed:true,maxAge:1000*60*60*24*30*12});
     ctx.cookies.set('user_i',enc_user_data(ctx,s),{signed:false,maxAge:1000*60*60*24*30*12});
+    
+    clog('== test =====================================================');
+    if (bad_test++>3) {
+        bad_test = 0;
+        return;
+    }
+    var uuu = load(ctx);
+    clog(g.util.inspect(uuu));
+    clog('        -----------------------------------------------------');
+    clog(g.util.inspect(user));
+    clog('==/test =====================================================');
+    
 }
 
 function load(ctx) {
     var data_req = ctx.cookies.get('user',{signed:true},null);
+    clog(g.util.inspect(data_req));
     var user  = null;
     try{
       user = JSON.parse(data_req);
     }catch(e){
-      clog_err('ERROR: bad json in request cookie"'+data_req+'"',e);
+      clog_err('ERROR: bad json in request cookie "'+data_req+'"',e);
     }
     var bad_test = check_user_data(user,{ctx:ctx});
     if (bad_test){

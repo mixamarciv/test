@@ -10,25 +10,29 @@ var fnc = {};
 
 //загрузка роутов из всех поддиректорий g.config.scripts_path
 //а так же загрузка пунктов меню и создание временного html файла меню
-module.exports = g.co(function *(app){
-    
-    //загрузка списка index.js файлов из подкаталогов g.config.scripts_path
-    var list = yield tf(fnc.load_index_files_list)(g.config.scripts_path);
-    
-    //загрузка роутингов и других данных из списка index.js файлов
-    yield tf(fnc.load_route_from_index_files)(app,list);
-        
-    //загрузка пунктов меню из списка index.js файлов
-    yield tf(fnc.load_menu_from_index_files)(list);
-    
-    yield tf(require('./render_html_menu_file.js'))(g.config.temp_path+'/template/html/menu/main_menu.html',g.config.auto.menu);
-    
-});
+module.exports = function (app,fn0) {
+    f.run_co(function *(){
+        //загрузка списка index.js файлов из подкаталогов g.config.scripts_path
+        /*var list = yield new Promise(function(resolve, reject){
+            fnc.load_index_files_list(g.config.scripts_path,function(err){
+                if (err) return reject(err);
+                resolve(arguments);
+            });
+        });*/
+        var list = yield fnc.load_index_files_list(g.config.scripts_path);
 
+        //загрузка роутингов и других данных из списка index.js файлов
+        yield fnc.load_route_from_index_files(app,list);
+
+        //загрузка пунктов меню из списка index.js файлов
+        yield fnc.load_menu_from_index_files(list);
+        
+        yield require('./render_html_menu_file.js')(g.config.temp_path+'/template/html/menu/main_menu.html',g.config.auto.menu);
+    },fn0);
+}
 
 //загрузка списка index.js файлов из всех поддиректорий path
-fnc.load_index_files_list = function (path,fn){
-    g.co(function *(){
+fnc.load_index_files_list = function *(path,fn){
         var list = [];
         function *update_list_route_files(ppath,level) {
             if (!level) level = 0;
@@ -64,13 +68,11 @@ fnc.load_index_files_list = function (path,fn){
             throw(e);
         }
         return list;
-    })(fn);
 }
 
 
 //загрузка списка index.js файлов из всех поддиректорий path
-fnc.load_route_from_index_files = function (app,list,fn){
-    g.co(function *(){
+fnc.load_route_from_index_files = function* (app,list,fn){
         var Router = require('koa-router');
         var router = new Router();
         var cnt_load_route = 0;
@@ -99,14 +101,12 @@ fnc.load_route_from_index_files = function (app,list,fn){
         app.use(router.middleware());
         
         if (cnt_err) throw(errors);
-    })(fn);
 }
 
 //загрузка пунктов меню из index.js файлов
 //  меню задаются в этих файлах функуцией module.exports.load_menu()
 //    menu_item == {link: 'ссылка', name: 'название пункта меню', submenu: []}
-fnc.load_menu_from_index_files = function (list,fn) {
-    g.co(function *(){
+fnc.load_menu_from_index_files = function* (list,fn) {
         var cnt_load_menu = 0;
         var cnt_err = 0;
         var errors = [];
@@ -144,7 +144,6 @@ fnc.load_menu_from_index_files = function (list,fn) {
         g.config.auto.menu = menu_list;
         
         if (cnt_err) throw(errors);
-    })(fn);
 }
 
 function push_menu_item(menu_list,a) {
