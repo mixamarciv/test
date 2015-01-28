@@ -6,7 +6,44 @@ var f = g.functions;
 var clog = console.log;
 var tf = g.thunkify;
 
-//убиваем предыдущий процесс
+
+f.run_gen(function*(){
+    //убиваем предыдущий процесс
+    yield tf(require('kill-prev-process-app'))(g.config.options_kill_prev_app_process);
+    var app = require('koa')();
+    //задаем настройки приложения
+    require('./app/app_use/index.js')(app);
+    
+    //загрузка роутов из всех поддиректорий g.config.scripts_path
+    var load_all_routes = require('./app/app_load/index.js');
+    yield tf(load_all_routes)(app);
+    
+    var server80 = require('http').createServer(app.callback());
+    var p80 = tf(start_listner)(server80,80);
+    //f(80,end_load);
+    //clog(p80);
+    //yield p80(80);
+    // SSL options
+    var ssl_options = {
+      key: g.fs.readFileSync('./keys/server.key'),
+      cert: g.fs.readFileSync('./keys/server.crt')
+    }
+    var server443 = require('https').createServer(ssl_options, app.callback());
+    var p443 = tf(start_listner)(server443,443);
+    
+    yield p80;
+    yield p443;
+    
+},end_load);
+
+function start_listner(server,port,fn) {
+    server.listen(port,function(err){
+        if(!err) clog('  listen '+port);
+        fn(err);
+    });
+}
+
+/**********
 require('kill-prev-process-app')(g.config.options_kill_prev_app_process,function(){
     
     var app = require('koa')();
@@ -40,16 +77,14 @@ require('kill-prev-process-app')(g.config.options_kill_prev_app_process,function
     });
     
 });
+***********/
 
-
-var ss = 0;
-function server_is_ready(err) {
+function end_load(err) {
   if (err) {
     console.error('\n\n\n  SERVER START ERROR:  \n\n');
+    f.merr(err,'load error:');
     console.error(err);
     return;
   }
-  if ( ++ss > 1 ) {
-    clog('\n\nserver is running  '+g.mixa.str.date_format('Y.M.D h:m:s k')+'\n\n');
-  }
+  clog('\n\nserver is running  '+g.mixa.str.date_format('Y.M.D h:m:s k')+'\n\n');
 }

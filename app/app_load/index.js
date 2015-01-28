@@ -11,7 +11,7 @@ var fnc = {};
 //загрузка роутов из всех поддиректорий g.config.scripts_path
 //а так же загрузка пунктов меню и создание временного html файла меню
 module.exports = function (app,fn0) {
-    f.run_co(function *(){
+    f.run_gen(function *(){
         //загрузка списка index.js файлов из подкаталогов g.config.scripts_path
         /*var list = yield new Promise(function(resolve, reject){
             fnc.load_index_files_list(g.config.scripts_path,function(err){
@@ -30,6 +30,7 @@ module.exports = function (app,fn0) {
         yield require('./render_html_menu_file.js')(g.config.temp_path+'/template/html/menu/main_menu.html',g.config.auto.menu);
     },fn0);
 }
+
 
 //загрузка списка index.js файлов из всех поддиректорий path
 fnc.load_index_files_list = function *(path,fn){

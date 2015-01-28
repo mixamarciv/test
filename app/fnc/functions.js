@@ -8,12 +8,31 @@ module.exports = fnc;
 fnc.run_gen = function(fn){
   return g.thunkify(g.co(fn));
 }
-fnc.run_co = function(fn_gen,fn_callback){
+
+
+fnc.run_gen = function(fn_gen,fn_callback){ //my run generator wrap
   g.co(fn_gen).then(function(val){
       fn_callback(null,val);
   },function(err){
       fn_callback(err);
   });
+}
+
+fnc.tf = function(f){  //my thunkify function with promise
+    return function(){
+        var args = [];
+        for(var i=0;i<arguments.length;i++) args[i] = arguments[i];
+        var p = new Promise(function (resolve, reject) {
+            args.push(function(err){
+                if (err) return reject(err);
+                var p = [];
+                for(var i=1;i<arguments.length;i++) p[i-1] = arguments[i];
+                resolve.apply(null,p);
+            });
+            f.apply(null,args);
+        });
+        return p;
+    }
 }
 
 fnc.wait    = function(time,fn) {

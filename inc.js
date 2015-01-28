@@ -28,7 +28,7 @@ g.iconv.extendNodeEncodings();
 
 g.co = require('co');
 g.thunkify = require('thunkify');
-/*
+/******
 g.thunkify = function (f) {
     return function(){
         var args = arguments;
@@ -44,7 +44,8 @@ g.thunkify = function (f) {
         });
         return p;
     }
-}*/
+}
+******/
 
 g.koa_send = require('koa-send');
 

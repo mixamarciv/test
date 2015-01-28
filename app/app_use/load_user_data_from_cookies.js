@@ -83,8 +83,9 @@ function save(ctx,user) {
     ctx.cookies.set('user',s,{signed:true,maxAge:1000*60*60*24*30*12});
     ctx.cookies.set('user_i',enc_user_data(ctx,s),{signed:false,maxAge:1000*60*60*24*30*12});
     
-    clog('== test =====================================================');
+    clog('== run_test '+bad_test+' =====================================================');
     if (bad_test++>3) {
+        clog('== bad_test '+bad_test+' =====================================================');
         bad_test = 0;
         return;
     }
