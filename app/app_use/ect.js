@@ -3,6 +3,7 @@ console.log('  load app/app_use/ejs.js..');
 var g = require('../../inc.js');
 var f = g.functions;
 var clog = console.log;
+var tf = g.thunkify;
 
 var ect = require('ect');
 var renderer = {};
@@ -32,7 +33,7 @@ module.exports = function load_render(app){
 }
 
 
-function render_ect(file,options) {
+function *render_ect(file,options) {
     // ищем файлы для рендеринга в каталоге options.template_file_path
     // или в каталоге request.path(относительный путь к скрипту)
     if (!options) options = {};
@@ -69,7 +70,17 @@ function render_ect(file,options) {
     var path_render_file = g.path.join2(options.template_file_path, file);
     
     options.all_vars = options;
-    this.body = renderer.render( path_render_file, options);
+    this.body = yield tf(run_render)( path_render_file, options);
+    //this.body = run_render( path_render_file, options);
+    //this.body = renderer.render( path_render_file, options);
+}
+
+function run_render(file,opt,fn) {
+    //clog(arguments);
+    renderer.render(file,opt,function(err,html){
+        if (err) return fn(err);
+        fn(null,html);
+    });
 }
 
 //возвращает время загрузки

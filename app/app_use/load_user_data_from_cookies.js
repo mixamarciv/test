@@ -36,7 +36,7 @@ function check_user_data(user,opt) {
     if (!user.start_session) return '!user.start_session';
     if (opt) {
         var ctx = opt.ctx;
-        var user_str = JSON.stringify(user);
+        var user_str = encodeURIComponent(JSON.stringify(user));
         var hash = enc_user_data(ctx,user_str);
         var user_hash = ctx.cookies.get('user_i');
         if (hash != user_hash) {
@@ -47,14 +47,6 @@ function check_user_data(user,opt) {
     }
     return 0;
 }
-//"user.sig=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; secure;
-//httponly
-//user={"id":1,"login":"anonymous7","name":"Ð½Ðµ Ð°Ð²ÑÐ¾ÑÐ¸Ð·Ð¾Ð²Ð°Ð½(7)","start_session":1422281670451}; path=/; expires=Thu, 21 Jan 2016 14:14:41 GMT; secure;
-//httponlyuser.sig=n74UixSAsO1r6R1_Ovz8y7ymwmw; path=/; expires=Thu, 21 Jan 2016 14:14:41 GMT; secure;
-//httponlyuser_i=F1bh5UwXBEmNPcuRQ3Pu5WRvs4A=; path=/; expires=Thu, 21 Jan 2016 14:14:41 GMT; secure; httponlyuser_i.sig=tnI9-korV8htAoPUbVR6MMDfN1o;
-//path=/; expires=Thu, 21 Jan 2016 14:14:41 GMT; secure;
-//httponlytestsession=eyJzdGFydF90aW1lIjoiMjAxNS0wMS0yNlQxNDoxNDozMC40NTFaIiwidmlld3MiOjV9; path=/; secure;
-//httponlytestsession.sig=8a8KgBaSsSFPNk_8PhAF3vHID6k; path=/; secure; httponly"
 
 var anonim_s = '';
 var anonim_count = 0;
@@ -68,25 +60,24 @@ function load_new_anonim_user(ctx) {
     var data = {
         id: 1,
         login: 'anonymous'+n,
-        name: 'anonymous('+n+')',
+        name: 'вы не авторизованы('+n+')',
         start_session: new Date(ctx.session.start_time).getTime()
     }
     return data;
 }
 
-var bad_test = 0;
+var bad_test_n = 0;
 function save(ctx,user) {
     var bad_test = check_user_data(user,0);
     if (bad_test) throw(new Error('bad user data: '+bad_test));
     
-    var s = JSON.stringify(user);
+    var s = encodeURIComponent(JSON.stringify(user));
     ctx.cookies.set('user',s,{signed:true,maxAge:1000*60*60*24*30*12});
     ctx.cookies.set('user_i',enc_user_data(ctx,s),{signed:false,maxAge:1000*60*60*24*30*12});
     
-    clog('== run_test '+bad_test+' =====================================================');
-    if (bad_test++>3) {
-        clog('== bad_test '+bad_test+' =====================================================');
-        bad_test = 0;
+    if (bad_test_n++>2) {
+        clog('== bad_test '+bad_test_n+' =====================================================');
+        bad_test_n = 0;
         return;
     }
     var uuu = load(ctx);
@@ -98,8 +89,8 @@ function save(ctx,user) {
 }
 
 function load(ctx) {
-    var data_req = ctx.cookies.get('user',{signed:true},null);
-    clog(g.util.inspect(data_req));
+    var data_req = decodeURIComponent(ctx.cookies.get('user',{signed:true},null));
+    //clog(g.util.inspect(data_req));
     var user  = null;
     try{
       user = JSON.parse(data_req);
@@ -108,6 +99,7 @@ function load(ctx) {
     }
     var bad_test = check_user_data(user,{ctx:ctx});
     if (bad_test){
+        clog('BAD cookies TEST:'+bad_test);
         user = load_new_anonim_user(ctx);
         save(ctx,user);
         return user;

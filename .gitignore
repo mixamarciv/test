@@ -1,6 +1,7 @@
 node_modules*/
 db/**.fdb
 db/*.fdb
+**.fdb
 .bin/*.log
 temp/
 keys/**

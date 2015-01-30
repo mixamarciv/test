@@ -10,44 +10,48 @@ var fnc = {};
 
 //загрузка роутов из всех поддиректорий g.config.scripts_path
 //а так же загрузка пунктов меню и создание временного html файла меню
-module.exports = function (app,fn0) {
-    f.run_gen(function *(){
-        //загрузка списка index.js файлов из подкаталогов g.config.scripts_path
-        /*var list = yield new Promise(function(resolve, reject){
-            fnc.load_index_files_list(g.config.scripts_path,function(err){
-                if (err) return reject(err);
-                resolve(arguments);
-            });
-        });*/
-        var list = yield fnc.load_index_files_list(g.config.scripts_path);
+module.exports = function *(app){
+    //загрузка списка index.js файлов из подкаталогов g.config.scripts_path
+    /*var list = yield new Promise(function(resolve, reject){
+        fnc.load_index_files_list(g.config.scripts_path,function(err){
+            if (err) return reject(err);
+            resolve(arguments);
+        });
+    });*/
+    var list = yield fnc.load_index_files_list(g.config.scripts_path);
 
-        //загрузка роутингов и других данных из списка index.js файлов
-        yield fnc.load_route_from_index_files(app,list);
+    //загрузка роутингов и других данных из списка index.js файлов
+    yield fnc.load_route_from_index_files(app,list);
 
-        //загрузка пунктов меню из списка index.js файлов
-        yield fnc.load_menu_from_index_files(list);
-        
-        yield require('./render_html_menu_file.js')(g.config.temp_path+'/template/html/menu/main_menu.html',g.config.auto.menu);
-    },fn0);
+    //загрузка пунктов меню из списка index.js файлов
+    yield fnc.load_menu_from_index_files(list);
+    
+    yield require('./render_html_menu_file.js')(g.config.temp_path+'/template/html/menu/main_menu.html',g.config.auto.menu);
 }
 
 
-//загрузка списка index.js файлов из всех поддиректорий path
+//загрузка списка index.js файлов из всех поддиректорий path или js файлов с названием каталога где он находится
 fnc.load_index_files_list = function *(path,fn){
         var list = [];
         function *update_list_route_files(ppath,level) {
             if (!level) level = 0;
+            var base_name = g.path.basename(ppath)+'.js';
             var dir = yield tf(g.fs.readdir)(ppath);
+            var new_file = null;
             for(var i=0;i<dir.length;i++){
                 var file = dir[i];
                 var file_path = g.path.join2(ppath,file);
                 var stat = yield tf(g.fs.stat)(file_path);
                 if (stat.isDirectory()) {
                     yield update_list_route_files(file_path,level+1);
-                }else if ( file == 'index.js') {
-                    list.push(file_path);
+                }else if (!new_file && file == 'index.js') {
+                    new_file = file_path;
+                }else if (file==base_name) {
+                    new_file = file_path;
+                    break;
                 }
             }
+            if (new_file) list.push(new_file);
             if (level==0) {
                 //сортируем получившийся список
                 list.sort(function(a,b){

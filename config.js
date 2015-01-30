@@ -22,7 +22,21 @@ c.client_lib_path = path_join(__dirname,'client/lib');         //путь к к�
 c.log_path  = path_join(__dirname,'log/'+datef('Y.M'));
 
 c.db = {};
+c.db['app'] = {
+    dbtype: 'ibase',
+    database: path_join(c.app_path,'app/db/app.fdb'),
+    host: '127.0.0.1',
+    port: 3050,            // default
+    user: 'SYSDBA',        // default
+    password: 'masterkey', // default
+    role: null,            // default
+    pageSize: 4096,        // default when creating database
+    cp: 'win1251',
+    table_prefix: "t_"
+};
+
 c.db['0002.fdb'] = {
+    dbtype: 'firebird',
     database: 'D:/_db_web/db002/0002.fdb',
     host: '192.168.1.7',
     port: 3050,            // default

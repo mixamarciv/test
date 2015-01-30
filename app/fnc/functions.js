@@ -18,7 +18,8 @@ fnc.run_gen = function(fn_gen,fn_callback){ //my run generator wrap
   });
 }
 
-fnc.tf = function(f){  //my thunkify function with promise
+//my thunkify function with promise
+fnc.tf = function(f){  
     return function(){
         var args = [];
         for(var i=0;i<arguments.length;i++) args[i] = arguments[i];
@@ -55,7 +56,7 @@ function die() {
 fnc.merr =
 function add_message_to_error(err,msg) {
     if (!err) {
-      err = new Error('undefined error3000');
+      err = new Error(msg);
     }
     var info = g.util.inspect(err.stack).replace(/(\\\\)/g,'\\').replace(/\\n\s*at/g,'\n    at');
     if (!msg) msg = '';

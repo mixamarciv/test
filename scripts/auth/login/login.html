@@ -1,0 +1,22 @@
+<% extend @template_main_path + '/html/index.html' %>
+
+
+<div class="center-block" >
+<form method="POST" action="" accept-charset="UTF-8" class="form-login col-md-5">
+    <h4>авторизация</h4>
+    <input name="login" type="text" id="userName" class="form-control input-sm chat-input" placeholder="логин" /></br>
+    <input name="pass" type="text" id="userPassword" class="form-control input-sm chat-input" placeholder="пароль" /></br>
+    <div class="wrapper">
+	<span class="group-btn">     
+	    <button type="submit" name="submit" class="btn btn-primary btn-md">войти</button>
+	</span>
+    </div>
+</form>
+</div>
+
+
+<pre>
+
+<%- @g.mixa.dump.var_dump_node('d',@d) %>
+<%- @g.mixa.dump.var_dump_node('u',@u) %>
+</pre>

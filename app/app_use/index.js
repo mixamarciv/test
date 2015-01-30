@@ -8,11 +8,7 @@ var clog = console.log;
 module.exports = function load_app_use(app){
     
     //задаем локальные переменные и время старта загрузки контента
-    app.use(function *(next) {
-        this.locvars = {};
-        this.locvars.start_load = new Date;
-        yield next;
-    });
+    app.use(initialize);
     
     //logger
     app.use(require('koa-logger')());
@@ -23,9 +19,7 @@ module.exports = function load_app_use(app){
     app.use(helmet.iexss({ setOnOldIE: true }));
     app.use(helmet.ienoopen());
     //app.use(helmet.hidePoweredBy());
-    
-    //check error500 and 404
-    app.use(require('./error_404_and_500.js'));
+
     
     // Force SSL on all page (редирект всех на ssl)
     app.use(require('koa-force-ssl')());
@@ -46,12 +40,25 @@ module.exports = function load_app_use(app){
     require('./ect.js')(app);
     
     app.use(require('koa-conditional-get')());
-    app.use(require('koa-etag')());
+    //app.use(require('koa-etag')());
     
-    //app.use(require('./load_user_data.js'));    
 }
 
-
+function* initialize(next) {
+    //this.locvars - переменные доступные во время обработки запроса.
+    this.locvars = {};
+    this.locvars.start_load = new Date;
+    
+    this.catch_error = require(g.config.scripts_path+'/error/catch.js').catch_error;
+    try {
+        yield next;
+    } catch(e) {
+        this.status = 500;
+        yield this.catch_error(e);
+    }
+    if (this.status != 404) return;
+    yield this.catch_error(404,'page not found');
+}
 
 //-----------------------------------------------------------
 /***********************

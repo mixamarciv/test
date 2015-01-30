@@ -15,11 +15,11 @@ module.exports = function *(file_path,menu_list){
         yield tf(f.fs.check_directory)(g.path.dirname(file_path));
     }
     
-    var html = '<div class="navbar-collapse collapse navbar-responsive-collapse">\n';
+    var html = '';
     html += '<ul class="nav navbar-nav">\n';
     html += render_menu_html(menu_list);    
     html += '</ul>\n';
-    html += '</div>\n';
+    html += '\n';
     
     /*html += '<ul class="nav navbar-nav navbar-right">\n';
     html += '   <li class="dropdown">\n';

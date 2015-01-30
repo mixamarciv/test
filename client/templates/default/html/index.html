@@ -7,61 +7,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
   </head>
-<body style="background: #000;" >
+<body>
 
+  
+<% include @template_main_path + '/html/menu/main_menu.html' %>
 
-  <nav class="navbar navbar-default navbar-static-top" role="navigation" > <!-- navbar-fixed-top -->
-    <!-- <div class="container"> -->
-      <% include @template_main_path + '/html/menu/main_menu.html' %>
-    <!-- </div> -->
-  </nav>
-  
-  
-  <% if @error : %>
-    <div class="alert alert-dismissable alert-danger">
-      <!-- button type="button" class="close" data-dismiss="alert">×</button -->
-      <strong>ERROR: <%- error %></strong>
-      <div class="row">
-        <div class="col-md-12"><%- @html_dump_error %></div>
-      </div>
-    </div>
-  <% end %>
-  
-  <div class="col-md-12">
-  
+ 
+<header class="header">
     <% content 'header' %>
-  </div>
+</header>
+
+
   
+<div class="container">
+  <% content %>
+</div>
   
-    <div class="row-fluid">
-      <div class="col-md-1"></div>
-      <div class="col-md-10">
-        
-        
-        <div class="row"><div class="col-md-12">
-        <% content %>
-        </div></div>
-        
-        
-      </div>
-      <div class="col-md-1"></div>
-    </div>
-    
+
+
   
-  <stdscripts>
-    <script language='javascript' src='/files/templates/<%- @template_main %>/a.js'></script>
-  </stdscripts>
-  
-  <div class="col-md-12">
+<footer class="footer">
+  <div class="container">
     <% content 'footer' %>
   </div>
-
   <div class="col-md-10"></div>
   <div class="col-md-2">
       <small><small><%- @get_execute_time() %></small></small>
   </div>
-  <!-- -->
-  
-  
+</footer>
+
+
+<stdscripts>
+  <script language='javascript' src='/files/templates/<%- @template_main %>/a.js'></script>
+</stdscripts>
+
 </body>
 </html>

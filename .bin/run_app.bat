@@ -9,8 +9,8 @@
 ::SET options=%options% --skip_flx_to_txt=c:\temp\_flxconv\20\2014.09\20141005\153241\
 
 
-node.exe --harmony app.js --fcomp=22 --fyear=2014 --fmonth=09 %3 %4 %5 %6 %7 %8 %9 %options% 
-
+::node.exe --harmony app.js --fcomp=22 --fyear=2014 --fmonth=09 %3 %4 %5 %6 %7 %8 %9 %options% 
+node.exe app.js
 
 :: ===========================================================================
-::@PAUSE
+@PAUSE
