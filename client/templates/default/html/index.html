@@ -30,10 +30,16 @@
   <div class="container">
     <% content 'footer' %>
   </div>
-  <div class="col-md-10"></div>
+  <small><small>
+  <div class="col-md-8"></div>
   <div class="col-md-2">
-      <small><small><%- @get_execute_time() %></small></small>
+    
   </div>
+  <div class="col-md-2">
+      server time: <%- @g.moment().format('YYYY.MM.DD HH:mm:ss'); %><br>
+      <%- @get_execute_time() %>
+  </div>
+  </small></small>
 </footer>
 
 

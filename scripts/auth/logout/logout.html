@@ -1,12 +1,12 @@
 <% extend @template_main_path + '/html/index.html' %>
 
-<h1><big><big>выход</big></big></h1>
+<h1 class="page-header"><big><big>выход</big></big></h1>
 
 <% if @u : %>
      <% if @u.name : %>
     <!-- div class="alert well" role="alert" -->
 	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	до встречи <%- @u.name %>
+	<p>до встречи <%- @u.name %></p>
     <!-- /div -->
     <% end %>
 <% end %>
