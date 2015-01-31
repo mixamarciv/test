@@ -19,11 +19,16 @@ module.exports = function(ctx) {
             if (!user) user = load(ctx);
             return user;
         },
-        set: function(user) {
-            save(ctx,user);
+        set: function(new_user) {
+            save(ctx,new_user);
+            user = new_user;
         },
-        check_user_data: function(user) {
-            check_user_data(user,0);
+        check_user_data: function(p_user) {
+            check_user_data(p_user,0);
+        },
+        logout: function(){
+            user = load_new_anonim_user(ctx);
+            save(ctx,user);
         }
     };
 }
@@ -67,7 +72,12 @@ function load_new_anonim_user(ctx) {
 }
 
 var bad_test_n = 0;
-function save(ctx,user) {
+function save(ctx,user,after_load) {
+    if (!after_load) {
+        var old_user = ctx.locvars.user.get();
+        if (!user.start_session) user.start_session = old_user.start_session;
+    }
+    
     var bad_test = check_user_data(user,0);
     if (bad_test) throw(new Error('bad user data: '+bad_test));
     
@@ -75,6 +85,7 @@ function save(ctx,user) {
     ctx.cookies.set('user',s,{signed:true,maxAge:1000*60*60*24*30*12});
     ctx.cookies.set('user_i',enc_user_data(ctx,s),{signed:false,maxAge:1000*60*60*24*30*12});
     
+    /****
     if (bad_test_n++>2) {
         clog('== bad_test '+bad_test_n+' =====================================================');
         bad_test_n = 0;
@@ -85,6 +96,7 @@ function save(ctx,user) {
     clog('        -----------------------------------------------------');
     clog(g.util.inspect(user));
     clog('==/test =====================================================');
+    ****/
     
 }
 
@@ -101,7 +113,7 @@ function load(ctx) {
     if (bad_test){
         clog('BAD cookies TEST:'+bad_test);
         user = load_new_anonim_user(ctx);
-        save(ctx,user);
+        save(ctx,user,1);
         return user;
     }
     return user;

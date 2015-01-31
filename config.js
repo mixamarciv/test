@@ -10,7 +10,7 @@ var path_norm = g.mixa.path.norm;
 var datef = g.mixa.str.date_format;
 
 
-
+c.app_name = 'webc4';
 c.app_path = path_norm(__dirname);                             //путь к приложению
 c.scripts_path = path_join(c.app_path,'scripts');              //пути к пользовательским скриптам
 c.files_path = path_join(c.app_path,'files');                  //пути к клиентским файлам

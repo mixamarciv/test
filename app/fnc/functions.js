@@ -148,5 +148,6 @@ fnc.wait_for_file = function(file,options,fn){
     });
 };
 
+fnc.db_app = require('./app_db.js');
 fnc.render_css = require('./render_css.js');
 fnc.render_js  = require('./render_js.js');

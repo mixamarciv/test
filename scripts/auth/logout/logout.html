@@ -1,0 +1,20 @@
+<% extend @template_main_path + '/html/index.html' %>
+
+<h1><big><big>выход</big></big></h1>
+
+<% if @u : %>
+     <% if @u.name : %>
+    <!-- div class="alert well" role="alert" -->
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	до встречи <%- @u.name %>
+    <!-- /div -->
+    <% end %>
+<% end %>
+
+
+<!--
+<br><br>
+<pre>
+<%- @g.mixa.dump.var_dump_node('u',@u) %>
+</pre>
+-->
