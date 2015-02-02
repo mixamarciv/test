@@ -1,6 +1,6 @@
-console.log('  load app/app_use/ejs.js..');
+console.log('  load app/load_webserver/app_use/ejs.js..');
 
-var g = require('../../inc.js');
+var g = require('../../../inc.js');
 var f = g.functions;
 var clog = console.log;
 var tf = g.thunkify;

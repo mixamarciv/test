@@ -5,6 +5,12 @@ console.log('load inc ...');
 var g = {}
 module.exports = g;
 
+
+g.data = {};    //список глобальных переменных
+g.data.app_start_time = new Date();
+g.data.db = {}; //список установленных подключений к бд
+
+
 g.os   = require('os');
 g.fs   = require('fs');
 g.util = require('util');
@@ -47,9 +53,5 @@ g.functions = require('./app/fnc/functions.js');
 g.config = require('./config.js');
 
 
-g.data = {};    //список глобальных переменных
-g.data.db = {}; //список установленных подключений к бд
-
-//g.db_0002fdb = require('./fnc/database_connect.js').create_db_connect(g.config.db0002fdb_options);
 
 

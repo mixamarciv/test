@@ -41,7 +41,7 @@
      ,"gulp-minify-css": "*"
 
 
-     ,"node-firebird": "*"
+     ,"node-firebird": "0.2.5"
      ,"underscore": "*"
      ,"underscore.string": "*"
      ,"async": "*"

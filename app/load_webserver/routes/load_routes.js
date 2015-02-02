@@ -1,7 +1,7 @@
 'use strict';
-console.log('  load app/app_load/index.js..');
+console.log('  load app/load_webserver/load_routes/load_routes.js..');
 
-var g = require('../../inc.js');
+var g = require('../../../inc.js');
 var f = g.functions;
 var clog = console.log;
 var tf = g.thunkify;
@@ -12,12 +12,14 @@ var fnc = {};
 //а так же загрузка пунктов меню и создание временного html файла меню
 module.exports = function *(app){
     //загрузка списка index.js файлов из подкаталогов g.config.scripts_path
-    /*var list = yield new Promise(function(resolve, reject){
+    /*
+    var list = yield new Promise(function(resolve, reject){
         fnc.load_index_files_list(g.config.scripts_path,function(err){
             if (err) return reject(err);
             resolve(arguments);
         });
-    });*/
+    });
+    */
     var list = yield fnc.load_index_files_list(g.config.scripts_path);
 
     //загрузка роутингов и других данных из списка index.js файлов
