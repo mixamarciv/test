@@ -34,7 +34,7 @@ module.exports.load_route = function(router,fn){
         }
         this.cookies.set('template_main',new_t);
         var cur_t2 = this.cookies.get('template_main');
-        this.render('index.html', {new_template: new_t,cur_t2:cur_t2});
+        yield this.render('index.html', {new_template: new_t,cur_t2:cur_t2});
         yield next;
     });
     fn();

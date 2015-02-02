@@ -13,7 +13,7 @@ function render(file,fn){
     
     var options = {render_file:file};
     options.files = [path.join2(__dirname,'slate.bootstrap.min.css'),
-                     path.join2(c.client_lib_path,'../css/menuhover/forbootstrap.css'),
+                     //path.join2(c.client_lib_path,'../css/menuhover/forbootstrap.css'),
                      path.join2(c.client_lib_path,'../css/footer/footer.css')
                     ];
     options.use_less = 0;
