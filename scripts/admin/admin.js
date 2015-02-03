@@ -35,7 +35,7 @@ module.exports.load_route = function(router,fn){
     fn();
     router.all(route_path+'/:table_name/:oper_type',function*(next) {
         var p = this.params;
-
+        
         var f_table = render[p.table_name];
         if (!f_table) return yield next;
         

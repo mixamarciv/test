@@ -29,6 +29,54 @@
 
 </div>
     
+    
+<div class="container">
+    <table class="table table-hover" tested="table-condensed">
+	<thead>
+	    <tr>
+		<th>id:</th>
+		<th>логин:</th>
+		<th>имя:</th>
+		<th>Email</th>
+	    </tr>
+	</thead>
+	<tbody>
+	<% for user in @list : %>
+	    <tr>
+		<td><%- user.id %></td>
+		<td><%- user.login %></td>
+		<td><%- user.name %></td>
+		<td><%- user.mail %></td>
+	    </tr>
+	<% end %>
+	</tbody>
+    </table>
+    
+    <table class="table table-hover table-condensed" tested="table-condensed">
+	<thead>
+	    <tr>
+		<th>id:</th>
+		<th>логин:</th>
+		<th>имя:</th>
+		<th>Email</th>
+	    </tr>
+	</thead>
+	<tbody>
+	<% for user in @list : %>
+	    <tr>
+		<td><%- user.id %></td>
+		<td><%- user.login %></td>
+		<td><%- user.name %></td>
+		<td><%- user.mail %></td>
+	    </tr>
+	<% end %>
+	</tbody>
+    </table>
+    
+</div>
+
+
+
 <!-- well  -->
 <br>
 <br>
