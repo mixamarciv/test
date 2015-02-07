@@ -77,3 +77,10 @@ function* load_user(d) {
 }
 
 
+var query = {
+    query_str: 'SELECT field1,field2 FROM table WHERE 1=1 [#where1]',
+    filters: [{field:'field1',where:'[#where1]',filterfnc:function(val){return ' AND field1 like '+val;}}],
+    fields: [{field:'field1',name:'название1'},{field:'field2',name:'название2'}],
+    
+    test: 'test'
+}
