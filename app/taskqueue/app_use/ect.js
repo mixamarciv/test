@@ -1,4 +1,4 @@
-console.log('  load app/load_webserver/app_use/ejs.js..');
+console.log('  load app/webserver/app_use/ejs.js..');
 
 var g = require('../../../inc.js');
 var f = g.functions;

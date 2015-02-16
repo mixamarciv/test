@@ -1,5 +1,5 @@
 'use strict';
-console.log('  load app/load_webserver/app_use/app_use.js..');
+console.log('  load app/webserver/app_use/app_use.js..');
 
 var g = require('../../../inc.js');
 var f = g.functions;

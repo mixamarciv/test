@@ -9,7 +9,7 @@
 ::SET options=%options% --skip_flx_to_txt=c:\temp\_flxconv\20\2014.09\20141005\153241\
 
 
-node.exe --harmony app.js --app=webserver 
+node.exe --harmony app.js --app=taskqueue 
 ::node.exe app.js
 
 :: ===========================================================================

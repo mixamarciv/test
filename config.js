@@ -9,8 +9,10 @@ var path_join = g.mixa.path.join;
 var path_norm = g.mixa.path.norm;
 var datef = g.mixa.str.date_format;
 
+//аргументы запуска приложения
+c.args = require('minimist')(process.argv.slice(2));
 
-c.app_name = 'webc4';
+//c.app_name = 'webc4';
 c.app_path = path_norm(__dirname);                             //путь к приложению
 c.scripts_path = path_join(c.app_path,'scripts');              //пути к пользовательским скриптам
 c.files_path = path_join(c.app_path,'files');                  //пути к клиентским файлам
@@ -21,10 +23,12 @@ c.client_lib_path = path_join(__dirname,'client/lib');         //путь к к�
 //названия логов:
 c.log_path  = path_join(__dirname,'log/'+datef('Y.M'));
 
+
 c.db = {};
-c.db['app'] = {
+
+c.db['webserver'] = {
     dbtype: 'ibase',
-    database: path_join(c.app_path,'app/db/app.fdb'),
+    database: path_join(c.app_path,'app/webserver/db/app.fdb'),
     host: '127.0.0.1',
     port: 3050,            // default
     user: 'SYSDBA',        // default
@@ -34,6 +38,21 @@ c.db['app'] = {
     cp: 'win1251',
     table_prefix: "t_"
 };
+
+
+c.db['taskqueue'] = {
+    dbtype: 'ibase',
+    database: path_join(c.app_path,'app/taskqueue/db/task.fdb'),
+    host: '127.0.0.1',
+    port: 3050,            // default
+    user: 'SYSDBA',        // default
+    password: 'masterkey', // default
+    role: null,            // default
+    pageSize: 4096,        // default when creating database
+    cp: 'win1251',
+    table_prefix: "t_"
+};
+
 
 c.db['0002.fdb'] = {
     dbtype: 'firebird',
@@ -48,17 +67,10 @@ c.db['0002.fdb'] = {
     table_prefix: ""
 };
 
+
 //текущий ip адрес машинки(первый, если их несколько)
 c.ip = g.mixa.ip.get_ipv4_adress_list(/192\.168\.\d\./)[0];
 
-//аргументы запуска приложения
-c.args = require('minimist')(process.argv.slice(2));
-
-
-c.options_kill_prev_app_process = {
-    path: path_join(c.temp_path,'pid'),   // где храним pid текущего-предыдущего процесса
-    wait: 10                       // сколько ждем после завершения предыдущего процесса 
-};
 
 c.templates = {};          //набор параметров и данных по шаблонам
 c.templates.main_path = path_join(c.app_path,'client/templates/');  //пути к шаблонам eсt

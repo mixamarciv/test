@@ -1,5 +1,5 @@
 'use strict';
-console.log('  load app/load_webserver/load_routes/render_html_menu_file.js..');
+console.log('  load app/webserver/load_routes/render_html_menu_file.js..');
 
 var g = require('../../../inc.js');
 var f = g.functions;

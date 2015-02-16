@@ -1,5 +1,5 @@
 'use strict';
-console.log('  load app/load_webserver/webserver.js..');
+console.log('  load app/taskqueue/taskqueue.js..');
 
 var clog = console.log;
 
@@ -7,13 +7,31 @@ var g = require('../../inc.js');
 var f = g.functions;
 var tf = g.thunkify;
 
+var listen_port = 62001;
 
-module.exports.start = function(err,mainfn){
+module.exports = function(fn){
+    start(function(err){
+        if (err) {
+          if(fn) return fn(err);
+          console.error('\n\n\n  TASKQUEUE START ERROR:  \n\n');
+          f.merr(err,'load error:');
+          console.error(err);
+          return fn(err);
+        }
+        if(fn) return fn(null);
+        clog('\n\nserver is running  '+g.mixa.str.date_format('Y.M.D h:m:s k')+'\n\n');
+    });
+}
+
+function start(err,mainfn){
     f.run_gen(function*(){
-        process.title = g.config.app_name;
+        process.title = 'taskqueue:'+listen_port;
         
         //убиваем предыдущий процесс
-        yield tf(require('kill-prev-app-process'))(g.config.options_kill_prev_app_process);
+        yield tf(require('kill-prev-app-process'))({
+            path: g.path.join2(g.config.temp_path,'pid/taskqueue'),   // где храним pid текущего-предыдущего процесса
+            wait: 10                                                  // сколько ждем после завершения предыдущего процесса 
+        });
         
         var app = require('koa')();
         
@@ -25,22 +43,14 @@ module.exports.start = function(err,mainfn){
         clog('\nload routes:');
         yield load_all_routes(app);
         
-        var server80 = require('http').createServer(app.callback());
-        var http = tf(start_listner)(server80,80);
-        
-        var ssl_options = {
-          key: g.fs.readFileSync('./keys/server.key'),
-          cert: g.fs.readFileSync('./keys/server.crt')
-        }
-        var server443 = require('https').createServer(ssl_options, app.callback());
-        var https = tf(start_listner)(server443,443);
+        var server = require('http').createServer(app.callback());
+        var http = tf(start_listner)(server,listen_port);
         
         clog('\nconnect app database');
-        yield f.db_app.gen_connect();
-        
+        yield f.db_app.gen_connect('taskqueue');
         
         clog('\nstart listeners:');
-        yield [http, https];
+        yield [http];
         
     },end_load);
     
@@ -63,3 +73,5 @@ module.exports.start = function(err,mainfn){
       mainfn();
     }
 }
+
+

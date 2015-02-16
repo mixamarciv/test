@@ -41,7 +41,7 @@ function* load_user(d) {
     if (/@.*\..+/.test(d.login)) search_field = 'pass_mail';
     
     var query = "SELECT idc AS id,name,login FROM t_user WHERE "+search_field+"=?";
-    var rows = yield gen_query(query,[d.pass_login]);
+    var rows = yield gen_query('webserver',query,[d.pass_login]);
     if (!rows || rows.length==0) return {error:'не верный логин/емеил пароль'};
    
     var u = rows[0];

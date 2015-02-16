@@ -4,15 +4,20 @@ console.log('start app  (%s%s; node %s; pid:%s)',process.platform, process.arch,
 
 var clog = console.log;
 var g = require('./inc.js');
+var c = g.config;
+var is_run = 0;
 
-var webserver = require('app/load_webserver/webserver.js');
+if ( c.args.app == 'webserver' ) {
+    is_run = 1;
+    require('app/webserver/webserver.js')();
+}
 
-webserver.start(function(err){
-    if (err) {
-      console.error('\n\n\n  WEBSERVER START ERROR:  \n\n');
-      f.merr(err,'load error:');
-      console.error(err);
-      return;
-    }
-    clog('\n\nserver is running  '+g.mixa.str.date_format('Y.M.D h:m:s k')+'\n\n');
-});
+if ( c.args.app == 'taskqueue' ) {
+    is_run = 1;
+    require('app/taskqueue/taskqueue.js')();
+}
+
+
+if ( !is_run ) {
+    clog('\n\napp not found! (bad --app param)\n\n');
+}
