@@ -58,7 +58,10 @@ function add_message_to_error(err,msg) {
     if (!err) {
       err = new Error(msg);
     }
-    var info = g.util.inspect(err.stack).replace(/(\\\\)/g,'\\').replace(/\\n\s*at/g,'\n    at');
+    
+    var info = err.stack;
+    info = g.util.inspect(info).replace(/(\\\\)/g,'\\').replace(/\\n[\s]+at/g,'\n    at')
+    
     if (!msg) msg = '';
     else msg += '\n';
     var imsg = msg + info;
@@ -148,6 +151,9 @@ fnc.wait_for_file = function(file,options,fn){
     });
 };
 
+
 fnc.db_app = require('./db.js');
+fnc.db = fnc.db_app;
+
 fnc.render_css = require('./render_css.js');
 fnc.render_js  = require('./render_js.js');

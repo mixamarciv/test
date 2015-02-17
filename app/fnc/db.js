@@ -15,8 +15,11 @@ f.gen_query = gen_query;
 
 
 function* gen_connect(db_name) {
-    if (g.data.db.app) return g.data.db.app;
+    clog('BBBBBBBBBBB1');
+    if (g.data.db[db_name]) return g.data.db[db_name];
+    clog('BBBBBBBBBBB2');
     g.data.db[db_name] = yield tf(g.db.connect)(g.config.db[db_name]);
+    clog('BBBBBBBBBBB3');
     return g.data.db[db_name];
 }
 

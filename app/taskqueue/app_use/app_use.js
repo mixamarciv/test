@@ -22,12 +22,17 @@ function* initialize(next) {
     this.locvars = {};
     this.locvars.start_load = new Date;
     
+    
     try {
         yield next;
     } catch(e) {
         this.status = 500;
-        this.body = {error:e};
+        var dump_error = 'ERROR:\n'+g.mixa.dump.var_dump_node('error',f.merr(e),{max_str_length:10000});
+        
+        this.body = dump_error;
+        clog(dump_error);
+        //this.body = g.mixa.dump.var_dump_node(e);
     }
     
-    yield next;
+    //yield next;
 }
