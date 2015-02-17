@@ -63,6 +63,8 @@ function* create_new_task(self,p) {
     var q = 'SELECT UUID_TO_CHAR( GEN_UUID() ) AS idt, UUID_TO_CHAR( GEN_UUID() ) AS idq FROM rdb$database';
     var rows = yield f.db.gen_query(db_name,q);
     var row = rows[0];
+    row.idt = g.u.str.trim(row.idt);
+    row.idq = g.u.str.trim(row.idq);
     
     var q = 'INSERT INTO task(idc,idc_firs_run,name,note,script,cache_text,cache_hash) '+
 	    'VALUES (?, ?, ?, ?, ?, ?, ?)';
@@ -71,6 +73,8 @@ function* create_new_task(self,p) {
     var q = 'INSERT INTO task_queue(idc,idc_task,user_info) '+
 	    'VALUES (?, ?, ?)';
     yield f.db.gen_query(db_name, q, [ row.idq, row.idt, p.user_info]);
+    
+    self.body = 'создана новая задача "'+g.u.str.trim(String(row.idt))+'", ваш id очереди: "'+String(row.idq)+'"';
 }
 
 
