@@ -67,6 +67,11 @@ function add_message_to_error(err,msg) {
     var imsg = msg + info;
     if (!err.messages) err.messages = [imsg];
     else err.messages = [imsg].concat(err.messages);
+    
+    
+    err.toString = function(){
+      g.mixa.dump.var_dump_node('error',this,{max_str_length:90000});
+    }
     return err;
 }
 
