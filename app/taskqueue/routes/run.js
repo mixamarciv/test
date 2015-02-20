@@ -20,7 +20,7 @@ module.exports.start_next_task     = start_next_task;
 function* run(next){
 
     var p = this.request.query;
-    
+    //clog(g.mixa.dump.var_dump_node('p',p,{max_str_length:90000}));
     {//проверяем все ли необходимые параметры заданы
 	var arr_check = ['name','note','run_json','cache_text','user_info','out_file'];
 	for(var i=0;i<arr_check.length;i++){
@@ -31,12 +31,21 @@ function* run(next){
 	    }
 	}
 	
-	if (!p.run_json.run) {
-	    var run = p.run_json;
-	    p.run_json = {run:run};
+	try{
+	    if (!g.u.isObject(p.run_json) && g.u.isString(p.run_json)) {
+		p.run_json = JSON.parse(p.run_json);
+	    }
+	}catch(err){
+	    clog('ERROR JSON.parse string:');
+	    clog(p.run_json);
+	    clog(f.merr(err).toString());
+	    this.body = {error:'не верно задан параметр p.run_json: "'+p.run_json+'"',info:f.merr(err).toString()};
+	    return yield next;
 	}
+	
     }
 
+    
     p.name;
     p.note;
     p.run_json;  //run,args
@@ -45,6 +54,8 @@ function* run(next){
     p.cache_hash = g.crypto.createHash('sha1').update(p.cache_text).digest('hex');
     p.user_info;
     p.user_info_hash = g.crypto.createHash('sha1').update(p.user_info).digest('hex');
+    
+    clog(g.mixa.dump.var_dump_node('p',p,{max_str_length:90000}));
     
     var q = 'SELECT t.out_file,t.date_create,t.date_run,t.date_end,t.status, '+
             ' idc AS idt,(SELECT q.idc FROM task_queue q WHERE q.idc_task=t.idc AND q.user_info_hash=\''+p.user_info_hash+'\') AS idq '+
@@ -57,15 +68,20 @@ function* run(next){
     
     //если такое задание уже было отправлено в очередь
     var row = rows[0];
-    p.idt = g.u.str.trim(row.idt);
+    p.out_file = g.u.str.trim(row.out_file);
+    p.date_create = g.u.str.trim(row.date_create);
+    p.date_run = g.u.str.trim(row.date_run);
+    p.date_end = g.u.str.trim(row.date_end);
+    p.status = g.u.str.trim(row.status);
     p.idq = g.u.str.trim(row.idq);
+    p.idt = g.u.str.trim(row.idt);
     p.status = row.status;
     
     if (!p.idq) { //обновляем информацию по количеству клиетов ожидающих ответа
 	yield create_new_client(this,p,next);
-	this.body = {msg:'ваша задача уже в очереди "'+p.idt+'", ваш id очереди: "'+row.idq+'"',idq:p.idq,idt:p.idt};
+	this.body = {msg:'ваша задача уже в очереди "'+p.idt+'", ваш id очереди: "'+row.idq+'"',p:p};
     }else{
-	this.body = {msg:'ваша задача и ваш клиент уже в очереди',idq:p.idq,idt:p.idt};
+	this.body = {msg:'ваша задача и ваш клиент уже в очереди',p:p};
     }   
     
     if (p.status==1) {
@@ -77,7 +93,6 @@ function* run(next){
     }else
     if (p.status==4) {
 	this.body.info = 'процесс завершен';
-	this.body.out_file = p.out_file;
     }
     
 
@@ -110,7 +125,7 @@ function* create_new_task(self,p,next) {
     
     var queue = yield get_queue();
     
-    self.body = {msg:'создана новая задача "'+p.idt+'", ваш id очереди: "'+p.idq+'"',idq:p.idq,idt:p.idt,queue:queue};
+    self.body = {msg:'создана новая задача "'+p.idt+'", ваш id очереди: "'+p.idq+'"',p:p,queue:queue};
     
     if (queue.length==0) {
 	start_task(p);
@@ -164,25 +179,42 @@ function start_task(p) {
 		s = JSON.parse(s);
 	    }
 	}catch(err){
-		clog('ERROR JSON.parse string:');
-		clog(s);
-		clog(f.merr(err).toString());
-		return start_next_task_run();
+	    clog('ERROR JSON.parse string:');
+	    clog(s);
+	    clog(f.merr(err).toString());
+	    return start_next_task_run();
 	}
 	
-	var run = {run:s.run,args:s.args,log:p.out_file+'.log'};
-
-	//clog(g.mixa.dump.var_dump_node('p',p,{max_str_length:90000}));
-	//clog(g.mixa.dump.var_dump_node('s',s,{max_str_length:90000}));
+	{
+	  var dir = g.path.dirname(p.out_file);
+	  yield tf(g.mixa.path.mkdir)(dir);  // создаем каталог для результата выполнения задачи
+	}
 	
-	var stream = g.fs.createWriteStream(p.out_file);
-    
-	run.on_data = function(data){
+	
+	clog(g.mixa.dump.var_dump_node('s',s,{max_str_length:90000}));
+	
+	var out_stream = g.fs.createWriteStream(p.out_file+'1.html',{flags:'w'});
+	var     stream = g.fs.createWriteStream(p.out_file+'2.html',{flags:'w'});
+	
+	var run = { run:s.run, args:check_arguments(s.args), log:p.out_file+'.log', enc:'utf-8' };
+	clog(g.mixa.dump.var_dump_node('run1',run,{max_str_length:90000}));
+	
+	var run = { run:s.run, args:check_arguments(s.args), log:p.out_file+'.log', enc:s.enc   };
+	clog(g.mixa.dump.var_dump_node('run2',run,{max_str_length:90000}));
+	
+	
+	run.on_data = function(data) {
+	    //data = new Buffer(data);
 	    stream.write(data);
 	}
 	
+	
+	
 	var exit_code = yield tf(g.process_logger)(run);
-	stream.end();
+	
+	out_stream.end();
+	    stream.end();
+	    
 	var q = 'UPDATE task t SET t.status = 4, t.date_end = current_timestamp WHERE t.idc = \''+p.idt+'\'';
 	yield f.db.gen_query(db_name, q);
 	yield start_next_task();
@@ -235,8 +267,15 @@ function start_next_task_run() {
     });
 }
 
+var test_firs_run = 1;
 function* start_next_task() {
-    var queue = yield get_queue('1');
+    
+    var que_query = '1';
+    if (test_firs_run) {
+	test_firs_run = 0;
+	que_query = '1,2,3,4';
+    }
+    var queue = yield get_queue(que_query);
     if (!queue || !queue.length){
 	clog('нет задач в очереди');
 	return;
@@ -251,6 +290,16 @@ function* start_next_task() {
     yield f.db.gen_query(db_name, q );
     
     start_task(p);
+}
+
+function check_arguments(aa) {
+    for(var i=0;i<aa.length;i++){
+	//var a = aa[i];
+	//aa[i] = aa[i].replace(/\&/g,'^&');
+	//aa[i] = aa[i].replace(/\=/g,'^=');
+	//aa[i] = '"'+aa[i]+'"';
+    }
+    return aa;
 }
 
 /***
