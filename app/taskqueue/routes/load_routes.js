@@ -12,7 +12,7 @@ module.exports = function *(app){
     var Router = require('koa-router');
     var router = new Router();
     
-    router.get('/run', require('./run.js')());
+    router.get('/run', require('./run.js').run());
     router.get('/status', function *(next) {yield next;});
     
     app.use(router.middleware());

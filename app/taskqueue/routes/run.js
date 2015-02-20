@@ -7,12 +7,14 @@ var clog = console.log;
 var tf = g.thunkify;
 var path = g.path;
 
+var trim = g.u.str.trim;
 var db_name = 'taskqueue';
 
 //загрузка роутов из всех поддиректорий g.config.scripts_path
-module.exports = function(){
- return run;
-}
+module.exports.run = function(){ return run;}
+
+module.exports.start_next_task_run = start_next_task_run;
+module.exports.start_next_task     = start_next_task;
 
 
 function* run(next){
@@ -156,6 +158,7 @@ function start_task(p) {
 	clog('запускается задача '+p.idt);
 	
 	var s = p.run_json;
+
 	try{
 	    if (!g.u.isObject(s) && g.u.isString(s)) {
 		s = JSON.parse(s);
@@ -167,8 +170,10 @@ function start_task(p) {
 		return start_next_task_run();
 	}
 	
-	
 	var run = {run:s.run,args:s.args,log:p.out_file+'.log'};
+
+	//clog(g.mixa.dump.var_dump_node('p',p,{max_str_length:90000}));
+	//clog(g.mixa.dump.var_dump_node('s',s,{max_str_length:90000}));
 	
 	var stream = g.fs.createWriteStream(p.out_file);
     
@@ -176,13 +181,10 @@ function start_task(p) {
 	    stream.write(data);
 	}
 	
-	
 	var exit_code = yield tf(g.process_logger)(run);
 	stream.end();
-	
 	var q = 'UPDATE task t SET t.status = 4, t.date_end = current_timestamp WHERE t.idc = \''+p.idt+'\'';
 	yield f.db.gen_query(db_name, q);
-	
 	yield start_next_task();
 	
     },function(err){
@@ -240,6 +242,10 @@ function* start_next_task() {
 	return;
     }
     var p = queue[0];
+    
+    for(var i in p){
+	p[i] = trim(p[i]);
+    }
     
     var q = 'UPDATE task t SET t.status = 2 WHERE t.idc = \''+p.idt+'\'';
     yield f.db.gen_query(db_name, q );

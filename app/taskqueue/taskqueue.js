@@ -18,8 +18,11 @@ module.exports = function(fn){
           console.error(err);
           return fn(err);
         }
+        
+
         if(fn) return fn(null);
-        clog('\n\nserver is running  '+g.mixa.str.date_format('Y.M.D h:m:s k')+'\n\n');
+        //clog('\n\nserver is running '+g.mixa.str.date_format('Y.M.D h:m:s k')+'\n\n');
+        
     });
 }
 
@@ -51,6 +54,11 @@ function start(err,mainfn){
         
         clog('\nstart listeners:');
         yield [http];
+        
+        var qtasks = require('./routes/run.js');
+        clog('\n  restart prev tasks');
+        //clog(g.mixa.dump.var_dump_node('qtasks',qtasks,{max_str_length:90000}));
+        qtasks.start_next_task_run();
         
     },end_load);
     
