@@ -55,7 +55,7 @@ function* run(next){
     p.user_info;
     p.user_info_hash = g.crypto.createHash('sha1').update(p.user_info).digest('hex');
     
-    clog(g.mixa.dump.var_dump_node('p',p,{max_str_length:90000}));
+    //clog(g.mixa.dump.var_dump_node('p',p,{max_str_length:90000}));
     
     var q = 'SELECT t.out_file,t.date_create,t.date_run,t.date_end,t.status, '+
             ' idc AS idt,(SELECT q.idc FROM task_queue q WHERE q.idc_task=t.idc AND q.user_info_hash=\''+p.user_info_hash+'\') AS idq '+
@@ -191,29 +191,27 @@ function start_task(p) {
 	}
 	
 	
-	clog(g.mixa.dump.var_dump_node('s',s,{max_str_length:90000}));
+	//clog(g.mixa.dump.var_dump_node('s',s,{max_str_length:90000}));
 	
-	var out_stream = g.fs.createWriteStream(p.out_file+'1.html',{flags:'w'});
-	var     stream = g.fs.createWriteStream(p.out_file+'2.html',{flags:'w'});
+	var out_stream = g.fs.createWriteStream(p.out_file,{flags:'w'});
+	//var     stream = g.fs.createWriteStream(p.out_file,{flags:'w'});
 	
-	var run = { run:s.run, args:check_arguments(s.args), log:p.out_file+'.log', enc:'utf-8' };
-	clog(g.mixa.dump.var_dump_node('run1',run,{max_str_length:90000}));
-	
-	var run = { run:s.run, args:check_arguments(s.args), log:p.out_file+'.log', enc:s.enc   };
-	clog(g.mixa.dump.var_dump_node('run2',run,{max_str_length:90000}));
+	var run = { run:s.run, args:check_arguments(s.args), log:p.out_file+'.log', enc:'utf-8',out_stream:out_stream };
+	//clog(g.mixa.dump.var_dump_node('run1',run,{max_str_length:90000}));
 	
 	
+	/*
 	run.on_data = function(data) {
 	    //data = new Buffer(data);
 	    stream.write(data);
 	}
-	
+	*/
 	
 	
 	var exit_code = yield tf(g.process_logger)(run);
 	
 	out_stream.end();
-	    stream.end();
+	    //stream.end();
 	    
 	var q = 'UPDATE task t SET t.status = 4, t.date_end = current_timestamp WHERE t.idc = \''+p.idt+'\'';
 	yield f.db.gen_query(db_name, q);
@@ -226,35 +224,6 @@ function start_task(p) {
 	    //return start_next_task_run();
 	}
     });
-    /*****/
-    /****
-    //g.mixa.path.mkdir
-    //var run = {run:p.script,log:'file.log',args:['argument1','arg2'],on_data:function(data){console.log(data);}}
-
-    
-    var run = {run:s.run,args:s.args,log:p.out_file+'.log'};
-
-
-    
-    g.process_logger(run,function(err,exit_code){
-	stream.end();
-	if (err){
-	    clog('ERROR in process_logger');
-	    clog(f.merr(err).toString());
-	    return;
-	}
-	var q = 'UPDATE task t SET t.status = 4, t.date_end = current_timestamp WHERE t.idc = \''+p.idt+'\'';
-	f.db.query(db_name, q, function(err){
-	    if (err){
-		clog('ERROR in f.db.query');
-		clog(f.merr(err).toString());
-		return;
-	    }
-	    start_next_task_run();
-	});
-    });
-    
-    ******/
 }
 
 function start_next_task_run() {
@@ -267,13 +236,13 @@ function start_next_task_run() {
     });
 }
 
-var test_firs_run = 1;
+var is_firs_run = 1;
 function* start_next_task() {
     
-    var que_query = '1';
-    if (test_firs_run) {
-	test_firs_run = 0;
-	que_query = '1,2,3,4';
+    var que_query = '1';  //берем только задачи из очереди
+    if (is_firs_run) {
+	is_firs_run = 0;
+	que_query = '1,2';  //берем задачи из очереди и незавершенные задачи
     }
     var queue = yield get_queue(que_query);
     if (!queue || !queue.length){
