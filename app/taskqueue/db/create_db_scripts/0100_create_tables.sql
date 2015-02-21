@@ -4,7 +4,7 @@
 
 CREATE TABLE TASK (
     IDC           CHAR(36),
-    IDC_FIRS_RUN  CHAR(36),
+    IDC_FIRST_RUN CHAR(36),
     NAME          VARCHAR(500),
     NOTE          VARCHAR(2000),
     RUN_JSON      VARCHAR(20000),

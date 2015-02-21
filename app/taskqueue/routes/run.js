@@ -107,7 +107,7 @@ function* create_new_task(self,p,next) {
     p.idt = g.u.str.trim(row.idt);
     p.idq = g.u.str.trim(row.idq);
     
-    var q = 'INSERT INTO task(idc,idc_firs_run,name,note,run_json,out_file,cache_text,cache_hash, status) '+
+    var q = 'INSERT INTO task(idc,idc_first_run,name,note,run_json,out_file,cache_text,cache_hash, status) '+
 	    'VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0)';
     /***
     status
@@ -193,25 +193,25 @@ function start_task(p) {
 	
 	//clog(g.mixa.dump.var_dump_node('s',s,{max_str_length:90000}));
 	
-	var out_stream = g.fs.createWriteStream(p.out_file,{flags:'w'});
-	//var     stream = g.fs.createWriteStream(p.out_file,{flags:'w'});
+	/*var out_stream = g.fs.createWriteStream(p.out_file,{flags:'w'});*/
+	var     stream = g.fs.createWriteStream(p.out_file,{flags:'w'});
 	
-	var run = { run:s.run, args:check_arguments(s.args), log:p.out_file+'.log', enc:'utf-8',out_stream:out_stream };
+	var run = { run:s.run, args:check_arguments(s.args), log:p.out_file+'.log', enc:'utf-8'/*,out_stream:out_stream*/ };
 	//clog(g.mixa.dump.var_dump_node('run1',run,{max_str_length:90000}));
 	
+    
 	
-	/*
 	run.on_data = function(data) {
 	    //data = new Buffer(data);
 	    stream.write(data);
 	}
-	*/
+	
 	
 	
 	var exit_code = yield tf(g.process_logger)(run);
 	
-	out_stream.end();
-	    //stream.end();
+	//out_stream.end();
+	stream.end();
 	    
 	var q = 'UPDATE task t SET t.status = 4, t.date_end = current_timestamp WHERE t.idc = \''+p.idt+'\'';
 	yield f.db.gen_query(db_name, q);

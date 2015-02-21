@@ -13,7 +13,7 @@ module.exports = function *(app){
     var router = new Router();
     
     router.get('/run', require('./run.js').run());
-    router.get('/status', function *(next) {yield next;});
+    router.get('/status', require('./status.js').status());
     
     app.use(router.middleware());
 }
