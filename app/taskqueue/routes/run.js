@@ -127,6 +127,8 @@ function* create_new_task(self,p,next) {
     
     self.body = {msg:'создана новая задача "'+p.idt+'", ваш id очереди: "'+p.idq+'"',p:p,queue:queue};
     
+    clog('создана новая задача '+p.idt);
+    
     if (queue.length==0) {
 	start_task(p);
 	self.body.info = 'задача выполняется';
