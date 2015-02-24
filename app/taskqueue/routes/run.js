@@ -221,19 +221,20 @@ function start_task(p) {
 	
     },function(err){
 	if (err){
-	    clog('ERROR in start_next_task');
+	    clog('ERROR in start_next_task[1]');
 	    clog(f.merr(err).toString());
-	    //return start_next_task_run();
+	    return start_next_task_run();
 	}
     });
 }
 
+
 function start_next_task_run() {
     f.run_gen(start_next_task,function(err){
 	if (err){
-	    clog('ERROR in start_next_task');
+	    clog('ERROR in start_next_task[2]');
 	    clog(f.merr(err).toString());
-	    return;
+	    return start_next_task_run();
 	}
     });
 }
