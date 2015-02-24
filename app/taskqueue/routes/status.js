@@ -43,7 +43,18 @@ function* status(next){
 	    '   LEFT JOIN task_queue tq ON tq.idc_task=t.idc \n'+
 	    '   LEFT JOIN task_queue tf ON tf.idc_task=t.idc AND tf.idc=t.idc_first_run \n'+
 	    ' WHERE tq.idc=\''+p.idq+'\'';
-    var rows = yield f.db.gen_query(db_name,q);
+    var rows = [];
+    try{
+       rows = yield f.db.gen_query(db_name,q);
+    }catch(e){
+	yield f.gen_setTimeout(200);
+	try{
+	    rows = yield f.db.gen_query(db_name,q);
+	}catch(e2){
+	    this.body = {error:f.merr(e2).toString(),error0:f.merr(e).toString()};
+	    yield next;
+	}
+    }
     
     if (rows.length==0) { 
 	this.body = {error:'идентификатор очереди не найден (idq='+p.idq+')'};

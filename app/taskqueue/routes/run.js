@@ -217,8 +217,8 @@ function start_task(p) {
 	    
 	var q = 'UPDATE task t SET t.status = 4, t.date_end = current_timestamp WHERE t.idc = \''+p.idt+'\'';
 	yield f.db.gen_query(db_name, q);
-	yield start_next_task();
 	
+	start_next_task_run();
     },function(err){
 	if (err){
 	    clog('ERROR in start_next_task[1]');
@@ -230,6 +230,7 @@ function start_task(p) {
 
 
 function start_next_task_run() {
+    setTimeout(function(){
     f.run_gen(start_next_task,function(err){
 	if (err){
 	    clog('ERROR in start_next_task[2]');
@@ -237,6 +238,7 @@ function start_next_task_run() {
 	    return start_next_task_run();
 	}
     });
+    },200);
 }
 
 var is_firs_run = 1;
