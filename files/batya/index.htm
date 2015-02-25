@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title></title>
+
+    <link rel="stylesheet" href="index_files/a.css">
+    <script language="javascript" src="index_files/a.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+  </head>
+<body>
+
+<script language="javascript">
+jQuery(function(){
+    var items = $('#header1').find('big');
+    console.log('init_items ');
+    init_items(items,0,function(){
+	console.log('show_items ');
+	show_items(items,0,function(){
+	    $('#end_block').html('AAAAAAAAAAAddd');
+	});
+    });
+    
+});
+
+function init_items(items,i,cfn) {
+    if (items.length==i) return cfn();
+    if (!i) i = 0;
+    var e = $(items[i]);
+    
+    var init = e.attr('init');
+    if(init){
+	var fn = function(){
+	    init_items(items,i+1,cfn);
+	}
+	eval(init);
+    }else{
+	init_items(items,i+1,cfn);
+    }
+}
+
+function show_items(items,i,cfn) {
+    if (items.length==i) return cfn();
+    if (!i) i = 0;
+    var e = $(items[i]);
+    var anim = e.attr('anim');
+    console.log(items.length+' anim '+anim);
+    if(anim){
+	var fn = function(){
+	    show_items(items,i+1,cfn);
+	}
+	console.log(' anim '+anim);
+	eval(anim);
+    }else{
+	show_items(items,i+1,cfn);
+    }
+}
+</script>
+
+<div id='header1'>
+    <h1>
+    <div class="row">
+      <div class="col-md-12 text-center" style="height: 200px;">
+	<big >
+		  <big init="e.fadeOut(0,fn);" anim="e.fadeIn(300,fn);">Сык
+	    </big><big init="e.fadeOut(0,fn);" anim="e.fadeIn(400,fn);">ты
+	    </big><big init="e.fadeOut(0,fn);" anim="e.fadeIn(500,fn);">в
+	    </big><big init="e.fadeOut(0,fn);" anim="e.fadeIn(700,fn);">кар
+	    </big>
+	</big>
+      </div>
+    </div>
+    
+    <div class="row" style='height: 100px;'>
+	<div class='col-md-2 col-md-offset-4 text-right' >
+
+		<big init="e.animate({width:'hide'},0,fn);" anim="e.animate({width:'show'},500,fn);">Мастер</big>
+		
+	</div>
+	<div class='col-md-2 text-left' >
+		<big init="e.animate({width:'hide'},0,fn);" anim="e.animate({width:'show'},500,fn);"><strong><nobr>на час</nobr></strong></big>
+		
+	</div>
+    </div>
+    </h1>
+</div>
+
+<div class="row">
+    <div class='col-md-12'>
+    Вид услуг: Бытовые услуги - Мелкий бытовой ремонт
+    Разовые работы по ремонту и благоустройству Вашей квартиры или дома:
+    </div>
+</div>
+
+<div class="row">
+    <div class='col-md-4'>
+	<div class="panel panel-default">
+            <div class="panel-heading">электромонтажные работы</div>
+            <div class="panel-body">
+		подключение электроприборов, посудомоечных машин,
+		замена и перенос розеток, выключателей, сборка и подвеска люстр, бра, светильников, счётчиков, УЗО, автомат-щитов.
+            </div>
+        </div>
+    </div>
+    <div class='col-md-4'>
+	<div class="panel panel-default">
+            <div class="panel-heading">сантехнические работы</div>
+            <div class="panel-body">
+		ремонт, установка стиральных машин, унитаза. смесителей.
+            </div>
+        </div>
+    </div>
+    <div class='col-md-4'>
+	<div class="panel panel-default">
+            <div class="panel-heading">пплотницкие и столярные работы</div>
+            <div class="panel-body">
+		сборка-разборка и перестановка мебели, навешивание полок,
+		шкафчиков, картин, укладка линолеума, крепление плинтусов, карнизов для штор и др. мужская помощь по дому.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class='col-md-12'>
+    Мы будем рады помочь Вам выполнить любые работы - от 500 руб на дому, звоните договоримся.Пенсионерам скидки
+    </div>
+</div>
+
+
+
+<script language="javascript" src="index_files/a.js"></script>
+  
+
+  <div class="col-md-12">
+  </div>
+
+  <div class="col-md-10"></div>
+  <div class="col-md-2">
+      <small><small>89ms</small></small>
+  </div>
+  <!-- -->
+  
+  <div calss='row'>
+    <div class="col-md-12" id='end_block'>
+	
+    </div>
+  </div>
+
+
+</body></html>
