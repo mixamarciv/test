@@ -13,14 +13,44 @@
 <script language="javascript">
 jQuery(function(){
     var items = $('#header1').find('big');
-    console.log('init_items ');
+    //console.log('init_items ');
     init_items(items,0,function(){
-	console.log('show_items ');
+	
+	var sbik = $('#sbIk');
+	var sbik_html = sbik.html();
+	sbik_html = sbik_html.replace(/\<\/big\>[\r\n\t ]*/g,'</big>');
+	$('#sbIk').html(sbik_html);
+	
+	var items = $('#header1').find('big');
+	//console.log('show_items ');
 	show_items(items,0,function(){
-	    $('#end_block').html('AAAAAAAAAAAddd');
+	    //$('#end_block').html('AAAAAAAAAAAddd');
 	});
     });
     
+    
+    /*****
+    var items2 = $('.panel');
+    var f_over = function(el){
+	var e = $(this).find('.panel-body');
+	e.html( '<strong>'+e.html()+'</strong>' );
+    };
+    
+    var f_leave = function(el){
+	var e = $(this).find('.panel-body');
+	var h = e.html();
+	h = h.replace(/^\<strong\>/,'');
+	h = h.replace(/\<\/strong\>$/,'');
+	e.html( h );
+    }
+    
+    var items2_pb = items2.find('.panel-body');
+    //items2.mouseleave(f_leave);
+    
+    items2.mouseover(f_over);
+    items2_pb.mouseover(f_over);
+    items2.mouseout(f_leave);
+    ***/
 });
 
 function init_items(items,i,cfn) {
@@ -57,45 +87,70 @@ function show_items(items,i,cfn) {
 }
 </script>
 
+
+<div class='container'>
 <div id='header1'>
     <h1>
+  
+    <div class="row" style='min-height: 80px;'>
+	<div class='col-md-3'>
+	    <img src="index_files/muj_na_chas.jpg" class="img-responsive" alt="муж на час в г.сыктывкар" style='width:150px;'>
+	</div>
+	<div class='col-md-6 text-center' >
+	    <div style='width:47%;float: left;min-height:80px; min-width: 200px; ' class='text-right'>
+		<big init="e.animate({width:'hide'},0,fn);" anim="e.animate({width:'show'},500,fn);">Мастер</big> 
+	    </div>
+	    <div style='width:1%;min-width: 10px; float: left;min-height:80px; ' class='text-left'>
+	    </div>
+	    <div style='width:47%;float: left;min-height:80px;  min-width: 200px; ' class='text-left'>
+		<big init="e.animate({width:'hide'},0,fn);" anim="e.animate({width:'show'},500,fn);"><strong><nobr>на час</nobr></strong></big>
+	    </div>
+	</div>
+	<div class='col-md-3'>
+	    <img src="index_files/master_na_chas_big.jpg" class="img-responsive" alt="мастер на час в г.сыктывкар" style='width:150px;'>
+	</div>
+    </div>
+
     <div class="row">
       <div class="col-md-12 text-center" style="height: 200px;">
-	<big >
-		  <big init="e.fadeOut(0,fn);" anim="e.fadeIn(300,fn);">Сык
-	    </big><big init="e.fadeOut(0,fn);" anim="e.fadeIn(400,fn);">ты
-	    </big><big init="e.fadeOut(0,fn);" anim="e.fadeIn(500,fn);">в
-	    </big><big init="e.fadeOut(0,fn);" anim="e.fadeIn(700,fn);">кар
+	<big id='sbIk'>
+	    <small>
+	    <big init="e.fadeOut(0,fn);" anim="e.fadeIn(500,fn);"></big>
+	    <big init="e.fadeOut(0,fn);" anim="e.fadeIn(100,fn);">в городе</big>
+	    <big init="e.fadeOut(0,fn);" anim="e.fadeIn(300,fn);"></big>
+	    </small>
+	    <br>
+		  <big init="e.fadeOut(0,fn);" anim="e.fadeIn(200,fn);">Сык</big>
+		  <big init="e.fadeOut(0,fn);" anim="e.fadeIn(300,fn);"></big>
+		  <big init="e.fadeOut(0,fn);" anim="e.fadeIn(400,fn);">ты</big>
+		  <big init="e.fadeOut(0,fn);" anim="e.fadeIn(200,fn);"></big>
+		  <big init="e.fadeOut(0,fn);" anim="e.fadeIn(200,fn);">в</big>
+		  <big init="e.fadeOut(0,fn);" anim="e.fadeIn(400,fn);"></big>
+		  <big init="e.fadeOut(0,fn);" anim="e.fadeIn(300,fn);">кар
 	    </big>
 	</big>
       </div>
     </div>
     
-    <div class="row" style='height: 100px;'>
-	<div class='col-md-2 col-md-offset-4 text-right' >
-
-		<big init="e.animate({width:'hide'},0,fn);" anim="e.animate({width:'show'},500,fn);">Мастер</big>
-		
-	</div>
-	<div class='col-md-2 text-left' >
-		<big init="e.animate({width:'hide'},0,fn);" anim="e.animate({width:'show'},500,fn);"><strong><nobr>на час</nobr></strong></big>
-		
-	</div>
-    </div>
     </h1>
 </div>
 
+
+
 <div class="row">
-    <div class='col-md-12'>
-    Вид услуг: Бытовые услуги - Мелкий бытовой ремонт
-    Разовые работы по ремонту и благоустройству Вашей квартиры или дома:
+    <div class='col-md-1'></div>
+    <div class='col-md-10'>
+    <p><strong><big>
+    Бытовые услуги, Мелкий бытовой ремонт<br>
+    Разовые работы по ремонту и благоустройству Вашей квартиры или дома</big></strong></p>
+    
     </div>
 </div>
 
 <div class="row">
     <div class='col-md-4'>
 	<div class="panel panel-default">
-            <div class="panel-heading">электромонтажные работы</div>
+            <div class="panel-heading"><strong><big>электромонтажные работы</big></strong></div>
             <div class="panel-body">
 		подключение электроприборов, посудомоечных машин,
 		замена и перенос розеток, выключателей, сборка и подвеска люстр, бра, светильников, счётчиков, УЗО, автомат-щитов.
@@ -104,7 +159,7 @@ function show_items(items,i,cfn) {
     </div>
     <div class='col-md-4'>
 	<div class="panel panel-default">
-            <div class="panel-heading">сантехнические работы</div>
+            <div class="panel-heading"><strong><big>сантехнические работы</big></strong></div>
             <div class="panel-body">
 		ремонт, установка стиральных машин, унитаза. смесителей.
             </div>
@@ -112,7 +167,7 @@ function show_items(items,i,cfn) {
     </div>
     <div class='col-md-4'>
 	<div class="panel panel-default">
-            <div class="panel-heading">пплотницкие и столярные работы</div>
+            <div class="panel-heading"><strong><big>пплотницкие и столярные работы</big></strong></div>
             <div class="panel-body">
 		сборка-разборка и перестановка мебели, навешивание полок,
 		шкафчиков, картин, укладка линолеума, крепление плинтусов, карнизов для штор и др. мужская помощь по дому.
@@ -121,31 +176,41 @@ function show_items(items,i,cfn) {
     </div>
 </div>
 
+
 <div class="row">
-    <div class='col-md-12'>
-    Мы будем рады помочь Вам выполнить любые работы - от 500 руб на дому, звоните договоримся.Пенсионерам скидки
+    <div class='col-md-3'>
+	<img src="index_files/master.jpg" class="img-responsive" alt="мастер в городе сыктывкар" >
+    </div>
+    <div class='col-md-9'>
+        <strong>
+	<big>
+	<p>Мы будем рады помочь Вам выполнить любые работы - <big style='color: #066501;'>от <big style='color: #078101;'>500</big> руб</big> на дому</p>
+	<p>звоните договоримся.</p>
+	<p>
+	</big>
+	<big><big><i>Пенсионерам скидки</i></big></big>
+	</p>
+	<p><p><p>
+	</strong>
+	<h2><big>тел.<strong><big init="e.fadeOut(0,fn);" anim="e.fadeIn(5000,fn);"> 8-904-867-12-56</big></strong></big></h2>
+	
     </div>
 </div>
 
+<div calss='row'>
+  <div class="col-md-10"></div>
+  <div class="col-md-2">
+      <small><small></small></small>
+  </div>
+</div>
+  
+</div>
 
 
 <script language="javascript" src="index_files/a.js"></script>
   
-
-  <div class="col-md-12">
-  </div>
-
-  <div class="col-md-10"></div>
-  <div class="col-md-2">
-      <small><small>89ms</small></small>
-  </div>
-  <!-- -->
   
-  <div calss='row'>
-    <div class="col-md-12" id='end_block'>
-	
-    </div>
-  </div>
+
 
 
 </body></html>
