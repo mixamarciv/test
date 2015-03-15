@@ -1,5 +1,8 @@
 'use strict';
 
+var g = require('../../../inc.js');
+var use_https = g.config.auto.use_https;
+
 //меняем this.cookies.set и get
 //  что бы результат this.cookies.get был == предыдущему this.cookies.set в этом же запросе
 module.exports = function (ths) {
@@ -20,6 +23,7 @@ module.exports = function (ths) {
     
     ths.cookies.set = function (name,value,options){
         self.cookies.__set_vars[name] = value;
+        if(options && !use_https) options.signed = 0;
         return self.cookies.__original_set(name,value,options);
     }   
 }

@@ -45,12 +45,21 @@ function start(err,mainfn){
         var server80 = require('http').createServer(app.callback());
         var http = tf(start_listner)(server80,80);
         
-        var ssl_options = {
-          key: g.fs.readFileSync('./keys/server.key'),
-          cert: g.fs.readFileSync('./keys/server.crt')
+        var https = null;
+        var https_test = yield f.fs.gen_exists('./keys');
+        if (https_test) https_test = yield f.gen_exists('./keys/server.key');
+        if (https_test) https_test = yield f.gen_exists('./keys/server.key');
+        if (https_test) {
+            var ssl_options = {
+              key: g.fs.readFileSync('./keys/server.key'),
+              cert: g.fs.readFileSync('./keys/server.crt')
+            }
+            var server443 = require('https').createServer(ssl_options, app.callback());
+            https = tf(start_listner)(server443,443);
+        }else{
+            clog('\nhttps key & crt files not found');
         }
-        var server443 = require('https').createServer(ssl_options, app.callback());
-        var https = tf(start_listner)(server443,443);
+        g.config.auto.use_https = https_test;
         
         clog('\nconnect app database');
         yield f.db_app.gen_connect('webserver');

@@ -1,21 +1,23 @@
 @SET db_file_path=%~dp0
-@call "..\..\.bin\set_path.bat"
+@SET path_prefix=..\..\..
+@SET dbfilename=app.FDB
+
+@call "%path_prefix%\.bin\set_path.bat"
 @cd %db_file_path%
 
-@mkdir "%db_file_path%\..\..\temp\database"
+@mkdir "%db_file_path%\%path_prefix%\temp\database"
 
 
-@echo CREATE DATABASE '%db_file_path%\app.fdb' page_size 8192 user 'SYSDBA' password 'masterkey'; > "%db_file_path%\..\..\temp\database\0001_create.sql"
-@isql -i "%db_file_path%\..\..\temp\database\0001_create.sql"
+@echo CREATE DATABASE '%db_file_path%\%dbfilename%' page_size 8192 user 'SYSDBA' password 'masterkey'; > "%db_file_path%\%path_prefix%\temp\database\0001_create.sql"
+@isql -i "%db_file_path%\%path_prefix%\temp\database\0001_create.sql"
 
-@echo CONNECT '%db_file_path%\app.fdb' user 'SYSDBA' password 'masterkey'; > "%db_file_path%\..\..\temp\database\0002_connect.sql"
+@echo CONNECT '%db_file_path%\%dbfilename%' user 'SYSDBA' password 'masterkey'; > "%db_file_path%\%path_prefix%\temp\database\0002_connect.sql"
 
-::@SET dbopt=-d "%db_file_path%\app.fdb" -u SYSDBA -p masterkey
 @cd create_db_scripts
-@mkdir "%db_file_path%\..\..\temp\database\create_db_scripts"
+@mkdir "%db_file_path%\%path_prefix%\temp\database\create_db_scripts"
 @for /r . %%g in (*.sql) do (
-  @copy "%db_file_path%\..\..\temp\database\0002_connect.sql"+"%%g" "%db_file_path%\..\..\temp\database\create_db_scripts\%%~ng"
-  @isql -i "%db_file_path%\..\..\temp\database\create_db_scripts\%%~ng"
+  @copy "%db_file_path%\%path_prefix%\temp\database\0002_connect.sql"+"%%g" "%db_file_path%\%path_prefix%\temp\database\create_db_scripts\%%~ng"
+  @isql -i "%db_file_path%\%path_prefix%\temp\database\create_db_scripts\%%~ng"
 )
 
 @pause

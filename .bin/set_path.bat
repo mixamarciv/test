@@ -28,6 +28,8 @@ CD "%this_file_path%\.."
 @SET PATH=%PATH%;c:\Program Files\Firebird\Firebird_2_5\bin
 @SET PATH=%PATH%;c:\Program Files (x86)\Firebird\Firebird_2_5\bin
 
+
+
 @SET PATH=%PATH%;e:\_db_web\php5\
 
 ::обязательно задаем путь к архиватору 7z

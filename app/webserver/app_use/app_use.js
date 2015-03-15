@@ -20,9 +20,10 @@ module.exports = function load_app_use(app){
     app.use(helmet.ienoopen());
     //app.use(helmet.hidePoweredBy());
 
-    
-    // Force SSL on all page (редирект всех на ssl)
-    app.use(require('koa-force-ssl')());
+    if( g.config.auto.use_https ) {
+        // Force SSL on all page (редирект всех на ssl)
+        app.use(require('koa-force-ssl')());
+    }
     
     //задаем параметры сессии в файле session.keys (содержимое в виде массива ['key1','key2'])
     app.keys = f.readJsonSync(g.path.join(g.config.app_path,'/keys/session.keys'),1);

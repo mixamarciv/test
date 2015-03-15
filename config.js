@@ -81,6 +81,9 @@ c.templates.cache = true;  // ect — Compiled functions are cached, defaulting 
 //далее данные которые будут загружены автоматически при старте приложения:
 c.auto = {};
 
+//==================================================================================
+//webserver:
+c.auto.use_https = 0;        //запускаем https сервер вместе с http
 c.auto.templates = {};       //данные шаблонов
 c.auto.templates.path  = {}; //список доступных шаблонов в виде: {'default':'/path/to/default','name':'/path/to/name'}
 c.auto.templates.names = []; //список имен доступных шаблонов
