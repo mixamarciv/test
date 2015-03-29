@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>test</title>
+
+    <link rel="stylesheet" href="index_files/a.css">
+    <script language="javascript" src="index_files/a.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+</head><body id=body1>
+<div id=AAA></div>
+<input type=button value='test' id=BBB>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<script language="javascript">
+    
+function mousePageXY(e){
+  var x = 0, y = 0;
+
+  if (!e) e = window.event;
+
+  if (e.pageX || e.pageY){
+    x = e.pageX;
+    y = e.pageY;
+  }
+  else if (e.clientX || e.clientY){
+    x = e.clientX + 
+      (document.documentElement.scrollLeft || document.body.scrollLeft) - 
+      document.documentElement.clientLeft;
+    y = e.clientY + 
+      (document.documentElement.scrollTop || document.body.scrollTop) - 
+      document.documentElement.clientTop;
+  }
+
+  return {"x":x, "y":y};
+}
+
+//Функция возвращает объект со свойствами x, y, определяющими координаты курсора.
+
+//Пример использования:
+
+
+jQuery(function(){
+    
+    var ob = $('#AAA');
+    
+    //console.log('init_items ');
+    document.onmousemove = function(e){
+        var mCur = mousePageXY(e); 
+        ob.html('CLICK X='+mCur.x+' Y='+mCur.y+' ');
+    };
+    
+    $('#BBB').click(function(){
+        alert('AAAA');
+        $('#body1').mousemove(500,500);
+        $('#body1').mousemove(502,501); 
+    });
+ 
+});
+
+</script>
+
+
+</body></html>
