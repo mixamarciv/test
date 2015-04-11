@@ -47,8 +47,8 @@ function start(err,mainfn){
         
         var https = null;
         var https_test = yield f.fs.gen_exists('./keys');
-        if (https_test) https_test = yield f.gen_exists('./keys/server.key');
-        if (https_test) https_test = yield f.gen_exists('./keys/server.key');
+        if (https_test) https_test = yield f.fs.gen_exists('./keys/server.key');
+        if (https_test) https_test = yield f.fs.gen_exists('./keys/server.key');
         if (https_test) {
             var ssl_options = {
               key: g.fs.readFileSync('./keys/server.key'),
