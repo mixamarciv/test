@@ -45,11 +45,15 @@
      ,"underscore": "*"
      ,"underscore.string": "*"
      ,"async": "*"
+     ,"rimraf": "*"
+  
+     ,"forever-monitor": "*"
+
      ,"mixa_std_js_functions": "https://github.com/mixamarciv/mixa_std_js_functions/tarball/master"
      ,"process-logger": "https://github.com/mixamarciv/process-logger/tarball/master"
      ,"kill-prev-app-process": "https://github.com/mixamarciv/kill-prev-app-process/tarball/master"
      ,"mixa_db_js_functions":  "https://github.com/mixamarciv/mixa_db_js_functions/tarball/master"
-     ,"rimraf": "*"
+     
   }
 }
 

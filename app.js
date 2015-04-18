@@ -1,23 +1,19 @@
 'use strict';
-console.log('start app  (%s%s; node %s; pid:%s)',process.platform, process.arch, process.version, process.pid);
+console.log('start node %s (%s%s; pid:%s)',process.version,process.platform,process.arch,process.pid);
+
+//console.log('start (%s%s; node %s; pid:%s)',process.platform, process.arch, process.version, process.pid);
 
 
 var clog = console.log;
-var g = require('./inc.js');
+var g = require('./base_inc.js');
 var c = g.config;
-var is_run = 0;
-
-if ( c.args.app == 'webserver' ) {
-    is_run = 1;
-    require('app/webserver/webserver.js')();
-}
-
-if ( c.args.app == 'taskqueue' ) {
-    is_run = 1;
-    require('app/taskqueue/taskqueue.js')();
-}
 
 
-if ( !is_run ) {
-    clog('\n\napp not found! (bad --app param)\n\n');
-}
+var run_file = c.args.app;
+clog('run '+run_file);
+
+g.fs.exists(run_file,function(ex){
+    if (!ex) return console.error('file "'+run_file+'" not found!');
+    require(run_file)();
+});
+

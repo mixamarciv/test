@@ -1,4 +1,4 @@
-var g = require('../../inc.js');
+var g = require('../../base_inc.js');
 var fs = g.fs;
 var path = g.path;
 var tf = g.thunkify;

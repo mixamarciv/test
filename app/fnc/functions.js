@@ -1,4 +1,4 @@
-var g = require('../../inc.js');
+var g = require('../../base_inc.js');
 var cerr = console.error;
 var clog = console.log;
 
@@ -132,13 +132,14 @@ fnc.gen_setTimeout = g.thunkify(function(timeout,fn){
 //options.timeout - таймаут между проверками файла
 //options.cnt     - количество проверок до прерывания проверок
 fnc.wait_for_file = function(file,options,fn){
+    //console.log('wait_for_file..');
     if (!fn){
       fn = options;
       options = {timeout:100,cnt:10};
     }
     if (!options.timeout || options.timeout<=0) options.timeout = 100;
     if (!options.cnt     || options.cnt<=0    ) options.cnt = 10;
-    g.co(function *(){
+    fnc.run_gen(function *(){
         var t = options.cnt;
         var exists = 0;
         while (t-->0) {
@@ -148,10 +149,13 @@ fnc.wait_for_file = function(file,options,fn){
             var b = yield fnc.gen_setTimeout(options.timeout);
         }
         return exists;
-    })(function(err,ret_exists){
-      //clog('ret('+ret+') exists == '+exists);
-      if (err) return fn(err);
-      if (!ret_exists) return fn(fnc.merr(err,'file not exists'));
+    },function(err,ret_exists){
+      if (err){
+        return fn(err);
+      }
+      if (!ret_exists){
+        return fn(fnc.merr(err,'file not exists'));
+      }
       fn(null);
     });
 };

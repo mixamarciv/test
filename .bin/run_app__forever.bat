@@ -9,8 +9,11 @@
 ::SET options=%options% --skip_flx_to_txt=c:\temp\_flxconv\20\2014.09\20141005\153241\
 
 
-node.exe --harmony app.js --app=app/webserver/stop.js
+::cd node_modules/pm2/bin
+
+node.exe start_app.js node.exe --harmony app.js --app=app/webserver/start.js 
+::node.exe --harmony app.js --app=webserver 
 ::node.exe app.js
 
 :: ===========================================================================
-::@PAUSE
+@PAUSE

@@ -7,12 +7,12 @@ temp/
 keys/**
 **/log.txt
 
-client/lib/**
-!client/lib/.bowerrc
-!client/lib/bower.json
+app/webserver/client/lib/**
+!app/webserver/client/lib/.bowerrc
+!app/webserver/client/lib/bower.json
 
-files/templates/**/*.js
-files/templates/**/*.css
+app/webserver/files/templates/**/*.js
+app/webserver/files/templates/**/*.css
 
 
 # Windows image file caches

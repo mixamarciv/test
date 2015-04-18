@@ -1,7 +1,7 @@
 'use strict';
 console.log('  load app/webserver/load_routes/load_routes.js..');
 
-var g = require('../../../inc.js');
+var g = require('../inc.js');
 var f = g.functions;
 var clog = console.log;
 var tf = g.thunkify;

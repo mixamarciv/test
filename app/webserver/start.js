@@ -3,10 +3,11 @@ console.log('  load app/webserver/webserver.js..');
 
 var clog = console.log;
 
-var g = require('../../inc.js');
+var g = require('./inc.js');
 var f = g.functions;
 var tf = g.thunkify;
-
+var c = g.config;
+var path_join = g.path.join2;
 
 module.exports = function(fn){
     start(function(err){
@@ -24,11 +25,11 @@ module.exports = function(fn){
 
 function start(err,mainfn){
     f.run_gen(function*(){
-        process.title = 'webserver:80&443';
+        //process.title = c.app_name+' (port:80,443)';
         
         //убиваем предыдущий процесс
         yield tf(require('kill-prev-app-process'))({
-            path: g.path.join2(g.config.temp_path,'pid/webserver'),   // где храним pid текущего-предыдущего процесса
+            path: g.path.join2(c.main_temp_path,'pid/webserver'),   // где храним pid текущего-предыдущего процесса
             wait: 10                                               // сколько ждем после завершения предыдущего процесса 
         });
         
@@ -46,13 +47,14 @@ function start(err,mainfn){
         var http = tf(start_listner)(server80,80);
         
         var https = null;
-        var https_test = yield f.fs.gen_exists('./keys');
-        if (https_test) https_test = yield f.fs.gen_exists('./keys/server.key');
-        if (https_test) https_test = yield f.fs.gen_exists('./keys/server.key');
+        var keys_path = c.app_ssl_keys_path;
+        var https_test = yield f.fs.gen_exists(keys_path);
+        if (https_test) https_test = yield f.fs.gen_exists(keys_path+'/server.key');
+        if (https_test) https_test = yield f.fs.gen_exists(keys_path+'/server.key');
         if (https_test) {
             var ssl_options = {
-              key: g.fs.readFileSync('./keys/server.key'),
-              cert: g.fs.readFileSync('./keys/server.crt')
+              key: g.fs.readFileSync(keys_path+'/server.key'),
+              cert: g.fs.readFileSync(keys_path+'/server.crt')
             }
             var server443 = require('https').createServer(ssl_options, app.callback());
             https = tf(start_listner)(server443,443);

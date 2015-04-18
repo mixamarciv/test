@@ -1,6 +1,6 @@
 'use strict';
 
-var g = require('../../../inc.js');
+var g = require('../inc.js');
 var use_https = g.config.auto.use_https;
 
 //меняем this.cookies.set и get

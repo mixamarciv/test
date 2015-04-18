@@ -1,4 +1,4 @@
-var g = require('../../inc.js');
+var g = require('../../base_inc.js');
 var f = g.functions;
 var c = g.config;
 var clog = console.log;
