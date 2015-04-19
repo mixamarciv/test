@@ -70,7 +70,7 @@ function add_message_to_error(err,msg) {
     
     
     err.toString = function(){
-      g.mixa.dump.var_dump_node('error',this,{max_str_length:90000});
+      return g.mixa.dump.var_dump_node('error',this,{max_str_length:90000});
     }
     return err;
 }

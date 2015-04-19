@@ -222,6 +222,7 @@ function start_task(p) {
     },function(err){
 	if (err){
 	    clog('ERROR in start_next_task[1]');
+	    clog(err);
 	    clog(f.merr(err).toString());
 	    return start_next_task_run();
 	}
@@ -267,7 +268,7 @@ function* start_next_task() {
 }
 
 function check_arguments(aa) {
-    for(var i=0;i<aa.length;i++){
+    if (aa) for(var i=0;i<aa.length;i++){
 	//var a = aa[i];
 	//aa[i] = aa[i].replace(/\&/g,'^&');
 	//aa[i] = aa[i].replace(/\=/g,'^=');

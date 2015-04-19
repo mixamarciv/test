@@ -6,6 +6,10 @@
   "scripts": {
     "start": "node --harmony app.js"
   },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
   "dependencies": {
       "minimist": "*"
      ,"bower": "*"
@@ -48,6 +52,8 @@
      ,"rimraf": "*"
   
      ,"forever-monitor": "*"
+
+     ,"request": "*"
 
      ,"mixa_std_js_functions": "https://github.com/mixamarciv/mixa_std_js_functions/tarball/master"
      ,"process-logger": "https://github.com/mixamarciv/process-logger/tarball/master"

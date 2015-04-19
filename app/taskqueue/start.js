@@ -7,7 +7,7 @@ var g = require('./inc.js');
 var f = g.functions;
 var tf = g.thunkify;
 
-var listen_port = 62001;
+var listen_port = g.config.http_port;
 
 module.exports = function(fn){
     start(function(err){

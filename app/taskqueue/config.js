@@ -13,6 +13,8 @@ var c = module.exports = g.config;
 c.args = require('minimist')(process.argv.slice(2));
 
 c.app_name          = 'taskqueue';
+c.http_port         = 62001;                                          //порт по которому слушаем запросы
+
 c.app_path          = path_norm(__dirname);                           //путь к приложению
 c.scripts_path      = path_join(c.app_path,'scripts');                //пути к пользовательским скриптам
 c.files_path        = path_join(c.app_path,'files');                  //пути к клиентским файлам
