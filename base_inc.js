@@ -31,8 +31,8 @@ g.iconv.extendNodeEncodings();
 g.mixa = require('mixa_std_js_functions');
 g.db = require('mixa_db_js_functions');
 
-g.path.join2 = g.mixa.path.join;
-g.path.norm2 = g.mixa.path.norm;
+g.path.join2      = g.mixa.path.join;
+g.path.norm2      = g.mixa.path.norm;
 g.path.normalize2 = g.mixa.path.norm;
 g.path.mkdir_path = g.mixa.path.mkdir_path;
 

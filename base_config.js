@@ -13,12 +13,12 @@ var datef = g.mixa.str.date_format;
 c.args = require('minimist')(process.argv.slice(2));
 
 //c.app_name = 'webc4';
-c.app_path = path_norm(__dirname);                             //путь к приложению
-c.scripts_path = path_join(c.app_path,'scripts');              //пути к пользовательским скриптам
-c.files_path = path_join(c.app_path,'files');                  //пути к клиентским файлам
-c.temp_path = path_join(c.app_path,'temp');                    //пути к временным файлам (файлы которые пере/создаются при перезапуске приложения)
+c.app_path       = path_norm(__dirname);                              //путь к приложению
+c.scripts_path   = path_join(c.app_path,'scripts');                   //пути к пользовательским скриптам
+c.files_path     = path_join(c.app_path,'files');                     //пути к клиентским файлам
+c.temp_path      = path_join(c.app_path,'temp');                      //пути к временным файлам (файлы которые пере/создаются при перезапуске приложения)
 c.main_temp_path = c.temp_path;
-c.client_lib_path = path_join(__dirname,'client/lib');         //путь к клиентским библиотекам (js,css)
+//c.client_lib_path = path_join(__dirname,'client/lib');         //путь к клиентским библиотекам (js,css)
 
 //названия логов:
 c.log_path  = path_join(__dirname,'log/'+datef('Y.M'));
