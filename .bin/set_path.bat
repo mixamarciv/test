@@ -28,12 +28,11 @@ CD "%this_file_path%\.."
 @SET PATH=%PATH%;c:\Program Files\Firebird\Firebird_2_5\bin
 @SET PATH=%PATH%;c:\Program Files (x86)\Firebird\Firebird_2_5\bin
 
-
-
-@SET PATH=%PATH%;e:\_db_web\php5\
+::задаем пути к php
+@SET PATH=%PATH%;d:\_db_web\php5\;e:\_db_web\php5\
 
 ::обязательно задаем путь к архиватору 7z
-@SET PATH=%PATH%;c:\Program Files\7-Zip;
+@SET PATH=%PATH%;c:\Program Files\7-Zip;c:\Program Files (x86)\7-Zip;
 
 @SET NODE_PATH=.
 

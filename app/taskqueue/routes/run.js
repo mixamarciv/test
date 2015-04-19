@@ -199,10 +199,10 @@ function start_task(p) {
 	var     stream = g.fs.createWriteStream(p.out_file,{flags:'w'});
 	
 	var run = { run:s.run, args:check_arguments(s.args), log:p.out_file+'.log', enc:'utf-8'/*,out_stream:out_stream*/ };
-	//clog(g.mixa.dump.var_dump_node('run1',run,{max_str_length:90000}));
+	clog(g.mixa.dump.var_dump_node('run1',run,{max_str_length:90000}));
 	
     
-	
+
 	run.on_data = function(data) {
 	    //data = new Buffer(data);
 	    stream.write(data);
@@ -213,8 +213,10 @@ function start_task(p) {
 	var exit_code = yield tf(g.process_logger)(run);
 	
 	//out_stream.end();
-	stream.end();
-	    
+	setTimeout(function(){
+	    stream.end();
+	},500);
+	
 	var q = 'UPDATE task t SET t.status = 4, t.date_end = current_timestamp WHERE t.idc = \''+p.idt+'\'';
 	yield f.db.gen_query(db_name, q);
 	
