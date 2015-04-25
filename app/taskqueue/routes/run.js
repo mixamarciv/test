@@ -199,7 +199,7 @@ function start_task(p) {
 	var     stream = g.fs.createWriteStream(p.out_file,{flags:'w'});
 	
 	var run = { run:s.run, args:check_arguments(s.args), log:p.out_file+'.log', enc:'utf-8'/*,out_stream:out_stream*/ };
-	clog(g.mixa.dump.var_dump_node('run1',run,{max_str_length:90000}));
+	//clog(g.mixa.dump.var_dump_node('run1',run,{max_str_length:90000}));
 	
     
 
@@ -224,7 +224,7 @@ function start_task(p) {
     },function(err){
 	if (err){
 	    clog('ERROR in start_next_task[1]');
-	    clog(err);
+	    //clog(err);
 	    clog(f.merr(err).toString());
 	    return start_next_task_run();
 	}
