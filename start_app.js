@@ -35,7 +35,7 @@ function start() {
 }
 
 
-var g = require('./base_inc.js');
+var g = require('./main_inc.js');
 var c = g.config;
 var log_path = g.path.join2(c.temp_path,'/logs');
     log_path = g.path.join2(log_path,get_app_name());

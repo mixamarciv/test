@@ -2,7 +2,7 @@
 console.log('load inc ...');
 //объявляем все глобальные переменные которые используются практически во всех модулях
 
-var g = require('../../base_inc.js');
+var g = require('../../main_inc.js');
 module.exports = g;
 
 

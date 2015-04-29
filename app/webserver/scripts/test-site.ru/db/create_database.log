@@ -1,0 +1,235 @@
+28.04.2015 16:10:10,41 begin create db "F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\app.FDB"  
+Use CONNECT or CREATE DATABASE to specify a database
+Statement failed, SQLSTATE = 08001
+I/O error during "open" operation for file "F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\app.FDB"
+-database or file exists
+After line 0 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\0001_create.sql
+F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\create_db_scripts\0100_create_tables.sql   
+F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\0002_connect.sql
+F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\create_db_scripts\0100_create_tables.sql
+Скопировано файлов:         1.
+Use CONNECT or CREATE DATABASE to specify a database
+Statement failed, SQLSTATE = 42S01
+unsuccessful metadata update
+-Table T_GROUP already exists
+After line 5 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S01
+unsuccessful metadata update
+-Table T_SCRIPT already exists
+After line 25 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S01
+unsuccessful metadata update
+-Table T_SCRIPT_GROUP already exists
+After line 38 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S01
+unsuccessful metadata update
+-Table T_USER already exists
+After line 52 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S01
+unsuccessful metadata update
+-Table T_USER_GROUP already exists
+After line 69 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index T_GROUP_IDX1 already exists
+After line 83 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index T_GROUP_IDX2 already exists
+After line 92 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index T_GROUP_IDX3 already exists
+After line 93 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index T_GROUP_IDX4 already exists
+After line 94 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index T_GROUP_IDX5 already exists
+After line 95 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index IDX_T_SCRIPT_1 already exists
+After line 96 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index IDX_T_SCRIPT_2 already exists
+After line 97 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index IDX_T_SCRIPT_3 already exists
+After line 98 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index IDX_T_SCRIPT_4 already exists
+After line 99 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index IDX_T_SCRIPT_5 already exists
+After line 100 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index T_SCRIPT_IDX1 already exists
+After line 101 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index IDX_T_SCRIPT_GROUP_1 already exists
+After line 102 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index IDX_T_SCRIPT_GROUP_2 already exists
+After line 103 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index IDX_T_SCRIPT_GROUP_3 already exists
+After line 104 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index IDX_T_SCRIPT_GROUP_4 already exists
+After line 105 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index IDX_T_SCRIPT_GROUP_5 already exists
+After line 106 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index IDX_T_SCRIPT_GROUP_6 already exists
+After line 107 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index IDX_T_SCRIPT_GROUP_7 already exists
+After line 108 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index T_USER_IDX1 already exists
+After line 109 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index T_USER_IDX10 already exists
+After line 110 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index T_USER_IDX2 already exists
+After line 111 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index T_USER_IDX3 already exists
+After line 112 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index T_USER_IDX4 already exists
+After line 113 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index T_USER_IDX5 already exists
+After line 114 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index T_USER_IDX6 already exists
+After line 115 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index T_USER_IDX7 already exists
+After line 116 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index T_USER_IDX8 already exists
+After line 117 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index T_USER_IDX9 already exists
+After line 118 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index T_USER_GROUP_IDX1 already exists
+After line 119 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index T_USER_GROUP_IDX2 already exists
+After line 120 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index T_USER_GROUP_IDX3 already exists
+After line 121 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index T_USER_GROUP_IDX4 already exists
+After line 122 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index T_USER_GROUP_IDX5 already exists
+After line 123 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index T_USER_GROUP_IDX6 already exists
+After line 124 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index T_USER_GROUP_IDX7 already exists
+After line 125 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42000
+unsuccessful metadata update
+-DEFINE TRIGGER failed
+-attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_8"
+After line 134 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42000
+unsuccessful metadata update
+-DEFINE TRIGGER failed
+-attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_8"
+After line 154 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42000
+unsuccessful metadata update
+-DEFINE TRIGGER failed
+-attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_8"
+After line 164 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42000
+unsuccessful metadata update
+-DEFINE TRIGGER failed
+-attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_8"
+After line 177 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42000
+unsuccessful metadata update
+-DEFINE TRIGGER failed
+-attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_8"
+After line 187 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42000
+unsuccessful metadata update
+-DEFINE TRIGGER failed
+-attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_8"
+After line 200 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42000
+unsuccessful metadata update
+-DEFINE TRIGGER failed
+-attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_8"
+After line 210 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42000
+unsuccessful metadata update
+-DEFINE TRIGGER failed
+-attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_8"
+After line 223 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42000
+unsuccessful metadata update
+-DEFINE TRIGGER failed
+-attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_8"
+After line 237 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42000
+unsuccessful metadata update
+-DEFINE TRIGGER failed
+-attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_8"
+After line 247 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+Statement failed, SQLSTATE = 42000
+unsuccessful metadata update
+-DEFINE TRIGGER failed
+-attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_8"
+After line 260 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0100_create_tables
+F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\create_db_scripts\0201_add_user.sql   
+F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\0002_connect.sql
+F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\create_db_scripts\0201_add_user.sql
+Скопировано файлов:         1.
+Use CONNECT or CREATE DATABASE to specify a database
+Statement failed, SQLSTATE = 23000
+attempt to store duplicate value (visible to active transactions) in unique index "T_USER_IDX1"
+After line 1 in file F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\temp_29765\create_db_scripts\0201_add_user
+28.04.2015 16:10:12,48   end create db "F:\program\programming\app_template3\app\webserver\scripts\test-site.ru\db\\app.FDB"  

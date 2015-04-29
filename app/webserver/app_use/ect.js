@@ -4,6 +4,7 @@ var g = require('../inc.js');
 var f = g.functions;
 var clog = console.log;
 var tf = g.thunkify;
+var c = g.config;
 
 var ect = require('ect');
 var renderer = {};
@@ -12,17 +13,17 @@ module.exports = function load_render(app){
     
     //задаем настройки рендера
     renderer = ect({
-        watch: g.config.templates.watch, // — Automatic reloading of changed templates,
+        watch: c.templates.watch, // — Automatic reloading of changed templates,
                        //defaulting to false (useful for debugging with enabled cache,
                        //not supported for client-side)
-        root: g.config.templates.main_path, //этот параметр не используется
-        cache: g.config.templates.cache, // — Compiled functions are cached, defaulting to true
+        root: c.templates.main_path, //этот параметр не используется
+        cache: c.templates.cache, // — Compiled functions are cached, defaulting to true
         test : 1,
     });
     
     //получаем список шаблонов
-    g.config.auto.templates.path  = get_templates_obj();
-    g.config.auto.templates.names = g.u.keys(g.config.auto.templates.path);
+    c.auto.templates.path  = get_templates_obj();
+    c.auto.templates.names = g.u.keys(c.auto.templates.path);
     
     //меняем функцию this.render
     app.use(function *(next) {
@@ -93,10 +94,10 @@ function get_execute_time() {
 //в виде: {'default':'/path/to/default','name':'/path/to/name'}
 function get_templates_obj() {
     var ret = {};
-    var list = g.fs.readdirSync(g.config.templates.main_path);
+    var list = g.fs.readdirSync(c.templates.main_path);
     for(var i=0;i<list.length;i++){
         var path = list[i];
-        var full_path = g.path.join2(g.config.templates.main_path,path);
+        var full_path = g.path.join2(c.templates.main_path,path);
         var s = g.fs.statSync(full_path);
         if (!s.isDirectory()) continue;
         var test_path = g.path.join(full_path,'html');

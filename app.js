@@ -5,7 +5,7 @@ console.log('start node %s (%s%s; pid:%s)',process.version,process.platform,proc
 
 
 var clog = console.log;
-var g = require('./base_inc.js');
+var g = require('./main_inc.js');
 var c = g.config;
 
 

@@ -1,0 +1,71 @@
+
+
+F:\program\programming\app_template3>echo 20.04.2015 15:03:11,09 AAA 
+20.04.2015 15:03:11,09 AAA
+
+F:\program\programming\app_template3>sleep 5 
+
+F:\program\programming\app_template3>echo 20.04.2015 15:03:16,13 BBB 
+20.04.2015 15:03:16,13 BBB
+
+F:\program\programming\app_template3>sleep 5 
+
+F:\program\programming\app_template3>(
+echo 20.04.2015 15:03:21,21 test1 1  
+ sleep 2 
+) 
+20.04.2015 15:03:21,21 test1 1
+
+F:\program\programming\app_template3>(
+echo 20.04.2015 15:03:21,21 test1 2  
+ sleep 2 
+) 
+20.04.2015 15:03:21,21 test1 2
+
+F:\program\programming\app_template3>(
+echo 20.04.2015 15:03:21,21 test1 3  
+ sleep 2 
+) 
+20.04.2015 15:03:21,21 test1 3
+
+F:\program\programming\app_template3>(
+echo 20.04.2015 15:03:21,21 test1 4  
+ sleep 2 
+) 
+20.04.2015 15:03:21,21 test1 4
+
+F:\program\programming\app_template3>(
+echo 20.04.2015 15:03:21,21 test1 5  
+ sleep 2 
+) 
+20.04.2015 15:03:21,21 test1 5
+
+F:\program\programming\app_template3>(
+echo 20.04.2015 15:03:21,21 test1 6  
+ sleep 2 
+) 
+20.04.2015 15:03:21,21 test1 6
+
+F:\program\programming\app_template3>(
+echo 20.04.2015 15:03:21,21 test1 7  
+ sleep 2 
+) 
+20.04.2015 15:03:21,21 test1 7
+
+F:\program\programming\app_template3>(
+echo 20.04.2015 15:03:21,21 test1 8  
+ sleep 2 
+) 
+20.04.2015 15:03:21,21 test1 8
+
+F:\program\programming\app_template3>(
+echo 20.04.2015 15:03:21,21 test1 9  
+ sleep 2 
+) 
+20.04.2015 15:03:21,21 test1 9
+
+F:\program\programming\app_template3>(
+echo 20.04.2015 15:03:21,21 test1 10  
+ sleep 2 
+) 
+20.04.2015 15:03:21,21 test1 10
