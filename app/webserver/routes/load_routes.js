@@ -28,7 +28,7 @@ module.exports = function *(app){
     //загрузка пунктов меню из списка index.js файлов
     yield fnc.load_menu_from_index_files(list);
     
-    yield require('./render_html_menu_file.js')(g.config.temp_path+'/template/html/menu/main_menu.html',g.config.auto.menu);
+    yield require('./render_html_menu_file.js')(g.config.temp_path+'/templates/html/menu/main_menu.html',g.config.auto.menu);
 }
 
 
