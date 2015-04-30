@@ -1,0 +1,57 @@
+
+<nav class="navbar navbar-default navbar-static-top" role="navigation" >
+      <div class="container">
+        <div class="navbar-header">
+	      <button type="button"
+		      class="navbar-toggle"
+		      data-toggle="collapse"
+		      data-target=".navbar-collapse"
+		      >
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="/">
+		<!-- 
+		<small><small><i>W<small>eb</small></i></small></small><b><big>C</big></b><small>lient</small></small></small><b>4</b>
+		врашке.рф
+		
+		<small><small><i>W<small>eb</small></i></small></small><b><big>C</big></b><small>lient</small></small></small><b>4</b>
+	        vrashke.ru
+		-->
+		<big><big>В</big><big><small>Раш<small>ке</small>.ru</small></big></big>
+	      </a>
+        </div>
+	
+	
+        <div id="navbar" class="navbar-collapse collapse">
+	  
+	  <% include @g.config.temp_path + '/template/html/menu/main_menu.html' %>
+	  
+	  <ul class="nav navbar-nav navbar-right">
+	    <li class="dropdown">
+	      <% user = @locvars.user.get(); %>
+	      <% if user.id==1 : %>
+		<a href="/auth/login" ><b>вход</b></a>
+	      <% else : %>
+		<a href="#" class="dropdown-toggle" ><%- user.name %><b class="caret"></b></a>
+		<ul class="dropdown-menu">
+		      <li><a href="/auth/login?newlogin=1">зайти под другим пользователем</a></li>
+		      <li><a href="/auth/logout">выход</a></li>
+		</ul>
+	      <% end %>
+	    </li>
+	  </ul>
+	  
+        </div><!--/.nav-collapse -->
+	
+	
+      </div>
+</nav>
+
+<!--
+<pre>
+<%- @g.mixa.dump.var_dump_node('user',user) %>
+</pre>
+-->
+
