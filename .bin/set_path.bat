@@ -32,16 +32,7 @@
 @SET PATH=%PATH%;d:\_db_web\php5\;e:\_db_web\php5\
 
 ::обязательно задаем путь к архиватору 7z
-@SET PATH=%PATH%;c:\Program Files\7-Zip;c:\Program Files (x86)\7-Zip
-
-
-
-::задаем пути к apache-ant (для создания приложений под андроид)
-@SET ANDROID_HOME=d:\program\android-sdk-windows
-@SET ANT_HOME=d:\program\apache-ant
-@SET PATH=%PATH%;%ANT_HOME%\tools;%ANT_HOME%\bin;%ANDROID_HOME%\tools;%ANDROID_HOME%\platforms
-
-
+@SET PATH=%PATH%;c:\Program Files\7-Zip;c:\Program Files (x86)\7-Zip;
 
 @SET NODE_PATH=.
 

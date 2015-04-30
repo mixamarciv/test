@@ -9,7 +9,7 @@
 ::SET options=%options% --skip_flx_to_txt=c:\temp\_flxconv\20\2014.09\20141005\153241\
 
 
-node.exe --harmony app.js --app=app/webserver/stop.js  --site_config_file=./scripts/remont.ru/config_site.js
+node.exe --harmony app.js --app=app/webserver/stop.js
 ::node.exe app.js
 
 :: ===========================================================================

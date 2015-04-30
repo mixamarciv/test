@@ -38,6 +38,10 @@ c.db['webserver'] = {
 };
 
 //==================================================================================
+//текущий ip адрес машинки(первый, если их несколько)
+c.ip = g.mixa.ip.get_ipv4_adress_list(/192\.168\.\d\./)[0];
+
+//==================================================================================
 //набор параметров и данных по шаблонам
 c.templates.main_path = path_join(c.app_path,'client/templates/');  //пути к шаблонам eсt
 c.templates.watch = true;  // ect — Automatic reloading of changed templates, defaulting to false

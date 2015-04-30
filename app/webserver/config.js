@@ -26,12 +26,54 @@ c.log_path  = path_join(c.temp_path,'log/'+datef('Y.M'));
 
 c.db = {};
 
+c.db['webserver'] = {
+    dbtype: 'ibase',
+    database: path_join(c.app_path,'db/app.fdb'),
+    host: '127.0.0.1',
+    port: 3050,            // default
+    user: 'SYSDBA',        // default
+    password: 'masterkey', // default
+    role: null,            // default
+    pageSize: 4096,        // default when creating database
+    cp: 'win1251',
+    table_prefix: "t_"
+};
+
+
+c.db['taskqueue'] = {
+    dbtype: 'ibase',
+    database: path_join(c.app_path,'app/taskqueue/db/task.fdb'),
+    host: '127.0.0.1',
+    port: 3050,            // default
+    user: 'SYSDBA',        // default
+    password: 'masterkey', // default
+    role: null,            // default
+    pageSize: 4096,        // default when creating database
+    cp: 'win1251',
+    table_prefix: "t_"
+};
+
+
+c.db['0002.fdb'] = {
+    dbtype: 'firebird',
+    database: 'D:/_db_web/db002/0002.fdb',
+    host: '192.168.1.7',
+    port: 3050,            // default
+    user: 'SYSDBA',        // default
+    password: 'masterkey', // default
+    role: null,            // default
+    pageSize: 4096,        // default when creating database
+    cp: 'win1251',
+    table_prefix: ""
+};
+
+
 //текущий ip адрес машинки(первый, если их несколько)
 c.ip = g.mixa.ip.get_ipv4_adress_list(/192\.168\.\d\./)[0];
 
 
 c.templates = {};          //набор параметров и данных по шаблонам
-c.templates.main_path = undefined;  //пути к шаблонам eсt (задаются в config_site.js)
+c.templates.main_path = path_join(c.app_path,'client/templates/');  //пути к шаблонам eсt
 c.templates.watch = true;  // ect — Automatic reloading of changed templates, defaulting to false
 c.templates.cache = true;  // ect — Compiled functions are cached, defaulting to true
 

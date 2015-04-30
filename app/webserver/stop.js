@@ -9,7 +9,7 @@ var tf = g.thunkify;
 
 module.exports = function(fn){
     require('kill-prev-app-process')({
-            path: g.path.join2(g.config.temp_path,'pid'),   // где храним pid текущего-предыдущего процесса
+            path: g.path.join2(g.config.main_temp_path,'pid/webserver'),   // где храним pid текущего-предыдущего процесса
             wait: 10                                                  // сколько ждем после завершения предыдущего процесса 
     },function(err){
       clog('end');

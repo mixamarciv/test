@@ -70,8 +70,6 @@ function *render_ect(file,options) {
     
     var path_render_file = g.path.join2(options.template_file_path, file);
     
-    
-    options._this = this;
     options.all_vars = options;
     this.body = yield tf(run_render)( path_render_file, options);
     //this.body = run_render( path_render_file, options);

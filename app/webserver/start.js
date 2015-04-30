@@ -29,7 +29,7 @@ function start(err,mainfn){
 
         //убиваем предыдущий процесс
         yield tf(require('kill-prev-app-process'))({
-            path: g.path.join2(c.temp_path,'pid'),   // где храним pid текущего-предыдущего процесса
+            path: g.path.join2(c.temp_path,'pid/webserver'),   // где храним pid текущего-предыдущего процесса
             wait: 10                                               // сколько ждем после завершения предыдущего процесса
         });
 
@@ -63,10 +63,9 @@ function start(err,mainfn){
         }
         g.config.auto.use_https = https_test;
 
-        if(c.db.length > 0){
-            clog('\nconnect app database');
-            yield f.db_app.gen_connect('webserver');
-        }
+        clog('\nconnect app database');
+        yield f.db_app.gen_connect('webserver');
+
 
         clog('\nstart listeners:');
         yield [http, https];
