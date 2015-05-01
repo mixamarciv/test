@@ -14,6 +14,6 @@ clog('run '+run_file);
 
 g.fs.exists(run_file,function(ex){
     if (!ex) return console.error('file "'+run_file+'" not found!');
-    require(run_file)();
+    require('./'+run_file)();
 });
 
