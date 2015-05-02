@@ -5,15 +5,19 @@ var tf = g.thunkify;
 
 var route_path = f.get_route_path(__filename);
 
+module.exports.route_function = route_function;
 module.exports.load_route = function(router,fn){
     //router.redirect('/','/main');
-    router.get(route_path, function*(next) {
-        var data = {
-                page_title: 'ремонт пк и заправка картриджей в рашке)',
-                test: 1
-            };
-        yield this.render('main.html', data);
-        yield next;
-    });
+    router.get(route_path, route_function);
     fn();
+}
+
+function *route_function(next) {
+    var data = {
+            page_title: 'ремонт пк и заправка картриджей в рашке)',
+            template_file_path: __dirname,
+            test: 1
+        };
+    yield this.render('main.html', data);
+    yield next;
 }
