@@ -13,6 +13,7 @@
 
 node.exe start_app.js node.exe --harmony app.js --app=app/webserver/start.js --site_config_file=./scripts/remont.ru/config_site.js
 ::node start_app.js node --harmony app.js --app=app/webserver/start.js --site_config_file=./scripts/remont.ru/config_site.js
+exec node start_app.js node --harmony app.js --app=app/webserver/start.js --site_config_file=./scripts/remont.ru/config_site.js
 
 ::node.exe --harmony app.js --app=webserver 
 ::node.exe app.js
