@@ -43,8 +43,8 @@ function start(err,mainfn){
         clog('\nload routes:');
         yield load_all_routes(app);
 
-        var server80 = require('http').createServer(app.callback());
-        var http = tf(start_listner)(server80,81);
+        var server_http = require('http').createServer(app.callback());
+        var http = tf(start_listner)(server_http,c.port_http);
 
         var https = null;
         var keys_path = c.app_ssl_keys_path;
@@ -56,8 +56,8 @@ function start(err,mainfn){
               key: g.fs.readFileSync(keys_path+'/server.key'),
               cert: g.fs.readFileSync(keys_path+'/server.crt')
             }
-            var server443 = require('https').createServer(ssl_options, app.callback());
-            https = tf(start_listner)(server443,443);
+            var server_https = require('https').createServer(ssl_options, app.callback());
+            https = tf(start_listner)(server_https,c.port_https);
         }else{
             clog('\nhttps key & crt files not found');
         }

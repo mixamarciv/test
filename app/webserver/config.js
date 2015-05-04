@@ -29,6 +29,13 @@ c.db = {};
 //текущий ip адрес машинки(первый, если их несколько)
 c.ip = g.mixa.ip.get_ipv4_adress_list(/192\.168\.\d\./)[0];
 
+//задаем http и https порты:
+c.port_http = c.args.port_http;
+c.port_https = c.args.port_https;
+
+if(!c.port_http ) c.port_http = 80;
+if(!c.port_https) c.port_https = 443;
+
 
 c.templates = {};          //набор параметров и данных по шаблонам
 c.templates.main_path = undefined;  //пути к шаблонам eсt (задаются в config_site.js)

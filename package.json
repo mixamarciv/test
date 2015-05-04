@@ -18,7 +18,6 @@
      ,"koa": "*"
      ,"co": "*"
      ,"thunkify": "*"
-     ,"koa-force-ssl": "*"
      ,"koa-session": "*"
      ,"koa-bodyparser": "*"
      ,"koa-helmet": "*"
