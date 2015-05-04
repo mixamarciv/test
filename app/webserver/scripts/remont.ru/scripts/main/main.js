@@ -14,7 +14,7 @@ module.exports.load_route = function(router,fn){
 
 function *route_function(next) {
     var data = {
-            page_title: 'ремонт пк и заправка картриджей в рашке)',
+            page_title: 'ремонт ПК и заправка картриджей в рашке в городе Инта',
             template_file_path: __dirname,
             test: 1
         };
