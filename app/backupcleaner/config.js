@@ -11,7 +11,6 @@ var c = module.exports = g.config;
 
 c.app_name      = 'backupcleaner';
 c.app_path      = path_norm(__dirname);                           //путь к приложению
-
 c.temp_path     = path_join(c.temp_path,c.app_name);              //пути к временным файлам (файлы которые пере/создаются при перезапуске приложения)
 
 //пути к логам:

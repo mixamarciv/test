@@ -9,6 +9,7 @@ g.thunkify = require('thunkify');
 
 g.config = require('./config.js');
 
+g.functions = require('../fnc/functions.js');
 
 
 
