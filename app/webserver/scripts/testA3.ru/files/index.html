@@ -80,14 +80,15 @@ var photocrati_ajax = {"url":"http:\/\/192.168.1.120\/?photocrati_ajax=1","wp_ho
 /* ]]> */
 </script>
 <script type='text/javascript' src='/wp-content/plugins/nextgen-gallery/products/photocrati_nextgen/modules/ajax/static/ajax.min.js?ver=4.2.2'></script>
-<script type='text/javascript'>
+<script type='text/javascript'> //NinjaContactFormOpts
 /* <![CDATA[ */
 var NinjaContactFormOpts = {"ajaxurl":"http:\/\/192.168.1.120\/wp-admin\/admin-ajax.php","sidebar_type":"slide","theme":"aerial","sidebar_pos":"left","flat_socialbar":"top","base_color":"{\"flat\":\"#37a4d2\",\"cube\":\"#c0392b\",\"minimalistic\":\"#50e3c2\",\"aerial\":\"#000000\"}","humantest":"","fade_content":"light","label":"1","label_top":"43%","label_vis":"visible","label_scroll_selector":"","label_mouseover":"","bg":"none","togglers":"","path":"http:\/\/192.168.1.120\/wp-content\/plugins\/ninja-contact-form\/img\/","send_more_text":"Send more","try_again_text":"Try again","close_text":"Close","sending_text":"Sending","msg_fail_text":"Something went wrong while sending your message","errors":{"required":"* Please enter %%","min":"* %% must have at least %% characters.","max":"* %% can have at most %% characters.","matches":"* %% must match %%.","less":"* %% must be less than %%","greater":"* %% must be greater than %%.","numeric":"* %% must be numeric.","email":"* %% must be a valid email address.","ip":"* %% must be a valid ip address.","answer":"* Wrong %%"},"id1":{"success":"Your message was sent."},"social":{"1":{"ncf_facebook":"http:\/\/facebook.com\/sparkfiredancer","ncf_twitter":"https:\/\/twitter.com\/SparkFireDance","ncf_pinterest":"https:\/\/uk.pinterest.com\/sparkfiredance\/","ncf_youtube":"http:\/\/vimeo.com\/channels\/sparkfire","ncf_instagram":"https:\/\/instagram.com\/spark.fire.dance\/","ncf_linkedin":"http:\/\/uk.linkedin.com\/in\/danmiethke","ncf_gplus":"https:\/\/plus.google.com\/+Sparkfiredanceacts"}}};
 /* ]]> */
 </script>
 <script type='text/javascript' src='/wp-content/plugins/ninja-contact-form/js/ninja-contact-form.min.js?ver=4.2.2'></script>
 <script type='text/javascript' src='/wp-content/plugins/fooboxV2/js/foobox.min.js?ver=2.0.7.3'></script>
-<script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js?ver=4.2.2'></script>
+<!--script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js?ver=4.2.2'></script-->
+<script type='text/javascript' src='/wp-content/plugins/jquery-easing/jquery.easing.js'></script>
 <link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://192.168.1.120/xmlrpc.php?rsd" />
 <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="/wp-includes/wlwmanifest.xml" /> 
 <meta name="generator" content="WordPress 4.2.2" />
@@ -95,14 +96,47 @@ var NinjaContactFormOpts = {"ajaxurl":"http:\/\/192.168.1.120\/wp-admin\/admin-a
 <!-- Start CSSHero.org Dynamic CSS & Fonts Loading -->
 	      <link rel="stylesheet" type="text/css" media="all" href="http://192.168.1.120/?wpcss_action=show_css" data-apply-prefixfree />
 	      <link href='http://fonts.googleapis.com/css?family=Quicksand%7C' rel='stylesheet' type='text/css'> 	 <!-- End CSSHero.org Dynamic CSS & Fonts Loading -->    
-										<script type="text/javascript">/* FooBox init code */
+
+<script type="text/javascript">/* FooBox init code */
 (function( FOOBOX, $, undefined ) {
-  FOOBOX.o = {theme: "fbx-dark", wordpress: { enabled: true }, containerCssClass: "foobox-instance", deeplinking : { enabled: true, prefix: "foobox" }, showCount:false, captions: { enabled:false }, affiliate : { enabled: false }, error: "Oops, the image couldn\'t load", slideshow: { enabled:true, timeout:4000}, social: { enabled: true, onlyShowOnHover:true, position: 'fbx-bottom', links: [ { css: 'fbx-facebook', supports: ['image', 'video'], title: 'Facebook', url: 'http://www.facebook.com/sharer.php?s=100&p[url]={url}&p[images][0]={img-ne}&p[title]={title}&p[summary]={desc}'  }, { css: 'fbx-google-plus', supports: ['image', 'video'], title: 'Google+', url: 'https://plus.google.com/share?url={url-ne}'  }, { css: 'fbx-pinterest', supports: ['image'], title: 'Pinterest', url: 'https://pinterest.com/pin/create/bookmarklet/?media={img-ne}&url={url}&title={title}&is_video=false&description={desc}'  } ] }, preload:true, modalClass: "fbx-spinner-5", strings: {
-				close: "Close", next: "Next", prev: "Previous", caption_close: "Close Caption", fullscreen: "Fullscreen", minimize: "Minimize", play: "Play",	pause: "Pause" }};
+  FOOBOX.o = {
+		theme: "fbx-dark",
+		wordpress: { enabled: true },
+		containerCssClass: "foobox-instance",
+		deeplinking : { enabled: true, prefix: "foobox" },
+		showCount:false,
+		captions: { enabled:false },
+		affiliate : { enabled: false },
+		error: "Oops, the image couldn\'t load",
+		slideshow: { enabled:true, timeout:4000},
+		social: { enabled: true,
+		          onlyShowOnHover:true,
+			  position: 'fbx-bottom',
+			  links: [{ css: 'fbx-facebook', supports: ['image', 'video'], title: 'Facebook',
+				     url: 'http://www.facebook.com/sharer.php?s=100&p[url]={url}&p[images][0]={img-ne}&p[title]={title}&p[summary]={desc}'  },
+				  { css: 'fbx-google-plus', supports: ['image', 'video'], title: 'Google+', url: 'https://plus.google.com/share?url={url-ne}'  },
+				  { css: 'fbx-pinterest', supports: ['image'], title: 'Pinterest',
+				    url: 'https://pinterest.com/pin/create/bookmarklet/?media={img-ne}&url={url}&title={title}&is_video=false&description={desc}'  }
+				 ]
+			},
+		preload:true,
+		modalClass: "fbx-spinner-5",
+		strings: {
+		  close: "Close",
+		  next: "Next",
+		  prev: "Previous",
+		  caption_close: "Close Caption",
+		  fullscreen: "Fullscreen",
+		  minimize: "Minimize",
+		  play: "Play",
+		  pause: "Pause"
+		}
+};
+
   FOOBOX.init = function() {
     $(".foobox-link").removeClass("foobox-link");
-  $("a.thickbox").removeClass("thickbox").unbind("click");
-  $("#TB_overlay, #TB_load, #TB_window").remove();
+    $("a.thickbox").removeClass("thickbox").unbind("click");
+    $("#TB_overlay, #TB_load, #TB_window").remove();
     $(".ngg-galleryoverview, .ngg-widget").foobox(FOOBOX.o);
     $(".gallery").foobox(FOOBOX.o);
     $(".sparkadmin").foobox(FOOBOX.o);
@@ -622,7 +656,9 @@ font-size: 0.8em !important;
 		<div id="main-slider" class="two-dim-slider">
 			<div class="slider-data">
 				<ul class="two-dim-albums-list">
-																<li class="two-dim-album" data-album-id="electroswing" data-img-scale="fill" data-bg="none #000000">
+
+
+<li class="two-dim-album" data-album-id="electroswing" data-img-scale="fill" data-bg="none #000000">
 	<div class="album-meta">
 		<h3 class="album-title"><a href="http://192.168.1.120/gallery/electroswing/">Electroswing Fire Show</a></h3>
 		<div class="album-content"><h2>Duo Fire act</h2>
@@ -649,7 +685,8 @@ font-size: 0.8em !important;
 		<li class="two-dim-item" data-img-width="1199" data-img-height="800"><a href="/wp-content/uploads/2014/01/uk-fire-performers-london-fire-show-sexy-circus-acts.jpg">/wp-content/uploads/2014/01/uk-fire-performers-london-fire-show-sexy-circus-acts.jpg</a><span class="image_description">/wp-content/uploads/2014/01/uk-fire-performers-london-fire-show-sexy-circus-acts.jpg</span></li>
 	</ul>
 </li>
-												<li class="two-dim-album" data-album-id="fire-fury" data-img-scale="fill" data-bg="none #000000">
+
+<li class="two-dim-album" data-album-id="fire-fury" data-img-scale="fill" data-bg="none #000000">
 	<div class="album-meta">
 		<h3 class="album-title"><a href="http://192.168.1.120/gallery/fire-fury/">Fire Fury Show</a></h3>
 		<div class="album-content"><h2>Duo or Quartet Fire Show</h2><p><span style="font-size: medium;">Dynamic act, energetic rhythms. High impact modern dance, spectacular fire skills, Firebreather type SFX. Fire Eaters, fire swords, staffs, palms and fans, hand-balance acrobatics, our signature 'Sparkle Fire' and 'Dragon Fire' effects</span></p><p><span style="font-size: medium;">The Duo is an exciting choice to fill any stage up to 10 meters wide.</span></p><p><span style="font-size: medium;">For larger stages we recommend our Quartet featuring Dan and 3 superstar female fire dancers. A very futuristic &amp; sexy circus act.</span></p><p><span style="font-size: 1.25em;"><strong>Performance lengths: Duo or 4 person show 5.5 min<strong> - <span style="color: #ff9933;"><a href="mailto:dan@sparkfiredance.com"><span style="color: #ff9933;"><span style="font-size: medium;">Book now</span></span></a></span></strong></strong></span></p></div>
@@ -669,7 +706,8 @@ font-size: 0.8em !important;
 		<li class="two-dim-item" data-img-width="1165" data-img-height="742"><a href="/wp-content/uploads/2014/01/fire-eaters-fire-dance-fire-breathing.jpg">fire dancer, circus performers, Circus Performers, entertainers, Corporate Entertainment, corporate entertainment, Firebreath</a><span class="image_description">fire dancer, circus performers, Circus Performers, entertainers, Corporate Entertainment, corporate entertainment, Firebreath</span></li>
 	</ul>
 </li>
-												<li class="two-dim-album" data-album-id="roving-walk-about-performers-wedding-party" data-img-scale="fill" data-bg="none #ffffff">
+
+<li class="two-dim-album" data-album-id="roving-walk-about-performers-wedding-party" data-img-scale="fill" data-bg="none #ffffff">
 	<div class="album-meta">
 		<h3 class="album-title"><a href="http://192.168.1.120/gallery/roving-walk-about-performers-wedding-party/">Fire Elves</a></h3>
 		<div class="album-content"><h2>Atmospheric freestyle fire &amp; acrobatic performance</h2>
@@ -689,7 +727,10 @@ font-size: 0.8em !important;
 		<li class="two-dim-item" data-img-width="1165" data-img-height="742"><a href="/wp-content/uploads/2014/12/Zirkusnummer-numero-de-cirque.jpg">Zirkusnummer numero-de-cirque</a><span class="image_description">Zirkusnummer numero-de-cirque</span></li>
 	</ul>
 </li>
-												<li class="two-dim-album" data-album-id="previous-work" data-img-scale="fill" data-bg="none #000000">
+
+
+
+<li class="two-dim-album" data-album-id="previous-work" data-img-scale="fill" data-bg="none #000000">
 	<div class="album-meta">
 		<h3 class="album-title"><a href="http://192.168.1.120/gallery/previous-work/">Bespoke Productions</a></h3>
 		<div class="album-content"><h2><strong>Custom fireshows, flame effects</strong> &amp; pyro acts performed in over 50 countries worldwide</h2>
@@ -714,7 +755,8 @@ font-size: 0.8em !important;
 		<li class="two-dim-item" data-img-width="1024" data-img-height="682"><a href="/wp-content/uploads/2014/12/Spark-Fire-Dance-Ice-fire-effect-AOI-2014-tour.jpg">Spark Fire Dance - Ice fire effect AOI 2014 tour</a><span class="image_description">Spark Fire Dance - Ice fire effect AOI 2014 tour</span></li>
 	</ul>
 </li>
-												<li class="two-dim-album" data-album-id="cirque-du-soleil" data-img-scale="fit-if-smaller" data-bg="none #000000">
+
+<li class="two-dim-album" data-album-id="cirque-du-soleil" data-img-scale="fit-if-smaller" data-bg="none #000000">
 	<div class="album-meta">
 		<h3 class="album-title"><a href="http://192.168.1.120/gallery/cirque-du-soleil/">with Cirque du Soleil</a></h3>
 		<div class="album-content"><h1><strong>Lead Firedancer, special effects circus acts design, fire performers coach &amp; fire dance choreographer</strong></h1><h2>2 years &amp; over 1000 <strong>fire shows</strong>. Featured <strong>firedancer</strong> act, lead artist &amp; coach of fireshow performers cast &amp; fire jugglers in Cirque’s largest fire show production to date.</h2><h2>Cirque du soleil special events co-ordinator overseeing special event circus performers &amp; supervising corporate party entertainment artists.</h2><h2>Cirque’s special event entertainment division provide event performers, corporate entertainment acts &amp; Cirque du Soleil artists of unrivalled quality to events worldwide.</h2><h2>After years of close work with Cirque's teams we know the performers &amp; circus artists that can bring a Cirque du Soleil theme to life for your event.</h2><h2>Circus acts from across Europe &amp; UK performers available for worldwide events. Not just fire eaters, fire jugglers &amp; fire breathers but acrobatic, equilibristic and aerial acts of Cirque calibre for simply spectacular results. <span style="font-size: small;"><strong><span style="color: #ff9900; font-size: medium;"><a href="mailto:dan@sparkfiredance.com"><span style="color: #ff9900;">Contact us</span></a></span> for more information.</strong></span></h2></div>
