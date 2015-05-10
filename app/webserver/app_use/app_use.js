@@ -19,7 +19,7 @@ module.exports = function load_app_use(app){
         app.use(helmet.defaults({ xframe: false }));
         app.use(helmet.iexss({ setOnOldIE: true }));
         app.use(helmet.ienoopen());
-        app.use(helmet.hidePoweredBy());
+        //app.use(helmet.hidePoweredBy());
     }
 
     if( g.config.auto.use_https ) {
