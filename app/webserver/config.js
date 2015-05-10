@@ -29,9 +29,13 @@ c.db = {};
 //текущий ip адрес машинки(первый, если их несколько)
 c.ip = g.mixa.ip.get_ipv4_adress_list(/192\.168\.\d\./)[0];
 
+//будем ли использовать koa-helmet для безопасности
+c.use_secure = 1;
+
 //задаем http и https порты:
 c.port_http = c.args.port_http;
 c.port_https = c.args.port_https;
+
 
 if(!c.port_http ) c.port_http = 80;
 if(!c.port_https) c.port_https = 443;

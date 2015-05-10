@@ -27,6 +27,8 @@ c.log_path  = path_join(c.temp_path,'log/'+datef('Y.M'));
 //параметры подключения к базам данных
 c.db = {};
 
+c.use_secure = 0;
+
 //номера портов:
 c.port_http = 80;
 c.port_https = 0;
