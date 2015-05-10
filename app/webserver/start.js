@@ -37,7 +37,7 @@ function start(err,mainfn){
 
         //задаем настройки приложения
         require('./app_use/app_use.js')(app);
-
+        
         //загрузка роутов из всех поддиректорий g.config.scripts_path
         var load_all_routes = require('./routes/load_routes.js');
         clog('\nload routes:');
