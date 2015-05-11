@@ -9,9 +9,9 @@
 ::SET options=%options% --skip_flx_to_txt=c:\temp\_flxconv\20\2014.09\20141005\153241\
 
 
-node.exe --harmony app.js --app=app/webserver/stop.js  --site_config_file=./scripts/testA3.ru/config_site.js
-::node.exe start_app.js node.exe --harmony app.js --app=app/webserver/start.js --site_config_file=./scripts/testA3.ru/config_site.js
+::node.exe --harmony app.js --app=app/webserver/stop.js  --site_config_file=./scripts/testA3.ru/config_site.js
+node.exe start_app.js node.exe --harmony app.js --app=app/webserver/start.js --site_config_file=./scripts/testA3.ru/config_site.js
 
 
 :: ===========================================================================
-::@PAUSE
+@PAUSE
