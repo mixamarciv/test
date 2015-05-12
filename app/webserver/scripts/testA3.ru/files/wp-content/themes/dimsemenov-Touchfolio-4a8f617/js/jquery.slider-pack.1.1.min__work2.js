@@ -130,6 +130,7 @@
         self.isVideoPlaying = false;
         self._hs2 = self.videoOverlay.find('.video-close-button');
         self._hs2.bind('click', function(e) {
+            //console1.log("self._hs2.bind('click', function(e) {");
             self.stopAndCloseVideo()
         });
         self._ir2 = false;
@@ -236,6 +237,7 @@
         self._dw5 = $('<div class="album-info-block text-block"><div class="album-info-text"></div></div>').appendTo('body');
         var l;
         self._mn4.bind('click', function() {
+            //console1.log("self._mn4.bind('click', function() {");
             self._ev5()
         });
         if (self.settings.appendGalleriesToMenu) {
@@ -269,10 +271,12 @@
         self.numAlbums = self.albumsArr.length;
         if (self._cx2) {
             self._jq5 = self.sliderRoot.find('.arrow-left').click(function(e) {
+                //console1.log("self._jq5 = self.sliderRoot.find('.arrow-left').click(function(e) {");
                 e.preventDefault();
                 self.prev()
             });
             self._kp5 = self.sliderRoot.find('.arrow-right').click(function(e) {
+                //console1.log("self._kp5 = self.sliderRoot.find('.arrow-right').click(function(e) {");
                 e.preventDefault();
                 self.next()
             })
@@ -286,6 +290,7 @@
             self._az6.append(albumsMenu);
             self._by6 = self._az6.find("#gallery-menu").find("li");
             self._by6.click(function(e) {
+                //console1.log("self._by6.click(function(e) {");
                 e.preventDefault();
                 e.stopImmediatePropagation();
                 var a = self.getAlbumIdByIdAtt($(this).attr('data-id'));
@@ -338,6 +343,7 @@
         });
         if (!self.hasTouch) {
             self.sliderRoot.bind('mousewheel', function(e, a, b, c) {
+                //console1.log("self.sliderRoot.bind('mousewheel', function(e, a, b, c) {");
                 if (a < 0) {
                     self.next()
                 } else if (a > 0) {
@@ -450,6 +456,12 @@
             b._by8(newPos + increment, '', axis, false, true, firstAnimComplete)
         },
         _cx6: function(a, b, c, d, e, f) {
+            //console1.log("_cx6:");
+            //console1.log(arguments); //["next", "x", 600, true, true]
+            if (e===undefined){
+                e = true;  //параметр должен быть обязательно задан
+            }
+
             var g = this,
                 blockLink, newPos, album;
             if (g._by1 || g._az1) {
@@ -694,6 +706,8 @@
                 a._ir8(e)
             });
             $(document).bind(a._jq1, function(e) {
+                //console1.log("$(document).bind(a._jq1, function(e) {   a._jq1=="+a._jq1);
+                //a._jq1==mouseup.tds
                 a._ev6(e)
             });
             a._kp = false;
@@ -804,8 +818,7 @@
             }
             return false
         },
-        _ev6: function(e) {
- 
+        _ev6: function(e) {            
             var d = this,
                 point = d.hasTouch ? e.originalEvent.changedTouches[0] : e,
                 totalMovePos, totalMoveDist, accDist, duration, v0, newPos, newDist, newDuration, blockLink;
@@ -953,6 +966,11 @@
             }
         },
         _by8: function(b, c, d, e, f, g) {
+            //console1.log("_by8:");
+            //console1.log(arguments); //[0, "prev", "x", false, true] 
+            if (e===undefined) e = false; //этот аргумент должен быть задан обязательно
+            if (f===undefined) f = true;  //аргумент должен быть задан обязательно
+            
             var h = this,
                 moveProp;
             h.onTransitionStart.call(h);
@@ -1365,6 +1383,7 @@
                     if (!blockInside.find('.play-button-container').length > 0) {
                         blockInside.append('<a class="play-button-container"><span class="play-button"><i class="play-icons-wrap"><u class="play-button-icon"></u><u class="play-video-loading-icon"></u></i></snan></a>');
                         blockInside.find('.play-button-container').bind('click', function(e) {
+                            //console1.log("blockInside.find('.play-button-container').bind('click', function(e) {");
                             if (!c.moved) {
                                 e.preventDefault();
                                 e.stopImmediatePropagation();
@@ -1717,7 +1736,7 @@
             
             var b = this,
                 albumBlock;
-            //console.log('b.currAlbumId,currItemId=='+b.currAlbumId+','+b.currItemId);
+            //console1.log('b.currAlbumId,currItemId=='+b.currAlbumId+','+b.currItemId);
             if (b.currItemId==0 || !b._ir4){
                 b._2prevAlbumId = b.currAlbumId;
                 if (b._dw5.data('curr-album-id') !== b.currAlbumId) {
@@ -1740,10 +1759,12 @@
                     i.replaceWith(i.text());
                     var j = b._dw5.find('.close-project');
                     j.bind('click', function(e) {
+                        //console1.log("j.bind('click', function(e) {");
                         e.preventDefault();
                         b._cx8()
                     });
                     b._dw5.find('.pin-it-btn, .facebook-share-btn').click(function(e) {
+                        //console1.log("b._dw5.find('.pin-it-btn, .facebook-share-btn').click(function(e) {");
                         e.preventDefault();
                         var a = window.open($(this).attr('href'), 'signin', 'width=665,height=300')
                     });
