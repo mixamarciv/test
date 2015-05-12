@@ -1020,11 +1020,13 @@
                     }
                     if (h.settings.autoOpenDescription && h.sliderWidth > 900) {
                         if (!h._mn) {
-                            if (h.currItemId === 0 && !h.albumsArr[h.currAlbumId].data('sawInfo')) {
+                            
+                            if (h.currItemId === 0 /*&& !h.albumsArr[h.currAlbumId].data('sawInfo')*/) {
                                 h._mn6();
                                 h.albumsArr[h.currAlbumId].data('sawInfo', true)
                             } else {
                                 h._byn1(h._mn4)
+                                //h._mn6();
                             }
                         }
                     } else {
@@ -1716,7 +1718,7 @@
             var b = this,
                 albumBlock;
             //console.log('b.currAlbumId,currItemId=='+b.currAlbumId+','+b.currItemId);
-            if (b.currItemId==0){
+            if (b.currItemId==0 || !b._ir4){
                 b._2prevAlbumId = b.currAlbumId;
                 if (b._dw5.data('curr-album-id') !== b.currAlbumId) {
                     var c = b.albumsArr[b.currAlbumId].find('.album-meta');
