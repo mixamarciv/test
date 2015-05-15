@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%- @page_title %></title>
+
+    <link rel='stylesheet' href='/templates/<%- @template_main %>/a.css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  </head>
+<body>
+
+<nav class="navbar navbar-default navbar-static-top" role="navigation" >
+      <div class="container">
+        <div class="navbar-header">
+	      <button type="button"
+		      class="navbar-toggle"
+		      data-toggle="collapse"
+		      data-target=".navbar-collapse"
+		      >
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="https://vrashke.ru">
+		<b><big><i><small>В</small></i><big>Р</b>ашке.ru</big></big> &nbsp;&nbsp; &nbsp;
+	      </a>
+        </div>
+	
+	
+        <div id="navbar" class="navbar-collapse collapse">
+	  
+	  <ul class="nav navbar-nav">
+              <li><a href="/main#ustanovka_oc">переустановка системы</a></li>
+              <li><a href="/main#remont_noutbuka">ремонт ПК и Ноутбуков</a></li>
+              <li><a href="/main#zapravka_cartridja">заправка Картриджей</a></li>
+              <!-- <li><a href="/main#zvonite">контакты</a></li> -->
+          </ul>
+          
+	  <ul class="nav navbar-nav navbar-right">
+	      <li>
+                <div class="col-md-8">
+                <a href="/templates/change?url=<%- @_this.originalUrl %>" class="btn" title="поменять шаблон сайта">
+                  <img src="/files/img/sun_mon_30.png" class="pull-right" alt="поменять шаблон">
+                </a>
+                </div>
+              </li>
+	  </ul>
+          
+        </div><!--/.nav-collapse -->
+	
+	
+      </div>
+</nav>
+
+
+<header class="header">
+    <% content 'header' %>
+</header>
+
+
+  
+<div class="container">
+  <% content %>
+</div>
+  
+
+
+  
+<footer class="footer">
+  <div class="container">
+    <% content 'footer' %>
+  </div>
+  <small><small>
+  <div class="col-md-10">
+        <div class="col-md-6">
+            <div class="col-md-6">
+                  наши сайты:<br>
+                  <a href="http://master.vrashke.ru">мастер на час в городе Сыктывкар</a><br>
+                  <a href="http://фонд-инта.рф">Благотворительный фонд города Инта</a><br>
+                  <a href="http://uzkh-inta.vrashke.ru">МКУ УЖКХ город Инта</a><br>
+            </div>
+            <div class="col-md-6">
+                  <a href="http://vrashke.net">vrashke.net</a><br>
+                  <a href="http://vrashke.com">vrashke.com</a><br>
+                  <a href="http://vrashke.ru">vrashke.ru</a><br>
+                  <a href="http://врашке.рф">врашке.рф</a><br>
+            </div>
+        </div>
+  </div>
+  <div class="col-md-2">
+      город Инта <br>
+      server time: <%- @g.moment().format('YYYY.MM.DD HH:mm:ss'); %><br>
+      <%- @get_execute_time() %>
+  </div>
+  </small></small>
+</footer>
+
+
+<stdscripts>
+  <script language='javascript' src='/templates/<%- @template_main %>/a.js'></script>
+</stdscripts>
+
+</body>
+</html>

@@ -3,6 +3,7 @@ console.log('load main_inc ...');
 //объявляем все глобальные переменные которые используются практически во всех модулях
 
 var g = {}
+global.app_includes = {main_inc:__filename};
 module.exports = g;
 
 
