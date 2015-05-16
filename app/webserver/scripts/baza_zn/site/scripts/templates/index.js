@@ -8,7 +8,7 @@ var path_join = g.path.join;
 var basename  = g.path.basename;
 var extname   = g.path.extname;
 
-var sendfile = require('koa-sendfile');
+var sendfile = g.koa_sendfile;
 
 var route_path = f.get_route_path(__filename);
 

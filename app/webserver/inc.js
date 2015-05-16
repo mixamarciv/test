@@ -14,7 +14,7 @@ module.exports = g;
 g.co = require('co');
 g.thunkify = require('thunkify');
 g.koa_send = require('koa-send');
-
+g.koa_sendfile = require('koa-sendfile');
 
 g.functions = require('../fnc/functions.js');
 //g.check_net_disk = require('./fnc/check_net_disk.js');
