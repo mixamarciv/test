@@ -1,0 +1,90 @@
+pre {
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: #1c1e22;
+  border: 1px solid #0c0d0e;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  padding: 9px;
+  border-radius: 3px;
+  white-space: pre;
+  font-family: consolas, courier, monospace;
+  color: #bfbfbf;
+  display: block;
+  float: left;
+  /**
+       float: left;
+       font-size: 1em;
+       line-height: 1.2em;
+       white-space: pre; 
+       background-color: #ccf; 
+       color: #000; 
+       border: 1px solid #666;
+       -moz-border-radius: 1em;
+       -webkit-border-radius: 1em;
+       border-radius: 1em; 
+       padding: 1em;
+       margin: 1.2em 1em;
+       float: left;
+       display: block;
+       **/
+}
+code {
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: #1c1e22;
+  border: 1px solid #0c0d0e;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  padding: 9px;
+  border-radius: 3px;
+  white-space: pre;
+  font-family: consolas, courier, monospace;
+  color: #bfbfbf;
+  display: block;
+  float: left;
+  /**
+       float: left;
+       font-size: 1em;
+       line-height: 1.2em;
+       white-space: pre; 
+       background-color: #ccf; 
+       color: #000; 
+       border: 1px solid #666;
+       -moz-border-radius: 1em;
+       -webkit-border-radius: 1em;
+       border-radius: 1em; 
+       padding: 1em;
+       margin: 1.2em 1em;
+       float: left;
+       display: block;
+       **/
+}
+/************
+code:before {
+    content:' ';
+    display:block;
+    clear: both;
+    line-height: 0;
+    height: 0;
+}
+
+
+code:after {
+    content:'';
+    display:block;
+    clear: both;
+    line-height: 0;
+    height: 0;
+}
+************/
+codeclear {
+  display: block;
+  clear: both;
+  line-height: 0;
+  height: 0;
+}

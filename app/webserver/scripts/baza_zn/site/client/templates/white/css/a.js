@@ -13,7 +13,9 @@ function render(file,fn){
     
     var options = {render_file:file};
     options.files = [path.join2(c.client_lib_path,'lib/bootstrap/**/bootstrap.min.css'),
-                     path.join2(c.client_lib_path,'css/stickyfooter.css')
+                     path.join2(c.client_lib_path,'css/stickyfooter.css'),
+	             path.join2(c.client_lib_path,'css/progress/squaresWaveG.css'),
+		     path.join2(c.app_path,'client/css/**')
                     ];
     options.use_less = 0;
     options.use_minify = 0;
