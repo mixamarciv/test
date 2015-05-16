@@ -3,6 +3,11 @@ console.log('load inc ...');
 //объявляем все глобальные переменные которые используются практически во всех модулях
 
 var g = require('../../main_inc.js');
+
+global.app_includes.inc = __filename;
+global.app_includes.app_inc = __filename;
+
+
 module.exports = g;
 
 
