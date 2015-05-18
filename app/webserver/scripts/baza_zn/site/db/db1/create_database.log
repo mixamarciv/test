@@ -1,0 +1,13 @@
+18.05.2015 10:40:52,16 begin create db "F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\db1\\data.fdb"  
+Use CONNECT or CREATE DATABASE to specify a database
+F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\db1\create_db_scripts\0100_create_tables.sql   
+F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\db1\\temp_4836\0002_connect.sql
+F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\db1\create_db_scripts\0100_create_tables.sql
+Скопировано файлов:         1.
+Use CONNECT or CREATE DATABASE to specify a database
+F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\db1\create_db_scripts\0201_add_user.sql   
+F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\db1\\temp_4836\0002_connect.sql
+F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\db1\create_db_scripts\0201_add_user.sql
+Скопировано файлов:         1.
+Use CONNECT or CREATE DATABASE to specify a database
+18.05.2015 10:40:52,82   end create db "F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\db1\\data.fdb"  

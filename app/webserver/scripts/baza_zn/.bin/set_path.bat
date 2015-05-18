@@ -11,11 +11,11 @@
 @%this_disk%
 @CD "%this_file_path%\..\..\app_template3"
 @CD "f:\program\programming\app_template3\"
-@CD "d:\program\programming\test\"
+::@CD "d:\program\programming\test\"
 
 SET site_config_path=f:/program/programming/app_template3/app/webserver/scripts/baza_zn/site/config_site.js
-SET site_config_path=f:/program/programming/baza_zn.1/site/config_site.js
-SET site_config_path=d:/program/programming/test/app/webserver/scripts/baza_zn/site/config_site.js
+::SET site_config_path=f:/program/programming/baza_zn.1/site/config_site.js
+::SET site_config_path=d:/program/programming/test/app/webserver/scripts/baza_zn/site/config_site.js
 
 :: ===========================================================================
 :: задаем основные пути для запуска скрипта

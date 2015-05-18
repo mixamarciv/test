@@ -26,6 +26,21 @@ c.log_path  = path_join(c.temp_path,'log/'+datef('Y.M'));
 
 //параметры подключения к базам данных
 c.db = {};
+c.db.default_conn_options = {
+    database: path_join(__dirname,'db'),   //в этом каталоге смотрим список баз данных
+    info: {id:'',name:'',description:''},  //информация о бд (берем из info.js файла - который лежит рядом с базой)
+    dbtype: 'ibase',
+    host: '127.0.0.1',
+    port: 3050,            // default
+    user: 'SYSDBA',        // default
+    password: 'masterkey', // default
+    role: null,            // default
+    pageSize: 4096,        // default when creating database
+    cp: 'utf8',
+    //table_prefix: "t_"
+    test: 0
+};
+
 
 //номера портов:
 c.port_http = 8097;
