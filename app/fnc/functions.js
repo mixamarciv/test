@@ -2,6 +2,8 @@ var g = require('../../main_inc.js');
 var cerr = console.error;
 var clog = console.log;
 
+var util = require('util');
+
 var fnc = {};
 module.exports = fnc;
 
@@ -36,9 +38,10 @@ fnc.tf = function(f){
     }
 }
 
-fnc.wait    = function(time,fn) {
+fnc.wait = function(time,fn) {
   setTimeout(fn,time);
 }
+
 
 fnc.random_int = g.mixa.int.get_random_int;
 
@@ -126,6 +129,7 @@ fnc.gen_setTimeout = g.thunkify(function(timeout,fn){
         fn(null,1);
     },timeout);
 });
+fnc.gen_wait = fnc.gen_setTimeout;
 
 
 //функция ожидающая создания файла file
@@ -166,3 +170,21 @@ fnc.db = fnc.db_app;
 
 fnc.render_css = require('./render_css.js');
 fnc.render_js  = require('./render_js.js');
+
+
+fnc.eval = function(script){
+  var vm = require('vm');
+  var sandbox = { };
+  vm.createContext(sandbox);
+  vm.runInContext(script, sandbox);
+  //console.log(util.inspect(sandbox));
+  return sandbox;
+}
+
+fnc.hash = function(data,alg){
+  if (!alg) alg = 'crc32';
+  var a = g.crypto.createHash(alg);
+  a.update(data);
+  var h = a.digest('hex');
+  return h;
+}

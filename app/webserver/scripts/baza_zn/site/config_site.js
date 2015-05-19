@@ -9,6 +9,8 @@ var datef = g.mixa.str.date_format;
 
 var c = module.exports = g.config;
 
+require('./prepare_to_start.js');
+
 //аргументы запуска приложения
 
 c.app_name      = 'baza_zn';
@@ -43,7 +45,7 @@ c.db.default_conn_options = {
 
 
 //номера портов:
-c.port_http = 8097;
+c.port_http  = 8097;
 c.port_https = 8098;
 
 

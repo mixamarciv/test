@@ -5,6 +5,8 @@ var tf = g.thunkify;
 
 var route_path = f.get_route_path(__filename);
 
+var url = require('url');
+
 module.exports.route_function = route_function;
 module.exports.load_route = function(router,fn){
     //router.redirect('/','/main');
@@ -13,11 +15,19 @@ module.exports.load_route = function(router,fn){
 }
 
 function *route_function(next) {
+    this.request.params = url.parse(this.originalUrl,true).query;
+    var db = this.request.params.db;
     var data = {
-            page_title: 'ремонт ПК и заправка картриджей в рашке в городе Инта',
+            page_title: 'поиск по базе данных на сайте в рашке.com',
             template_file_path: __dirname,
             test: 1
         };
+    
+    if (!db) {
+        //console.log(this.request.body);
+        yield this.render('select_db.html', data);
+        return yield next;
+    }
     yield this.render('main.html', data);
     yield next;
 }

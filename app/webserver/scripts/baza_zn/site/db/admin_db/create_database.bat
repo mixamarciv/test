@@ -15,7 +15,11 @@
 @MKDIR "%temp_path%\create_db_scripts" >> %log_file% 2>&1 
 
 @ECHO создаем БД %dbfilename%
-@ECHO CREATE DATABASE '%db_file_path%\%dbfilename%' page_size 8192 user 'SYSDBA' password 'masterkey'; > "%temp_path%\0001_create.sql"
+
+@ECHO SET SQL DIALECT 3; > "%temp_path%\0001_create.sql"
+@ECHO SET NAMES UTF8; >> "%temp_path%\0001_create.sql"
+@ECHO CREATE DATABASE '%db_file_path%\%dbfilename%' PAGE_SIZE 16384 user 'SYSDBA' password 'masterkey' DEFAULT CHARACTER SET UTF8; >> "%temp_path%\0001_create.sql"
+
 @isql -i "%temp_path%\0001_create.sql" >> %log_file% 2>&1 
 
 @ECHO CONNECT '%db_file_path%\%dbfilename%' user 'SYSDBA' password 'masterkey'; > "%temp_path%\0002_connect.sql"

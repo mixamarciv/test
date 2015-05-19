@@ -63,10 +63,10 @@ function start(err,mainfn){
         }
         g.config.auto.use_https = https_test;
 
-        if(c.db.length > 0){
-            clog('\nconnect app database');
-            yield f.db_app.gen_connect('webserver');
-        }
+        //if(c.db.length > 0){
+        //    clog('\nconnect app database');
+        //    yield f.db_app.gen_connect('webserver');
+        //}
 
         clog('\nstart listeners:');
         yield [http, https];

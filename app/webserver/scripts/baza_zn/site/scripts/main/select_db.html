@@ -1,0 +1,16 @@
+<% extend @template_main_path + '/html/index.html' %>
+
+<h1>выберите базу данных <small>(доступно <%- @g.config.db.arr.length %>)</small></h1>
+  
+
+<div class="list-group">
+  <% for db in @g.config.db.arr : %>
+    <a href="/search?db=<%- db.info.id %>" class="list-group-item">
+      <h3 class="list-group-item-heading"><%- db.name %> <small>[id:<%- db.info.id %>]</small></h3>
+      <% if db.info.description : %><p class="list-group-item-text"><%- db.info.description %></p><% end %>
+    </a>
+  <% end %>
+</div>
+
+<pre><%- @g.mixa.dump.var_dump_node('g.config.db.arr',@g.config.db.arr) %></pre>
+  

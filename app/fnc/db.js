@@ -4,6 +4,7 @@ var path = g.path;
 var tf = g.thunkify;
 var c = g.config;
 var clog = console.log;
+var fnc = g.functions;
 
 var f = {};
 module.exports = f;
@@ -14,13 +15,18 @@ f.query = query;
 f.gen_query = gen_query;
 
 
+//проверяем есть ли подключение к бд, если нет - создаем его, и возвращаем нужное подключение к бд
 function* gen_connect(db_name) {
     if (g.data.db[db_name]) return g.data.db[db_name];
     g.data.db[db_name] = yield tf(g.db.connect)(g.config.db[db_name]);
     return g.data.db[db_name];
 }
 
+
 function query(db_name,q,params,fn){
+    if (!g.data.db[db_name]) {
+	return fn(fnc.merr(new Error('not connected to db "'+db_name+'"')));
+    }
     g.data.db[db_name].query.apply(g.data.db[db_name].query,[q,params,fn]);
 };
 
