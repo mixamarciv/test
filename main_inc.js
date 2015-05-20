@@ -17,6 +17,7 @@ g.fs   = require('fs');
 g.util = require('util');
 g.path = require('path');
 g.crypto = require('crypto');
+g.crc  = require('crc');
 
 g.u    = require('underscore');
 g.u.str = require('underscore.string');

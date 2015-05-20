@@ -183,6 +183,12 @@ fnc.eval = function(script){
 
 fnc.hash = function(data,alg){
   if (!alg) alg = 'crc32';
+  
+  if (alg.substring(0,3)=='crc'){
+    var a = g.crc[alg];
+    var h = a(data).toString(16);
+    return h;
+  }
   var a = g.crypto.createHash(alg);
   a.update(data);
   var h = a.digest('hex');

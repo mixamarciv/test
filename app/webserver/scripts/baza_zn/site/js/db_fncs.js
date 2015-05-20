@@ -20,15 +20,17 @@ f.load_db_list = load_db_list;
 
 
 
-//загружаем список бд из каталога from_path в to_object
+//Р·Р°РіСЂСѓР¶Р°РµРј СЃРїРёСЃРѕРє Р±Рґ РёР· РєР°С‚Р°Р»РѕРіР° from_path РІ to_object
 function* load_db_list(from_path,to_object) {
     var files = yield fs2.gen_readdir(from_path);
     to_object.map = {};
     to_object.arr = [];
     
     for(var i=0;i<files.length;i++){
+        //clog(g.mixa.dump.var_dump_node('to_object',to_object,{max_str_length:90000,exclude:[]}));
+        c.db.default_conn_options.info = {};
         var p_path = path_join(from_path,files[i]);
-        var db = yield check_and_load_db_config(p_path);
+        var db = yield check_and_load_db_config(p_path,files[i]);
         if (db) {
             to_object[files[i]] = db;
             to_object.arr.push(db);
@@ -41,14 +43,17 @@ function* load_db_list(from_path,to_object) {
     //clog(files);
 }
 
-function* check_and_load_db_config(p_path) {
+function* check_and_load_db_config(p_path,name) {
     var database = path_join(p_path,'DATA.FDB');
     var b = yield fs2.gen_exists(database);
     var db = 0;
     if (b) {
-        var name = path.basename(p_path);
-        db = {};
-        u.extend( db, c.db.default_conn_options );
+        //var name = path.basename(p_path);
+        db = {test:0};
+        //clog(c.db.default_conn_options);
+        u.defaults( db, c.db.default_conn_options ) ;
+        //clog(c.db.default_conn_options);
+        //u.extend( db, c.db.default_conn_options );
         db.database = database;
         
         var info_path = path_join(p_path,'info.js');
@@ -56,7 +61,9 @@ function* check_and_load_db_config(p_path) {
         if (b) {
             db.info = yield get_info_from_file(info_path);
         }
-        
+        //clog(db);
+        //clog(db);
+        //if(!db.info.id) db.info.id = fnc.hash(name,'crc32');
         if(!db.info.id) db.info.id = fnc.hash(name,'crc32');
         if(!db.info.name) db.info.name = name;
         if(!db.info.description) db.info.description = database;
