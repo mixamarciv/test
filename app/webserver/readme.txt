@@ -10,3 +10,14 @@ var dump:
 
 
 
+
+
+    var ex = [/^g\.iconv/,
+              /^g\.u/,
+              /^g\.path/,
+              /^g\.moment/,
+	      /^g\.fs/,
+	      /^g.crypto/,
+	      /^g.crc/,
+             ];
+    clog(g.mixa.dump.var_dump_node('g',g,{max_str_length:90000,exclude:ex}));

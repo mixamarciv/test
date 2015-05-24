@@ -15,19 +15,40 @@ module.exports.load_route = function(router,fn){
 }
 
 function *route_function(next) {
-    this.request.params = url.parse(this.originalUrl,true).query;
-    var db = this.request.params.db;
+    var params = url.parse(this.originalUrl,true).query;
+    if (!this.request.params) {
+        this.request.params = params;
+    }else{
+        g.u.extend(this.request.params,params);
+    }
+    
     var data = {
+            params: params,
             page_title: 'поиск по базе данных на сайте в рашке.com',
             template_file_path: __dirname,
             test: 1
-        };
+    };
     
-    if (!db) {
-        //console.log(this.request.body);
+    if (params.db) { //проверяем существует ли выбранная бд
+        var db = g.config.db.map[params.db];
+        if (!db) {
+            data.error = 'БД: "'+params.db+'" не найдена!';
+            params.db = null;
+        }else{
+            data.db = db;
+        }
+    }
+    
+    if (!params.db) { //если бд не выбрана(или не существует)
         yield this.render('select_db.html', data);
         return yield next;
     }
+    
+    yield load_db_data.call(this,data,next);
+}
+
+
+function* load_db_data(data,next) {
     yield this.render('main.html', data);
     yield next;
 }

@@ -164,14 +164,6 @@ fnc.wait_for_file = function(file,options,fn){
     });
 };
 
-
-fnc.db_app = require('./db.js');
-fnc.db = fnc.db_app;
-
-fnc.render_css = require('./render_css.js');
-fnc.render_js  = require('./render_js.js');
-
-
 fnc.eval = function(script){
   var vm = require('vm');
   var sandbox = { };
@@ -194,3 +186,10 @@ fnc.hash = function(data,alg){
   var h = a.digest('hex');
   return h;
 }
+
+
+fnc.db_app = require('./db.js');
+fnc.db = fnc.db_app;
+
+fnc.render_css = require('./render_css.js');
+fnc.render_js  = require('./render_js.js');

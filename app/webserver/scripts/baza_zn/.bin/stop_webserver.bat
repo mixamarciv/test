@@ -7,7 +7,7 @@
 
 
 
-node --harmony app.js --app=app/webserver/stop.js --site_config_file="%site_config_path%"
+node --harmony app.js --app=app/webserver/stop.js --site_config_file="%site_path%/config_site.js"
 
 
 :: ===========================================================================

@@ -25,7 +25,9 @@ function* gen_connect(db_name) {
 
 function query(db_name,q,params,fn){
     if (!g.data.db[db_name]) {
-	return fn(fnc.merr(new Error('not connected to db "'+db_name+'"')));
+	var err = new Error('not connected to db "'+db_name+'"');
+	err = g.functions.merr(err);
+	return fn(err);
     }
     g.data.db[db_name].query.apply(g.data.db[db_name].query,[q,params,fn]);
 };

@@ -1,37 +1,18 @@
-19.05.2015 11:30:19,58 begin create db "F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\db2\\DATA.FDB"  
-Use CONNECT or CREATE DATABASE to specify a database
-F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\db2\create_db_scripts\0001_create_tables.sql   
-F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\db2\\temp_1759\0002_connect.sql
-F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\db2\create_db_scripts\0001_create_tables.sql
-Скопировано файлов:         1.
-Use CONNECT or CREATE DATABASE to specify a database
-Statement failed, SQLSTATE = 42000
-unsuccessful metadata update
--Generator T_WORD_ID already exists
-After line 23 in file F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\db2\\temp_1759\create_db_scripts\0001_create_tables
-19.05.2015 11:30:20,54   end create db "F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\db2\\DATA.FDB"  
-19.05.2015 11:31:20,19 begin create db "F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\db2\\DATA.FDB"  
-Use CONNECT or CREATE DATABASE to specify a database
-F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\db2\create_db_scripts\0001_create_tables.sql   
-F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\db2\\temp_1959\0002_connect.sql
-F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\db2\create_db_scripts\0001_create_tables.sql
-Скопировано файлов:         1.
-Use CONNECT or CREATE DATABASE to specify a database
-19.05.2015 11:31:20,54   end create db "F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\db2\\DATA.FDB"  
-19.05.2015 11:34:40,42 begin create db "F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\admin_db\\DATA.FDB"  
+24.05.2015 13:07:51,37 begin create db "F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\admin_db\\DATA.FDB"  
 Use CONNECT or CREATE DATABASE to specify a database
 F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\admin_db\create_db_scripts\0001_create_tables.sql   
-F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\admin_db\\temp_2612\0002_connect.sql
+F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\admin_db\\temp_22576\0002_connect.sql
 F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\admin_db\create_db_scripts\0001_create_tables.sql
 Скопировано файлов:         1.
 Use CONNECT or CREATE DATABASE to specify a database
 F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\admin_db\create_db_scripts\0101_data.sql   
-F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\admin_db\\temp_2612\0002_connect.sql
+F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\admin_db\\temp_22576\0002_connect.sql
 F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\admin_db\create_db_scripts\0101_data.sql
 Скопировано файлов:         1.
 Use CONNECT or CREATE DATABASE to specify a database
-Statement failed, SQLSTATE = 22001
-arithmetic exception, numeric overflow, or string truncation
--string right truncation
-After line 14 in file F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\admin_db\\temp_2612\create_db_scripts\0101_data
-19.05.2015 11:34:40,98   end create db "F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\admin_db\\DATA.FDB"  
+F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\admin_db\create_db_scripts\5001_create_triggers.sql   
+F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\admin_db\\temp_22576\0002_connect.sql
+F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\admin_db\create_db_scripts\5001_create_triggers.sql
+Скопировано файлов:         1.
+Use CONNECT or CREATE DATABASE to specify a database
+24.05.2015 13:07:52,71   end create db "F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\admin_db\\DATA.FDB"  

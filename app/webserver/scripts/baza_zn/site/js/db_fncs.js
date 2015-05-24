@@ -65,6 +65,7 @@ function* check_and_load_db_config(p_path,name) {
         //clog(db);
         //if(!db.info.id) db.info.id = fnc.hash(name,'crc32');
         if(!db.info.id) db.info.id = fnc.hash(name,'crc32');
+        db.info.id2 = name;
         if(!db.info.name) db.info.name = name;
         if(!db.info.description) db.info.description = database;
         

@@ -13,9 +13,11 @@
 @CD "f:\program\programming\app_template3\"
 ::@CD "d:\program\programming\test\"
 
-SET site_config_path=f:/program/programming/app_template3/app/webserver/scripts/baza_zn/site/config_site.js
-::SET site_config_path=f:/program/programming/baza_zn.1/site/config_site.js
-::SET site_config_path=d:/program/programming/test/app/webserver/scripts/baza_zn/site/config_site.js
+SET site_path=f:/program/programming/app_template3/app/webserver/scripts/baza_zn/site
+::SET site_path=f:/program/programming/baza_zn.1/site
+::SET site_path=d:/program/programming/test/app/webserver/scripts/baza_zn/site
+
+
 
 :: ===========================================================================
 :: задаем основные пути для запуска скрипта
