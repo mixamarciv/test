@@ -37,6 +37,7 @@ function* load_db_list(from_path,to_object) {
             to_object.map[files[i]] = db;
             if (db.info && db.info.id) {
                 to_object.map[db.info.id] = db;
+                to_object[db.info.id] = db;
             }
         }
     }

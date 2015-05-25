@@ -5,8 +5,8 @@
 @CLS
 :: ===========================================================================
 
-
-node --harmony app.js --app="app/webserver/start_ex.js"  --site_config_file="%site_path%/config_site.js" --start_ex_script="%site_path%/ex_scripts/task_update_index.js"
+SET opt=--id=21 --db=admin_db 
+node --harmony app.js --app="app/webserver/start_ex.js"  --site_config_file="%site_path%/config_site.js" --start_ex_script="%site_path%/ex_scripts/task_update_index.js" %opt%
 
 
 :: ===========================================================================

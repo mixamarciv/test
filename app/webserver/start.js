@@ -67,6 +67,11 @@ function start(err,mainfn){
         //    clog('\nconnect app database');
         //    yield f.db_app.gen_connect('webserver');
         //}
+        
+        if (c.prepare_to_start) {
+            yield tf(c.prepare_to_start)();
+        }
+        
 
         clog('\nstart listeners:');
         yield [http, https];

@@ -9,7 +9,8 @@ var datef = g.mixa.str.date_format;
 
 var c = module.exports = g.config;
 
-require('./prepare_to_start.js');
+
+
 
 //аргументы запуска приложения
 
@@ -48,7 +49,11 @@ c.db.default_conn_options = {
 c.port_http  = 8097;
 c.port_https = 8098;
 
-
+//функции для подготовки старта вебсервера - запускаются в webserver/start.js
+c.prepare_to_start = function(fn){
+    var p = require('./js/prepare_to_start.js');
+    p.load_db_list(fn);
+}
 //==================================================================================
 //набор параметров и данных по шаблонам
 c.templates.main_path = path_join(c.app_path,'client/templates/');  //пути к шаблонам eсt

@@ -1,17 +1,11 @@
 'use strict';
 console.log('load prepare_to_start.js');
 
-var g = require('./inc.js');
+var g = require('../inc.js');
 var fnc = g.functions;
 var c = g.config;
 
 module.exports.load_db_list = load_db_list;
-
-if(g.config.stop_server){
-    console.log('not need load prepare_to_start.js');
-}else{
-    load_db_list();
-}
 
 
 function load_db_list(fn) {

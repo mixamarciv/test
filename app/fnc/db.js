@@ -17,7 +17,12 @@ f.gen_query = gen_query;
 
 //проверяем есть ли подключение к бд, если нет - создаем его, и возвращаем нужное подключение к бд
 function* gen_connect(db_name) {
-    if (g.data.db[db_name]) return g.data.db[db_name];
+    if (g.data.db[db_name]){
+	//db.gen_query = function(sql,params){
+	//    return gen_query(db_name,sql,params);
+	//}
+	return g.data.db[db_name];
+    }
     g.data.db[db_name] = yield tf(g.db.connect)(g.config.db[db_name]);
     return g.data.db[db_name];
 }
@@ -32,9 +37,9 @@ function query(db_name,q,params,fn){
     g.data.db[db_name].query.apply(g.data.db[db_name].query,[q,params,fn]);
 };
 
-function* gen_query(db_name,q,params){
+function* gen_query(db_name,sql,params){
     if (arguments.length>2) {
-	return yield tf(query)(db_name,q,params);
+	return yield tf(query)(db_name,sql,params);
     }
-    return yield tf(query)(db_name,q);
+    return yield tf(query)(db_name,sql);
 };
