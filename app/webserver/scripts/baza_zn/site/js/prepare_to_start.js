@@ -11,7 +11,7 @@ module.exports.load_db_list = load_db_list;
 function load_db_list(fn) {
     fnc.run_gen(function*(){
         
-        yield fnc.gen_wait(1000);
+        //yield fnc.gen_wait(1000);
         console.log('load_db_list begin:');
         
         var db_paths = c.db.default_conn_options.database;

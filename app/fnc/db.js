@@ -43,3 +43,12 @@ function* gen_query(db_name,sql,params){
     }
     return yield tf(query)(db_name,sql);
 };
+
+function* gen_next_id(db_name,gen_name,inc_val){
+    if (!g.data.db[db_name]) {
+	var err = new Error('not connected to db "'+db_name+'"');
+	err = g.functions.merr(err);
+	return fn(err);
+    }
+    return yield tf(g.data.db[db_name].next_id)(gen_name,inc_val);
+};
