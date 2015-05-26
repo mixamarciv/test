@@ -13,7 +13,7 @@ module.exports = f;
 f.gen_connect = gen_connect;
 f.query = query;
 f.gen_query = gen_query;
-
+f.gen_next_id = gen_next_id;
 
 //проверяем есть ли подключение к бд, если нет - создаем его, и возвращаем нужное подключение к бд
 function* gen_connect(db_name) {

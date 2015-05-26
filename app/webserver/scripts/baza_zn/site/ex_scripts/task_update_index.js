@@ -61,8 +61,8 @@ function* gen_query(sql,params) {
 }
 
 function* gen_next_id(gen_name,inc_val) {
-    if(inc_val) return yield fnc.db.gen_query(db_id,sql,inc_val);
-    return yield fnc.db.gen_next_id(db_id,gen_name);
+    if(inc_val===undefined) return yield fnc.db.gen_next_id(db_id,gen_name,1);
+    return yield fnc.db.gen_next_id(db_id,gen_name,inc_val);
 }
 
 function* update_index_data() {
@@ -83,9 +83,9 @@ function* update_index_data_id(id,type) {
     if (!type) console.time('get words from post data');
     post_data.words = {};
     var w = post_data.words;
-    get_words_from_text(post_data.words,post_data.name);
-    get_words_from_text(post_data.words,post_data.text);
-    get_words_from_text(post_data.words,post_data.tags);
+    get_words_from_text(post_data.words,post_data.text,1);
+    get_words_from_text(post_data.words,post_data.name,3);
+    get_words_from_text(post_data.words,post_data.tags,5);
     if (!type) console.timeEnd('get words from post data');
     
     if (!type) console.time('update count post words in db');
@@ -135,11 +135,11 @@ function* update_index_data_id(id,type) {
 function* meta_get_id_word(word) {
     var sql = "SELECT id_word AS id FROM t_word w WHERE word='"+word+"'";
     var rows = yield gen_query(sql);
-    if (rows.length==0) {
+    if (rows.length>0) {
         var row = rows[0];
         return row.id;
     }
-    var id = gen_next_id('t_word_id');
+    var id = yield gen_next_id('t_word_id');
     sql = "INSERT INTO t_word(id_word,word) VALUES("+id+",'"+word+"')";
     yield gen_query(sql);
     return id;
@@ -154,7 +154,7 @@ function* meta_word_post_add(post_data,row) {
 
 function* meta_word_post_update(post_data,row) {
     if (!row.id_word) row.id_word = yield meta_get_id_word(row.word);
-    var sql = "UPDATE t_word__post w SET w.cnt = w.cnt + "+row.new_cnt+" WHERE w.id_word="+row.id_word;
+    var sql = "UPDATE t_word__post w SET w.cnt = "+row.new_cnt+" WHERE w.id_word="+row.id_word;
     yield gen_query(sql);
     return 1;
 }
@@ -166,9 +166,9 @@ function* meta_word_post_delete(post_data,row) {
     
     var sql = "SELECT SUM(p.cnt) AS cnt FROM t_word__post p WHERE p.id_word="+row.id_word+" ";
     var rows = yield gen_query(sql);
-    var row = rows[0];
+    var row2 = rows[0];
     
-    if (row.cnt>0) {
+    if (row2.cnt>0) {
         return 1;
     }
     var sql = "DELETE FROM t_word w WHERE w.id_word="+row.id_word+" ";
@@ -210,7 +210,7 @@ function* get_post_data(post_data) {
 }
 
 //получаем набор слов words и количество их повторений в тексте text
-function get_words_from_text(words,text,type) {
+function get_words_from_text(words,text,inc,type) {
   if (!text) return {};
   
   text = text.replace(/<[A-Za-z][^>]*>/g," "); //удаляем теги
@@ -230,9 +230,10 @@ function get_words_from_text(words,text,type) {
     var word = arr[0];
     word = word.toLowerCase();
     
-    if(!words[word]) words[word] = 1;
-    else words[word]++;
+    if(!words[word]) words[word] = inc;
+    else words[word] += inc ;
   }
+  clog(words);
   return words;
 }
 
