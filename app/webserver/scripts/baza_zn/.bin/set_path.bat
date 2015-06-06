@@ -9,11 +9,11 @@
 
 :: переходим в текущий каталог
 @%this_disk%
-@CD "%this_file_path%\..\..\app_template3"
-@CD "f:\program\programming\app_template3\"
+@CD "%this_file_path%\..\..\..\..\..\"
+::@CD "f:\program\programming\app_template3\"
 ::@CD "d:\program\programming\test\"
 
-SET site_path=f:/program/programming/app_template3/app/webserver/scripts/baza_zn/site
+SET site_path=./scripts/baza_zn/site
 ::SET site_path=f:/program/programming/baza_zn.1/site
 ::SET site_path=d:/program/programming/test/app/webserver/scripts/baza_zn/site
 
@@ -44,15 +44,15 @@ SET site_path=f:/program/programming/app_template3/app/webserver/scripts/baza_zn
 
 
 ::задаем пути к apache-ant (для создания приложений под андроид)
-@SET ANDROID_HOME=d:\program\android-sdk-windows
-@SET ANT_HOME=d:\program\apache-ant
-@SET PATH=%PATH%;%ANT_HOME%\tools;%ANT_HOME%\bin;%ANDROID_HOME%\tools;%ANDROID_HOME%\platforms
+::@SET ANDROID_HOME=d:\program\android-sdk-windows
+::@SET ANT_HOME=d:\program\apache-ant
+::@SET PATH=%PATH%;%ANT_HOME%\tools;%ANT_HOME%\bin;%ANDROID_HOME%\tools;%ANDROID_HOME%\platforms
 
 
 
 @SET NODE_PATH=.
 
-::@ECHO %PATH%
+@ECHO PATH=%PATH%
 :: ===========================================================================
 
 

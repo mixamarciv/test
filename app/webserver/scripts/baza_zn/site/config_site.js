@@ -48,6 +48,8 @@ c.db.default_conn_options = {
 //номера портов:
 c.port_http  = 8097;
 c.port_https = 8098;
+c.port_https = 0;
+
 
 //функции для подготовки старта вебсервера - запускаются в webserver/start.js
 c.prepare_to_start = function(fn){

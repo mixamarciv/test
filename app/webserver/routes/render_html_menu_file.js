@@ -10,6 +10,7 @@ var fnc = {};
 
 //загрузка роутов из всех поддиректорий g.config.scripts_path
 module.exports = function *(file_path,menu_list){
+    clog('start render_html_menu_file..');
     var exists = yield f.fs.gen_exists(file_path);
     if (!exists) {
         yield tf(f.fs.check_directory)(g.path.dirname(file_path));
@@ -35,6 +36,7 @@ module.exports = function *(file_path,menu_list){
     </li>
   </ul>
     */
+    
     yield tf(g.fs.writeFile)(file_path,html);
 }
 

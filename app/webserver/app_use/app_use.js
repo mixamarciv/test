@@ -16,7 +16,7 @@ module.exports = function load_app_use(app){
     //security headers to make your app more secure.
     if (g.config.use_secure) {
         var helmet = require('koa-helmet');
-        app.use(helmet.defaults({ xframe: false }));
+        //app.use(helmet.defaults({ xframe: false }));
         app.use(helmet.iexss({ setOnOldIE: true }));
         app.use(helmet.ienoopen());
         //app.use(helmet.hidePoweredBy());
