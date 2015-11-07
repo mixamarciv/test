@@ -18,3 +18,11 @@ F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\db2\c
 Скопировано файлов:         1.
 Use CONNECT or CREATE DATABASE to specify a database
 19.05.2015 11:31:20,54   end create db "F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\db2\\DATA.FDB"  
+04.06.2015 17:30:45,39 begin create db "D:\program\apps\test2\test\app\webserver\scripts\baza_zn\site\db\clear_db\\DATA.FDB"  
+Use CONNECT or CREATE DATABASE to specify a database
+D:\program\apps\test2\test\app\webserver\scripts\baza_zn\site\db\clear_db\create_db_scripts\0001_create_tables.sql   
+D:\program\apps\test2\test\app\webserver\scripts\baza_zn\site\db\clear_db\\temp_31966\0002_connect.sql
+D:\program\apps\test2\test\app\webserver\scripts\baza_zn\site\db\clear_db\create_db_scripts\0001_create_tables.sql
+Скопировано файлов:         1.
+Use CONNECT or CREATE DATABASE to specify a database
+04.06.2015 17:30:46,09   end create db "D:\program\apps\test2\test\app\webserver\scripts\baza_zn\site\db\clear_db\\DATA.FDB"  

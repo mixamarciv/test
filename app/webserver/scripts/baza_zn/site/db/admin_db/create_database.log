@@ -16,3 +16,21 @@ F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\admin
 Скопировано файлов:         1.
 Use CONNECT or CREATE DATABASE to specify a database
 24.05.2015 13:07:52,71   end create db "F:\program\programming\app_template3\app\webserver\scripts\baza_zn\site\db\admin_db\\DATA.FDB"  
+04.06.2015 17:30:34,25 begin create db "D:\program\apps\test2\test\app\webserver\scripts\baza_zn\site\db\admin_db\\DATA.FDB"  
+Use CONNECT or CREATE DATABASE to specify a database
+D:\program\apps\test2\test\app\webserver\scripts\baza_zn\site\db\admin_db\create_db_scripts\0001_create_tables.sql   
+D:\program\apps\test2\test\app\webserver\scripts\baza_zn\site\db\admin_db\\temp_31930\0002_connect.sql
+D:\program\apps\test2\test\app\webserver\scripts\baza_zn\site\db\admin_db\create_db_scripts\0001_create_tables.sql
+Скопировано файлов:         1.
+Use CONNECT or CREATE DATABASE to specify a database
+D:\program\apps\test2\test\app\webserver\scripts\baza_zn\site\db\admin_db\create_db_scripts\0101_data.sql   
+D:\program\apps\test2\test\app\webserver\scripts\baza_zn\site\db\admin_db\\temp_31930\0002_connect.sql
+D:\program\apps\test2\test\app\webserver\scripts\baza_zn\site\db\admin_db\create_db_scripts\0101_data.sql
+Скопировано файлов:         1.
+Use CONNECT or CREATE DATABASE to specify a database
+D:\program\apps\test2\test\app\webserver\scripts\baza_zn\site\db\admin_db\create_db_scripts\5001_create_triggers.sql   
+D:\program\apps\test2\test\app\webserver\scripts\baza_zn\site\db\admin_db\\temp_31930\0002_connect.sql
+D:\program\apps\test2\test\app\webserver\scripts\baza_zn\site\db\admin_db\create_db_scripts\5001_create_triggers.sql
+Скопировано файлов:         1.
+Use CONNECT or CREATE DATABASE to specify a database
+04.06.2015 17:30:36,47   end create db "D:\program\apps\test2\test\app\webserver\scripts\baza_zn\site\db\admin_db\\DATA.FDB"  

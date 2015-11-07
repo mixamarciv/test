@@ -21,8 +21,15 @@ g.functions = require('../fnc/functions.js');
 
 g.config = require('./config.js');  //загрузка основной конфигурации для всех сайтов
 
-if (g.config.args.site_config_file) {
-    g.config = require(g.config.args.site_config_file);  //путь к конфигам отдельного сайта
+var site_config_file = g.config.args.site_config_file;
+
+if (site_config_file) {
+    site_config_file = g.path.join(__dirname,site_config_file);
+    g.fs.exists(site_config_file,function(ex){
+        if (!ex) return console.error('ERROR: file site_config_file="'+site_config_file+'" not found!');
+        console.log('load site_config_file: '+site_config_file);
+        require(site_config_file);
+    });
 }
 
 

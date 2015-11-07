@@ -42,34 +42,42 @@ function start(err,mainfn){
         var load_all_routes = require('./routes/load_routes.js');
         clog('\nload routes:');
         yield load_all_routes(app);
-
+        clog('end load routes');
         var server_http = require('http').createServer(app.callback());
         var http = tf(start_listner)(server_http,c.port_http);
 
-        var https = null;
-        var keys_path = c.app_ssl_keys_path;
-        var https_test = yield f.fs.gen_exists(keys_path);
-        if (https_test) https_test = yield f.fs.gen_exists(keys_path+'/server.key');
-        if (https_test) https_test = yield f.fs.gen_exists(keys_path+'/server.key');
-        if (https_test) {
-            var ssl_options = {
-              key: g.fs.readFileSync(keys_path+'/server.key'),
-              cert: g.fs.readFileSync(keys_path+'/server.crt')
+        var https_test = 0;
+        if (c.port_https) {
+            var https = null;
+            var keys_path = c.app_ssl_keys_path;
+            https_test = yield f.fs.gen_exists(keys_path);
+            if (https_test) https_test = yield f.fs.gen_exists(keys_path+'/server.key');
+            if (https_test) https_test = yield f.fs.gen_exists(keys_path+'/server.crt');
+            if (https_test) {
+                clog('begin load https');
+                var ssl_options = {
+                  key: yield tf(g.fs.readFile)(keys_path+'/server.key'),
+                  cert: yield tf(g.fs.readFile)(keys_path+'/server.crt')
+                }
+                clog('end load https files');
+                var server_https = require('https').createServer(ssl_options, app.callback());
+                clog('end load server_https');
+                https = tf(start_listner)(server_https,c.port_https);
+                clog('end load https');
+            }else{
+                clog('\nhttps key & crt files not found');
             }
-            var server_https = require('https').createServer(ssl_options, app.callback());
-            https = tf(start_listner)(server_https,c.port_https);
-        }else{
-            clog('\nhttps key & crt files not found');
         }
         g.config.auto.use_https = https_test;
-
         //if(c.db.length > 0){
         //    clog('\nconnect app database');
         //    yield f.db_app.gen_connect('webserver');
         //}
         
         if (c.prepare_to_start) {
+            clog('begin prepare_to_start');
             yield tf(c.prepare_to_start)();
+            clog('end prepare_to_start');
         }
         
 

@@ -96,16 +96,23 @@ function get_execute_time() {
 //в виде: {'default':'/path/to/default','name':'/path/to/name'}
 function get_templates_obj() {
     var ret = {};
-    var list = g.fs.readdirSync(c.templates.main_path);
-    for(var i=0;i<list.length;i++){
-        var path = list[i];
-        var full_path = g.path.join2(c.templates.main_path,path);
-        var s = g.fs.statSync(full_path);
-        if (!s.isDirectory()) continue;
-        var test_path = g.path.join(full_path,'html');
-        s = g.fs.statSync(test_path);
-        if (!s.isDirectory()) continue;
-        ret[path] = full_path;
+    var ex = g.fs.existsSync(c.templates.main_path);
+    {
+        if (!ex) {
+            console.error('ERROR: path c.templates.main_path="'+c.templates.main_path+'" not found!');
+            return ret;
+        }
+        var list = g.fs.readdirSync(c.templates.main_path);
+        for(var i=0;i<list.length;i++){
+            var path = list[i];
+            var full_path = g.path.join2(c.templates.main_path,path);
+            var s = g.fs.statSync(full_path);
+            if (!s.isDirectory()) continue;
+            var test_path = g.path.join(full_path,'html');
+            s = g.fs.statSync(test_path);
+            if (!s.isDirectory()) continue;
+            ret[path] = full_path;
+        }
     }
     return ret;
 }
