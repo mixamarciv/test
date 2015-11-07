@@ -15,6 +15,7 @@ module.exports.run = function(){ return run;}
 
 module.exports.start_next_task_run = start_next_task_run;
 module.exports.start_next_task     = start_next_task;
+module.exports.start_prev_tasks    = start_prev_tasks;
 
 
 function* run(next){
@@ -22,7 +23,7 @@ function* run(next){
     var p = this.request.query;
     //clog(g.mixa.dump.var_dump_node('p',p,{max_str_length:90000}));
     {//проверяем все ли необходимые параметры заданы
-	var arr_check = ['name','note','run_json','cache_text','user_info','out_file'];
+	var arr_check = ['type','name','note','run_json','cache_text','user_info','out_file'];
 	for(var i=0;i<arr_check.length;i++){
 	    var test = arr_check[i];
 	    if (!p[test]) {
@@ -46,6 +47,7 @@ function* run(next){
     }
 
     
+    p.type;
     p.name;
     p.note;
     p.run_json;  //run,args
@@ -57,9 +59,9 @@ function* run(next){
     
     //clog(g.mixa.dump.var_dump_node('p',p,{max_str_length:90000}));
     
-    var q = 'SELECT t.out_file,t.date_create,t.date_run,t.date_end,t.status, '+
+    var q = 'SELECT t.type,t.out_file,t.date_create,t.date_run,t.date_end,t.status, '+
             ' idc AS idt,(SELECT q.idc FROM task_queue q WHERE q.idc_task=t.idc AND q.user_info_hash=\''+p.user_info_hash+'\') AS idq '+
-            ' FROM task t WHERE t.cache_hash=\''+p.cache_hash+'\'';
+            ' FROM task t WHERE t.cache_hash=\''+p.cache_hash+'\' AND t.type=\''+p.type+'\'';
     var rows = yield f.db.gen_query(db_name,q);
     
     if (rows.length==0) { // если такое задание ещё не выполнялось то добавляем его в очередь
@@ -68,6 +70,7 @@ function* run(next){
     
     //если такое задание уже было отправлено в очередь
     var row = rows[0];
+    p.type = g.u.str.trim(row.type);
     p.out_file = g.u.str.trim(row.out_file);
     p.date_create = g.u.str.trim(row.date_create);
     p.date_run = g.u.str.trim(row.date_run);
@@ -107,8 +110,8 @@ function* create_new_task(self,p,next) {
     p.idt = g.u.str.trim(row.idt);
     p.idq = g.u.str.trim(row.idq);
     
-    var q = 'INSERT INTO task(idc,idc_first_run,name,note,run_json,out_file,cache_text,cache_hash, status) '+
-	    'VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0)';
+    var q = 'INSERT INTO task(idc,idc_first_run,type,name,note,run_json,out_file,cache_text,cache_hash, status) '+
+	    'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0)';
     /***
     status
     0 - только созданная задача
@@ -117,23 +120,23 @@ function* create_new_task(self,p,next) {
     3 - прервана
     4 - завершена
      ***/
-    yield f.db.gen_query(db_name, q, [p.idt, p.idq, p.name, p.note, JSON.stringify(p.run_json), p.out_file, p.cache_text, p.cache_hash]);  
+    yield f.db.gen_query(db_name, q, [p.idt, p.idq, p.type, p.name, p.note, JSON.stringify(p.run_json), p.out_file, p.cache_text, p.cache_hash]);  
     
-    var q = 'INSERT INTO task_queue(idc,idc_task,user_info,user_info_hash) '+
-	    'VALUES (?, ?, ?, ?)';
-    yield f.db.gen_query(db_name, q, [p.idq, p.idt, p.user_info, p.user_info_hash]);
+    var q = 'INSERT INTO task_queue(idc,type,idc_task,user_info,user_info_hash) '+
+	    'VALUES (?, ?, ?, ?, ?)';
+    yield f.db.gen_query(db_name, q, [p.idq, p.type, p.idt, p.user_info, p.user_info_hash]);
     
     var queue = yield get_queue();
     
-    self.body = {msg:'создана новая задача "'+p.idt+'", ваш id очереди: "'+p.idq+'"',p:p,queue:queue};
+    self.body = {msg:'создана новая задача "'+p.idt+'", ваш id очереди: "'+p.type+'-'+p.idq+'"',p:p,queue:queue};
     
-    clog('создана новая задача '+p.idt);
+    clog('создана новая задача '+p.type+'-'+p.idt);
     
     if (queue.length==0) {
 	start_task(p);
 	self.body.info = 'задача выполняется';
     }else{
-	var q = 'UPDATE task t SET t.status = 1 WHERE t.idc = \''+p.idt+'\'';
+	var q = 'UPDATE task t SET t.status = 1 WHERE t.idc = \''+p.idt+'\' AND t.type = \''+p.type+'\'';
 	yield f.db.gen_query(db_name, q );
 	self.body.info = 'задача находится на '+queue.length+' позиции в очереди';
     }
@@ -148,19 +151,22 @@ function* create_new_client(self,p) {
     var row = rows[0];
     p.idq = g.u.str.trim(row.idq);
     
-    var q = 'INSERT INTO task_queue(idc,idc_task,user_info,user_info_hash) '+
-	    'VALUES (?, ?, ?, ?)';
-    yield f.db.gen_query(db_name, q, [p.idq, p.idt, p.user_info, p.user_info_hash]);
+    var q = 'INSERT INTO task_queue(idc,type,idc_task,user_info,user_info_hash) '+
+	    'VALUES (?, ?, ?, ?, ?)';
+    yield f.db.gen_query(db_name, q, [p.idq, p.type, p.idt, p.user_info, p.user_info_hash]);
 }
 
-function* get_queue(type_queues) {
+function* get_queue(type_queues,pp) {
     if (!type_queues) {
 	type_queues = '/* 1 - в очереди */ 1, 2 /* 2 - выполняется */';
     }
-    var q = 'SELECT t.idc AS idt,t.status,t.date_create,t.name,t.run_json,t.out_file \n'+
+    var q = 'SELECT t.idc AS idt,t.type,t.status,t.date_create,t.name,t.run_json,t.out_file \n'+
             ' FROM task t \n'+
-            ' WHERE t.status IN ('+type_queues+') \n'+
-	    ' ORDER BY t.date_create ';
+            ' WHERE t.status IN ('+type_queues+') \n'
+    if (pp && pp.type) {
+	q += '   AND t.type = \''+pp.type+'\'\n';
+    }
+    q += ' ORDER BY t.date_create ';
     var rows = yield f.db.gen_query(db_name, q);
     return rows;
 }
@@ -169,7 +175,7 @@ function start_task(p) {
     /****/
     f.run_gen(function*(){
 	
-	var q = 'UPDATE task t SET t.status = 2, t.date_run = current_timestamp WHERE t.idc = \''+p.idt+'\'';
+	var q = 'UPDATE task t SET t.status = 2, t.date_run = current_timestamp WHERE t.idc = \''+p.idt+'\' AND t.type = \''+p.type+'\'';
 	yield f.db.gen_query(db_name, q);
 	
 	clog('запускается задача '+p.idt);
@@ -184,7 +190,7 @@ function start_task(p) {
 	    clog('ERROR JSON.parse string:');
 	    clog(s);
 	    clog(f.merr(err).toString());
-	    return start_next_task_run();
+	    return start_next_task_run(p);
 	}
 	
 	{
@@ -217,42 +223,44 @@ function start_task(p) {
 	    stream.end();
 	},500);
 	
-	var q = 'UPDATE task t SET t.status = 4, t.date_end = current_timestamp WHERE t.idc = \''+p.idt+'\'';
+	var q = 'UPDATE task t SET t.status = 4, t.date_end = current_timestamp WHERE t.idc = \''+p.idt+'\' AND t.type = \''+p.type+'\'';
 	yield f.db.gen_query(db_name, q);
 	
-	start_next_task_run();
+	start_next_task_run(p);
     },function(err){
 	if (err){
 	    clog('ERROR in start_next_task[1]');
 	    //clog(err);
 	    clog(f.merr(err).toString());
-	    return start_next_task_run();
+	    return start_next_task_run(p);
 	}
     });
 }
 
 
-function start_next_task_run() {
+function start_next_task_run(p) {
     setTimeout(function(){
-    f.run_gen(start_next_task,function(err){
-	if (err){
+	g.co(function *(){
+	    yield start_next_task(p);
+	}).then(function(val){
+	    return;
+	},function(err){
 	    clog('ERROR in start_next_task[2]');
 	    clog(f.merr(err).toString());
-	    return start_next_task_run();
-	}
-    });
+	    return start_next_task_run(p);
+	});
     },200);
 }
 
 var is_firs_run = 1;
-function* start_next_task() {
+function* start_next_task(pp) {
     
     var que_query = '1';  //берем только задачи из очереди
     if (is_firs_run) {
 	is_firs_run = 0;
 	que_query = '1,2';  //берем задачи из очереди и незавершенные задачи
     }
-    var queue = yield get_queue(que_query);
+    var queue = yield get_queue(que_query,pp);
     if (!queue || !queue.length){
 	clog('нет задач в очереди');
 	return;
@@ -267,6 +275,25 @@ function* start_next_task() {
     yield f.db.gen_query(db_name, q );
     
     start_task(p);
+}
+
+function* start_prev_tasks() {
+
+    var q = 'SELECT t.idc AS idt,t.type,t.status,t.date_create,t.name,t.run_json,t.out_file \n'+
+            ' FROM task t \n'+
+            ' WHERE t.status IN (1,2) \n'
+       q += '   AND t.type||t.date_create IN (SELECT a.type||MIN(a.date_create) FROM task a WHERE a.status IN (1,2) GROUP BY a.type)';
+    q += ' ORDER BY t.date_create ';
+    var rows = yield f.db.gen_query(db_name, q);
+    if (!rows || !rows.length){
+	clog('на момент запуска нет задач в очереди');
+	return;
+    }
+    for(var i=0;i<aa.length;i++){
+	var p = rows[i];
+	start_next_task_run(p);
+    }
+    return rows;
 }
 
 function check_arguments(aa) {

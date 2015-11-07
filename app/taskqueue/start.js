@@ -58,7 +58,7 @@ function start(err,mainfn){
         var qtasks = require('./routes/run.js');
         clog('\n  restart prev tasks');
         //clog(g.mixa.dump.var_dump_node('qtasks',qtasks,{max_str_length:90000}));
-        qtasks.start_next_task_run();
+        yield qtasks.start_prev_tasks();
         
     },end_load);
     
