@@ -26,6 +26,7 @@ function* run(next){
 	var arr_check = ['type','name','note','run_json','cache_text','user_info','out_file'];
 	for(var i=0;i<arr_check.length;i++){
 	    var test = arr_check[i];
+	    if (!p[test] && test=='type') p[test] = 'all';
 	    if (!p[test]) {
 		this.body = {error:'не задан параметр "'+test+'"'};
 		return yield next;
@@ -88,7 +89,7 @@ function* run(next){
     }   
     
     if (p.status==1) {
-	var queue = yield get_queue();
+	var queue = yield get_queue('/* 1 - в очереди */ 1, 2 /* 2 - выполняется */',p);
 	this.body.info = 'задача находится на '+queue.length+' позиции в очереди';
     }else
     if (p.status==2) {
@@ -126,7 +127,7 @@ function* create_new_task(self,p,next) {
 	    'VALUES (?, ?, ?, ?, ?)';
     yield f.db.gen_query(db_name, q, [p.idq, p.type, p.idt, p.user_info, p.user_info_hash]);
     
-    var queue = yield get_queue();
+    var queue = yield get_queue('/* 1 - в очереди */ 1, 2 /* 2 - выполняется */',p);
     
     self.body = {msg:'создана новая задача "'+p.idt+'", ваш id очереди: "'+p.type+'-'+p.idq+'"',p:p,queue:queue};
     
@@ -289,7 +290,7 @@ function* start_prev_tasks() {
 	clog('на момент запуска нет задач в очереди');
 	return;
     }
-    for(var i=0;i<aa.length;i++){
+    for(var i=0;i<rows.length;i++){
 	var p = rows[i];
 	start_next_task_run(p);
     }

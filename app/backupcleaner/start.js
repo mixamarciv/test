@@ -52,28 +52,24 @@ function start(err,mainfn){
     }
 }
 
-
 function *test() {
+    clog('AAAAA');
+    var db = require('mixa_db_js_functions');
+    var options = {
+        dbtype: 'ibase',
+        database: 'd:/_db_web/db001/0001__old.fdb1',
+        host: '127.0.0.1',     // default
+        port: 3050,            // default
+        user: 'SYSDBA',        // default
+        password: 'masterkey'  // default
+    };
 
-var circle = {
-    radius: 2,
-    get diameter() {
-        return this.radius * 2;
-    },
-    set diameter(val) {
-        this.radius = val / 2;
-    }
+    db.connect(options,function(err,connect){
+        if(err) throw(err);
+        
+        connect.query('SELECT lcode,fio FROM kart WHERE 1=1',function(err,rows){
+            if(err) throw(err);
+            console.log(rows);
+        });
+    });
 }
-
-console.log(circle.diameter);
-circle.diameter = 42;
-console.log(circle.radius);
-    
-
-var a = "foo", b = "bar", c = 42;
-var o = {a, b, c};
-console.log(o);
-    
-    return 0;
-}
-
